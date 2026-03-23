@@ -1,0 +1,21 @@
+{
+  "name": "swarm",
+  "version": "0.1.0",
+  "description": "Synthetic Population Sandbox – LLM-powered ad pre-testing on simulated Polish population",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "generate": "tsx src/personas/generator.ts",
+    "run-study": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}
