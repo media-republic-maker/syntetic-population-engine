@@ -6,12 +6,13 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "tsx src/index.ts",
-    "generate": "tsx src/personas/generator.ts",
-    "run-study": "tsx src/index.ts"
+    "generate": "tsx src/cli.ts --generate",
+    "study": "tsx src/cli.ts --ad",
+    "web": "tsx src/server.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.39.0"
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.4.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
