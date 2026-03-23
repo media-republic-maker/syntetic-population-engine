@@ -1,0 +1,3393 @@
+[
+  {
+    "id": "c05b634a-605b-46d5-86e1-e1d56b095cb2",
+    "name": "Justyna",
+    "demographic": {
+      "age": 76,
+      "gender": "female",
+      "education": "secondary",
+      "region": "dolnoslaskie",
+      "settlementType": "small_city",
+      "householdType": "single"
+    },
+    "financial": {
+      "incomeLevel": "above_8000",
+      "ownsProperty": true,
+      "hasSavings": true,
+      "hasDebt": false,
+      "creditAttitude": "negative",
+      "priceSensitivity": 41
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 48,
+        "conscientiousness": 28,
+        "extraversion": 22,
+        "agreeableness": 55,
+        "neuroticism": 9
+      },
+      "riskTolerance": 46,
+      "traditionalism": 38,
+      "collectivism": 59,
+      "institutionalTrust": 50,
+      "mediaTrust": 41,
+      "brandTrust": 79
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "financial_services",
+        "entertainment",
+        "travel",
+        "healthcare",
+        "home_appliances"
+      ],
+      "brandLoyalty": 24,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "youtube",
+        "x_twitter",
+        "online_news",
+        "radio"
+      ],
+      "dailyMediaHours": 6,
+      "responsiveTo": [
+        "rational",
+        "social_proof",
+        "authority",
+        "humorous"
+      ]
+    },
+    "political": {
+      "affiliation": "undecided",
+      "engagementLevel": 65,
+      "euAttitude": 45,
+      "securityFocus": 90,
+      "climateAwareness": 94,
+      "migrationAttitude": 36
+    }
+  },
+  {
+    "id": "bb94440d-51de-4e6d-9259-321bf8f9b347",
+    "name": "Ewa",
+    "demographic": {
+      "age": 43,
+      "gender": "female",
+      "education": "higher",
+      "region": "zachodniopomorskie",
+      "settlementType": "village",
+      "householdType": "family_young_kids"
+    },
+    "financial": {
+      "incomeLevel": "3500_5000",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 41
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 64,
+        "conscientiousness": 77,
+        "extraversion": 67,
+        "agreeableness": 48,
+        "neuroticism": 37
+      },
+      "riskTolerance": 40,
+      "traditionalism": 54,
+      "collectivism": 56,
+      "institutionalTrust": 54,
+      "mediaTrust": 32,
+      "brandTrust": 50
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "food_delivery",
+        "entertainment",
+        "travel"
+      ],
+      "brandLoyalty": 56,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "tv_private",
+        "facebook",
+        "youtube",
+        "x_twitter",
+        "online_news",
+        "radio"
+      ],
+      "dailyMediaHours": 7,
+      "responsiveTo": [
+        "aspirational",
+        "authority"
+      ]
+    },
+    "political": {
+      "affiliation": "lewica",
+      "engagementLevel": 73,
+      "euAttitude": 57,
+      "securityFocus": 29,
+      "climateAwareness": 45,
+      "migrationAttitude": 55
+    }
+  },
+  {
+    "id": "6b8470de-093c-46c8-a886-fbf54d630123",
+    "name": "Piotr",
+    "demographic": {
+      "age": 46,
+      "gender": "male",
+      "education": "secondary",
+      "region": "kujawsko-pomorskie",
+      "settlementType": "village",
+      "householdType": "family_adult_kids"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "positive",
+      "priceSensitivity": 27
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 100,
+        "conscientiousness": 61,
+        "extraversion": 68,
+        "agreeableness": 47,
+        "neuroticism": 33
+      },
+      "riskTolerance": 35,
+      "traditionalism": 31,
+      "collectivism": 51,
+      "institutionalTrust": 14,
+      "mediaTrust": 17,
+      "brandTrust": 31
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "financial_services"
+      ],
+      "brandLoyalty": 70,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "facebook",
+        "instagram",
+        "youtube",
+        "online_news",
+        "radio"
+      ],
+      "dailyMediaHours": 5,
+      "responsiveTo": [
+        "social_proof",
+        "humorous"
+      ]
+    },
+    "political": {
+      "affiliation": "undecided",
+      "engagementLevel": 18,
+      "euAttitude": 52,
+      "securityFocus": 28,
+      "climateAwareness": 46,
+      "migrationAttitude": 56
+    }
+  },
+  {
+    "id": "3d14f0c0-4ae9-4582-ad77-2a52745afae5",
+    "name": "Łukasz",
+    "demographic": {
+      "age": 56,
+      "gender": "male",
+      "education": "vocational",
+      "region": "lodzkie",
+      "settlementType": "village",
+      "householdType": "couple_no_kids"
+    },
+    "financial": {
+      "incomeLevel": "5000_8000",
+      "ownsProperty": true,
+      "hasSavings": true,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 68
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 61,
+        "conscientiousness": 77,
+        "extraversion": 17,
+        "agreeableness": 17,
+        "neuroticism": 10
+      },
+      "riskTolerance": 38,
+      "traditionalism": 78,
+      "collectivism": 89,
+      "institutionalTrust": 65,
+      "mediaTrust": 32,
+      "brandTrust": 63
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "fashion",
+        "travel",
+        "healthcare"
+      ],
+      "brandLoyalty": 10,
+      "shoppingChannels": [
+        "online"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "tv_private",
+        "youtube",
+        "print_press"
+      ],
+      "dailyMediaHours": 5,
+      "responsiveTo": [
+        "social_proof",
+        "authority",
+        "humorous"
+      ]
+    },
+    "political": {
+      "affiliation": "pis",
+      "engagementLevel": 55,
+      "euAttitude": 61,
+      "securityFocus": 100,
+      "climateAwareness": 40,
+      "migrationAttitude": 54
+    }
+  },
+  {
+    "id": "2d55818f-3af2-4e31-a246-6da951125be6",
+    "name": "Beata",
+    "demographic": {
+      "age": 32,
+      "gender": "female",
+      "education": "vocational",
+      "region": "mazowieckie",
+      "settlementType": "village",
+      "householdType": "couple_no_kids"
+    },
+    "financial": {
+      "incomeLevel": "below_2000",
+      "ownsProperty": false,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "negative",
+      "priceSensitivity": 90
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 42,
+        "conscientiousness": 62,
+        "extraversion": 54,
+        "agreeableness": 46,
+        "neuroticism": 35
+      },
+      "riskTolerance": 64,
+      "traditionalism": 62,
+      "collectivism": 69,
+      "institutionalTrust": 26,
+      "mediaTrust": 27,
+      "brandTrust": 66
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "financial_services",
+        "entertainment",
+        "home_appliances"
+      ],
+      "brandLoyalty": 57,
+      "shoppingChannels": [
+        "online"
+      ],
+      "mediaHabits": [
+        "instagram",
+        "youtube",
+        "linkedin"
+      ],
+      "dailyMediaHours": 5,
+      "responsiveTo": [
+        "emotional",
+        "aspirational",
+        "rational",
+        "authority"
+      ]
+    },
+    "political": {
+      "affiliation": "td",
+      "engagementLevel": 90,
+      "euAttitude": 90,
+      "securityFocus": 79,
+      "climateAwareness": 61,
+      "migrationAttitude": 32
+    }
+  },
+  {
+    "id": "0f8f8adf-668f-4905-8d51-54146df72f11",
+    "name": "Agnieszka",
+    "demographic": {
+      "age": 25,
+      "gender": "female",
+      "education": "higher",
+      "region": "mazowieckie",
+      "settlementType": "village",
+      "householdType": "single"
+    },
+    "financial": {
+      "incomeLevel": "5000_8000",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "negative",
+      "priceSensitivity": 63
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 86,
+        "conscientiousness": 40,
+        "extraversion": 72,
+        "agreeableness": 59,
+        "neuroticism": 10
+      },
+      "riskTolerance": 14,
+      "traditionalism": 50,
+      "collectivism": 61,
+      "institutionalTrust": 23,
+      "mediaTrust": 48,
+      "brandTrust": 34
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "fashion",
+        "financial_services",
+        "food_delivery",
+        "healthcare",
+        "home_appliances"
+      ],
+      "brandLoyalty": 21,
+      "shoppingChannels": [
+        "mixed"
+      ],
+      "mediaHabits": [
+        "tv_private",
+        "youtube",
+        "online_news",
+        "podcast"
+      ],
+      "dailyMediaHours": 6,
+      "responsiveTo": [
+        "rational",
+        "authority",
+        "humorous"
+      ]
+    },
+    "political": {
+      "affiliation": "pis",
+      "engagementLevel": 19,
+      "euAttitude": 77,
+      "securityFocus": 65,
+      "climateAwareness": 47,
+      "migrationAttitude": 53
+    }
+  },
+  {
+    "id": "3a87a297-16f1-4b4d-84d5-f193e6fca9fc",
+    "name": "Michał",
+    "demographic": {
+      "age": 41,
+      "gender": "male",
+      "education": "higher",
+      "region": "mazowieckie",
+      "settlementType": "medium_city",
+      "householdType": "family_young_kids"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": false,
+      "hasSavings": true,
+      "hasDebt": true,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 52
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 47,
+        "conscientiousness": 23,
+        "extraversion": 48,
+        "agreeableness": 57,
+        "neuroticism": 59
+      },
+      "riskTolerance": 45,
+      "traditionalism": 21,
+      "collectivism": 64,
+      "institutionalTrust": 35,
+      "mediaTrust": 18,
+      "brandTrust": 73
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "food_delivery",
+        "automotive"
+      ],
+      "brandLoyalty": 38,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "tiktok",
+        "youtube",
+        "linkedin",
+        "radio"
+      ],
+      "dailyMediaHours": 1,
+      "responsiveTo": [
+        "social_proof",
+        "aspirational"
+      ]
+    },
+    "political": {
+      "affiliation": "ko",
+      "engagementLevel": 55,
+      "euAttitude": 42,
+      "securityFocus": 100,
+      "climateAwareness": 65,
+      "migrationAttitude": 38
+    }
+  },
+  {
+    "id": "9fc4d0ef-c271-451b-aae4-c656d51529f3",
+    "name": "Anna",
+    "demographic": {
+      "age": 61,
+      "gender": "female",
+      "education": "secondary",
+      "region": "slaskie",
+      "settlementType": "village",
+      "householdType": "single"
+    },
+    "financial": {
+      "incomeLevel": "3500_5000",
+      "ownsProperty": false,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "positive",
+      "priceSensitivity": 59
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 52,
+        "conscientiousness": 79,
+        "extraversion": 18,
+        "agreeableness": 45,
+        "neuroticism": 40
+      },
+      "riskTolerance": 23,
+      "traditionalism": 100,
+      "collectivism": 39,
+      "institutionalTrust": 57,
+      "mediaTrust": 37,
+      "brandTrust": 53
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "financial_services",
+        "food_delivery",
+        "entertainment"
+      ],
+      "brandLoyalty": 56,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "instagram",
+        "radio"
+      ],
+      "dailyMediaHours": 2,
+      "responsiveTo": [
+        "emotional",
+        "rational",
+        "aspirational"
+      ]
+    },
+    "political": {
+      "affiliation": "lewica",
+      "engagementLevel": 82,
+      "euAttitude": 68,
+      "securityFocus": 85,
+      "climateAwareness": 9,
+      "migrationAttitude": 62
+    }
+  },
+  {
+    "id": "c57d5491-d783-4054-95b9-b70d8b7adf98",
+    "name": "Kamil",
+    "demographic": {
+      "age": 47,
+      "gender": "male",
+      "education": "higher",
+      "region": "slaskie",
+      "settlementType": "village",
+      "householdType": "multigenerational"
+    },
+    "financial": {
+      "incomeLevel": "3500_5000",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": true,
+      "creditAttitude": "negative",
+      "priceSensitivity": 55
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 26,
+        "conscientiousness": 60,
+        "extraversion": 35,
+        "agreeableness": 50,
+        "neuroticism": 50
+      },
+      "riskTolerance": 50,
+      "traditionalism": 33,
+      "collectivism": 54,
+      "institutionalTrust": 58,
+      "mediaTrust": 34,
+      "brandTrust": 69
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "fashion",
+        "entertainment"
+      ],
+      "brandLoyalty": 62,
+      "shoppingChannels": [
+        "mixed"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "youtube",
+        "podcast",
+        "radio"
+      ],
+      "dailyMediaHours": 4,
+      "responsiveTo": [
+        "emotional",
+        "authority"
+      ]
+    },
+    "political": {
+      "affiliation": "pis",
+      "engagementLevel": 49,
+      "euAttitude": 42,
+      "securityFocus": 30,
+      "climateAwareness": 49,
+      "migrationAttitude": 55
+    }
+  },
+  {
+    "id": "fb0d1d48-e6f7-4bb7-8f55-a8f9a51ec544",
+    "name": "Ewa",
+    "demographic": {
+      "age": 34,
+      "gender": "female",
+      "education": "higher",
+      "region": "malopolskie",
+      "settlementType": "medium_city",
+      "householdType": "family_young_kids"
+    },
+    "financial": {
+      "incomeLevel": "3500_5000",
+      "ownsProperty": false,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 63
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 51,
+        "conscientiousness": 60,
+        "extraversion": 32,
+        "agreeableness": 36,
+        "neuroticism": 23
+      },
+      "riskTolerance": 63,
+      "traditionalism": 39,
+      "collectivism": 54,
+      "institutionalTrust": 72,
+      "mediaTrust": 8,
+      "brandTrust": 64
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "financial_services",
+        "food_delivery",
+        "travel",
+        "home_appliances"
+      ],
+      "brandLoyalty": 61,
+      "shoppingChannels": [
+        "mixed"
+      ],
+      "mediaHabits": [
+        "instagram",
+        "linkedin"
+      ],
+      "dailyMediaHours": 4,
+      "responsiveTo": [
+        "authority",
+        "emotional",
+        "social_proof",
+        "rational"
+      ]
+    },
+    "political": {
+      "affiliation": "ko",
+      "engagementLevel": 67,
+      "euAttitude": 58,
+      "securityFocus": 59,
+      "climateAwareness": 80,
+      "migrationAttitude": 21
+    }
+  },
+  {
+    "id": "7e980b66-17c3-4da1-b4f8-02d172aefc33",
+    "name": "Rafał",
+    "demographic": {
+      "age": 76,
+      "gender": "male",
+      "education": "higher",
+      "region": "lodzkie",
+      "settlementType": "medium_city",
+      "householdType": "couple_no_kids"
+    },
+    "financial": {
+      "incomeLevel": "above_8000",
+      "ownsProperty": true,
+      "hasSavings": true,
+      "hasDebt": true,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 23
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 65,
+        "conscientiousness": 66,
+        "extraversion": 42,
+        "agreeableness": 52,
+        "neuroticism": 32
+      },
+      "riskTolerance": 52,
+      "traditionalism": 84,
+      "collectivism": 48,
+      "institutionalTrust": 51,
+      "mediaTrust": 12,
+      "brandTrust": 39
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "financial_services",
+        "travel",
+        "automotive"
+      ],
+      "brandLoyalty": 56,
+      "shoppingChannels": [
+        "mixed"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "tv_private",
+        "radio"
+      ],
+      "dailyMediaHours": 4,
+      "responsiveTo": [
+        "aspirational",
+        "humorous",
+        "rational"
+      ]
+    },
+    "political": {
+      "affiliation": "pis",
+      "engagementLevel": 28,
+      "euAttitude": 63,
+      "securityFocus": 66,
+      "climateAwareness": 75,
+      "migrationAttitude": 62
+    }
+  },
+  {
+    "id": "045a0872-f157-4f75-9871-11973ef79945",
+    "name": "Wojciech",
+    "demographic": {
+      "age": 26,
+      "gender": "male",
+      "education": "secondary",
+      "region": "kujawsko-pomorskie",
+      "settlementType": "medium_city",
+      "householdType": "single"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": false,
+      "hasSavings": true,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 57
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 77,
+        "conscientiousness": 79,
+        "extraversion": 38,
+        "agreeableness": 61,
+        "neuroticism": 51
+      },
+      "riskTolerance": 100,
+      "traditionalism": 9,
+      "collectivism": 71,
+      "institutionalTrust": 28,
+      "mediaTrust": 44,
+      "brandTrust": 26
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "financial_services",
+        "entertainment",
+        "travel"
+      ],
+      "brandLoyalty": 50,
+      "shoppingChannels": [
+        "mixed"
+      ],
+      "mediaHabits": [
+        "facebook",
+        "tiktok",
+        "online_news",
+        "radio"
+      ],
+      "dailyMediaHours": 4,
+      "responsiveTo": [
+        "authority",
+        "rational",
+        "aspirational",
+        "social_proof"
+      ]
+    },
+    "political": {
+      "affiliation": "td",
+      "engagementLevel": 60,
+      "euAttitude": 24,
+      "securityFocus": 100,
+      "climateAwareness": 52,
+      "migrationAttitude": 80
+    }
+  },
+  {
+    "id": "360d94b2-d51b-45bd-97b4-fce8acf7f187",
+    "name": "Małgorzata",
+    "demographic": {
+      "age": 36,
+      "gender": "female",
+      "education": "secondary",
+      "region": "podkarpackie",
+      "settlementType": "village",
+      "householdType": "family_young_kids"
+    },
+    "financial": {
+      "incomeLevel": "below_2000",
+      "ownsProperty": false,
+      "hasSavings": false,
+      "hasDebt": true,
+      "creditAttitude": "negative",
+      "priceSensitivity": 71
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 47,
+        "conscientiousness": 37,
+        "extraversion": 26,
+        "agreeableness": 46,
+        "neuroticism": 44
+      },
+      "riskTolerance": 47,
+      "traditionalism": 33,
+      "collectivism": 15,
+      "institutionalTrust": 17,
+      "mediaTrust": 29,
+      "brandTrust": 51
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "fashion",
+        "financial_services",
+        "entertainment",
+        "home_appliances"
+      ],
+      "brandLoyalty": 38,
+      "shoppingChannels": [
+        "online"
+      ],
+      "mediaHabits": [
+        "tv_private",
+        "facebook",
+        "instagram",
+        "youtube",
+        "x_twitter"
+      ],
+      "dailyMediaHours": 1,
+      "responsiveTo": [
+        "rational",
+        "emotional"
+      ]
+    },
+    "political": {
+      "affiliation": "lewica",
+      "engagementLevel": 7,
+      "euAttitude": 60,
+      "securityFocus": 72,
+      "climateAwareness": 43,
+      "migrationAttitude": 55
+    }
+  },
+  {
+    "id": "9bd2b301-6d9c-4f39-9ffd-8d745158a59e",
+    "name": "Maria",
+    "demographic": {
+      "age": 50,
+      "gender": "female",
+      "education": "secondary",
+      "region": "mazowieckie",
+      "settlementType": "small_city",
+      "householdType": "couple_no_kids"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "positive",
+      "priceSensitivity": 26
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 47,
+        "conscientiousness": 63,
+        "extraversion": 82,
+        "agreeableness": 85,
+        "neuroticism": 27
+      },
+      "riskTolerance": 38,
+      "traditionalism": 31,
+      "collectivism": 38,
+      "institutionalTrust": 44,
+      "mediaTrust": 35,
+      "brandTrust": 19
+    },
+    "consumer": {
+      "primaryCategories": [
+        "entertainment",
+        "travel",
+        "healthcare",
+        "home_appliances"
+      ],
+      "brandLoyalty": 24,
+      "shoppingChannels": [
+        "online"
+      ],
+      "mediaHabits": [
+        "online_news",
+        "radio"
+      ],
+      "dailyMediaHours": 1,
+      "responsiveTo": [
+        "humorous",
+        "emotional"
+      ]
+    },
+    "political": {
+      "affiliation": "lewica",
+      "engagementLevel": 55,
+      "euAttitude": 59,
+      "securityFocus": 66,
+      "climateAwareness": 26,
+      "migrationAttitude": 50
+    }
+  },
+  {
+    "id": "85c6f79a-2b9f-40f7-a519-79880c91e971",
+    "name": "Magdalena",
+    "demographic": {
+      "age": 43,
+      "gender": "female",
+      "education": "primary",
+      "region": "lubelskie",
+      "settlementType": "village",
+      "householdType": "single"
+    },
+    "financial": {
+      "incomeLevel": "3500_5000",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 63
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 19,
+        "conscientiousness": 46,
+        "extraversion": 78,
+        "agreeableness": 47,
+        "neuroticism": 19
+      },
+      "riskTolerance": 46,
+      "traditionalism": 47,
+      "collectivism": 50,
+      "institutionalTrust": 37,
+      "mediaTrust": 42,
+      "brandTrust": 23
+    },
+    "consumer": {
+      "primaryCategories": [
+        "electronics",
+        "financial_services"
+      ],
+      "brandLoyalty": 36,
+      "shoppingChannels": [
+        "online"
+      ],
+      "mediaHabits": [
+        "tv_private",
+        "facebook",
+        "instagram",
+        "tiktok",
+        "youtube"
+      ],
+      "dailyMediaHours": 1,
+      "responsiveTo": [
+        "emotional",
+        "rational",
+        "humorous"
+      ]
+    },
+    "political": {
+      "affiliation": "pis",
+      "engagementLevel": 63,
+      "euAttitude": 50,
+      "securityFocus": 48,
+      "climateAwareness": 49,
+      "migrationAttitude": 80
+    }
+  },
+  {
+    "id": "8796339f-e6d9-4f23-b4f4-af8ec590d4f3",
+    "name": "Grzegorz",
+    "demographic": {
+      "age": 48,
+      "gender": "male",
+      "education": "secondary",
+      "region": "dolnoslaskie",
+      "settlementType": "medium_city",
+      "householdType": "single"
+    },
+    "financial": {
+      "incomeLevel": "5000_8000",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": true,
+      "creditAttitude": "negative",
+      "priceSensitivity": 37
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 40,
+        "conscientiousness": 31,
+        "extraversion": 17,
+        "agreeableness": 48,
+        "neuroticism": 52
+      },
+      "riskTolerance": 0,
+      "traditionalism": 58,
+      "collectivism": 50,
+      "institutionalTrust": 22,
+      "mediaTrust": 31,
+      "brandTrust": 54
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "financial_services",
+        "food_delivery",
+        "entertainment",
+        "healthcare",
+        "home_appliances"
+      ],
+      "brandLoyalty": 30,
+      "shoppingChannels": [
+        "mixed"
+      ],
+      "mediaHabits": [
+        "tv_private",
+        "linkedin",
+        "online_news"
+      ],
+      "dailyMediaHours": 2,
+      "responsiveTo": [
+        "emotional",
+        "authority"
+      ]
+    },
+    "political": {
+      "affiliation": "konfederacja",
+      "engagementLevel": 66,
+      "euAttitude": 64,
+      "securityFocus": 48,
+      "climateAwareness": 16,
+      "migrationAttitude": 24
+    }
+  },
+  {
+    "id": "9d36cd2b-6fb0-4959-b233-1af3c91f48d8",
+    "name": "Marta",
+    "demographic": {
+      "age": 32,
+      "gender": "female",
+      "education": "vocational",
+      "region": "malopolskie",
+      "settlementType": "small_city",
+      "householdType": "couple_no_kids"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "negative",
+      "priceSensitivity": 43
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 49,
+        "conscientiousness": 44,
+        "extraversion": 51,
+        "agreeableness": 43,
+        "neuroticism": 45
+      },
+      "riskTolerance": 52,
+      "traditionalism": 40,
+      "collectivism": 61,
+      "institutionalTrust": 53,
+      "mediaTrust": 16,
+      "brandTrust": 59
+    },
+    "consumer": {
+      "primaryCategories": [
+        "electronics",
+        "fashion",
+        "travel",
+        "home_appliances",
+        "automotive"
+      ],
+      "brandLoyalty": 68,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "tv_private",
+        "facebook",
+        "tiktok",
+        "online_news",
+        "podcast"
+      ],
+      "dailyMediaHours": 4,
+      "responsiveTo": [
+        "emotional",
+        "rational"
+      ]
+    },
+    "political": {
+      "affiliation": "konfederacja",
+      "engagementLevel": 16,
+      "euAttitude": 73,
+      "securityFocus": 59,
+      "climateAwareness": 63,
+      "migrationAttitude": 67
+    }
+  },
+  {
+    "id": "f203a9b6-f234-473f-902f-26b0682c3789",
+    "name": "Dorota",
+    "demographic": {
+      "age": 22,
+      "gender": "female",
+      "education": "higher",
+      "region": "slaskie",
+      "settlementType": "village",
+      "householdType": "couple_no_kids"
+    },
+    "financial": {
+      "incomeLevel": "3500_5000",
+      "ownsProperty": false,
+      "hasSavings": true,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 64
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 35,
+        "conscientiousness": 33,
+        "extraversion": 83,
+        "agreeableness": 47,
+        "neuroticism": 46
+      },
+      "riskTolerance": 51,
+      "traditionalism": 40,
+      "collectivism": 23,
+      "institutionalTrust": 34,
+      "mediaTrust": 56,
+      "brandTrust": 62
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "financial_services",
+        "food_delivery",
+        "entertainment",
+        "travel",
+        "home_appliances"
+      ],
+      "brandLoyalty": 52,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "tv_private",
+        "instagram",
+        "tiktok",
+        "youtube"
+      ],
+      "dailyMediaHours": 3,
+      "responsiveTo": [
+        "fear_of_missing",
+        "humorous",
+        "social_proof",
+        "authority"
+      ]
+    },
+    "political": {
+      "affiliation": "lewica",
+      "engagementLevel": 31,
+      "euAttitude": 57,
+      "securityFocus": 59,
+      "climateAwareness": 90,
+      "migrationAttitude": 72
+    }
+  },
+  {
+    "id": "dc497da7-bb76-48db-8cd1-43770af17595",
+    "name": "Katarzyna",
+    "demographic": {
+      "age": 79,
+      "gender": "female",
+      "education": "higher",
+      "region": "malopolskie",
+      "settlementType": "metropolis",
+      "householdType": "multigenerational"
+    },
+    "financial": {
+      "incomeLevel": "3500_5000",
+      "ownsProperty": true,
+      "hasSavings": true,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 66
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 61,
+        "conscientiousness": 62,
+        "extraversion": 70,
+        "agreeableness": 37,
+        "neuroticism": 68
+      },
+      "riskTolerance": 61,
+      "traditionalism": 30,
+      "collectivism": 41,
+      "institutionalTrust": 74,
+      "mediaTrust": 39,
+      "brandTrust": 45
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "food_delivery",
+        "travel",
+        "home_appliances",
+        "automotive"
+      ],
+      "brandLoyalty": 54,
+      "shoppingChannels": [
+        "mixed"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "tv_private",
+        "facebook",
+        "radio"
+      ],
+      "dailyMediaHours": 3,
+      "responsiveTo": [
+        "emotional",
+        "fear_of_missing",
+        "authority",
+        "rational"
+      ]
+    },
+    "political": {
+      "affiliation": "konfederacja",
+      "engagementLevel": 75,
+      "euAttitude": 95,
+      "securityFocus": 75,
+      "climateAwareness": 64,
+      "migrationAttitude": 30
+    }
+  },
+  {
+    "id": "c76c5a7b-036d-45cd-82a5-a21872883f8d",
+    "name": "Natalia",
+    "demographic": {
+      "age": 29,
+      "gender": "female",
+      "education": "higher",
+      "region": "dolnoslaskie",
+      "settlementType": "small_city",
+      "householdType": "couple_no_kids"
+    },
+    "financial": {
+      "incomeLevel": "above_8000",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "positive",
+      "priceSensitivity": 50
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 72,
+        "conscientiousness": 66,
+        "extraversion": 39,
+        "agreeableness": 58,
+        "neuroticism": 47
+      },
+      "riskTolerance": 35,
+      "traditionalism": 23,
+      "collectivism": 44,
+      "institutionalTrust": 48,
+      "mediaTrust": 6,
+      "brandTrust": 40
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "fashion",
+        "food_delivery",
+        "healthcare",
+        "automotive"
+      ],
+      "brandLoyalty": 59,
+      "shoppingChannels": [
+        "online"
+      ],
+      "mediaHabits": [
+        "instagram",
+        "youtube",
+        "online_news",
+        "podcast",
+        "radio"
+      ],
+      "dailyMediaHours": 2,
+      "responsiveTo": [
+        "emotional",
+        "fear_of_missing",
+        "authority"
+      ]
+    },
+    "political": {
+      "affiliation": "pis",
+      "engagementLevel": 23,
+      "euAttitude": 48,
+      "securityFocus": 69,
+      "climateAwareness": 97,
+      "migrationAttitude": 57
+    }
+  },
+  {
+    "id": "f5f0ca26-837e-4144-866c-bf992f50421f",
+    "name": "Paweł",
+    "demographic": {
+      "age": 52,
+      "gender": "male",
+      "education": "vocational",
+      "region": "lodzkie",
+      "settlementType": "medium_city",
+      "householdType": "family_adult_kids"
+    },
+    "financial": {
+      "incomeLevel": "3500_5000",
+      "ownsProperty": true,
+      "hasSavings": true,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 40
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 33,
+        "conscientiousness": 39,
+        "extraversion": 52,
+        "agreeableness": 49,
+        "neuroticism": 73
+      },
+      "riskTolerance": 47,
+      "traditionalism": 42,
+      "collectivism": 78,
+      "institutionalTrust": 22,
+      "mediaTrust": 72,
+      "brandTrust": 51
+    },
+    "consumer": {
+      "primaryCategories": [
+        "electronics",
+        "fashion",
+        "entertainment",
+        "healthcare"
+      ],
+      "brandLoyalty": 33,
+      "shoppingChannels": [
+        "mixed"
+      ],
+      "mediaHabits": [
+        "tv_private",
+        "facebook",
+        "x_twitter",
+        "print_press",
+        "radio"
+      ],
+      "dailyMediaHours": 9,
+      "responsiveTo": [
+        "emotional",
+        "fear_of_missing",
+        "authority"
+      ]
+    },
+    "political": {
+      "affiliation": "undecided",
+      "engagementLevel": 68,
+      "euAttitude": 17,
+      "securityFocus": 82,
+      "climateAwareness": 40,
+      "migrationAttitude": 30
+    }
+  },
+  {
+    "id": "14ae4c6c-03ab-4e03-8655-e37ed2f2b2e1",
+    "name": "Anna",
+    "demographic": {
+      "age": 72,
+      "gender": "female",
+      "education": "primary",
+      "region": "podkarpackie",
+      "settlementType": "metropolis",
+      "householdType": "single"
+    },
+    "financial": {
+      "incomeLevel": "5000_8000",
+      "ownsProperty": false,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 52
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 43,
+        "conscientiousness": 60,
+        "extraversion": 24,
+        "agreeableness": 57,
+        "neuroticism": 37
+      },
+      "riskTolerance": 41,
+      "traditionalism": 51,
+      "collectivism": 34,
+      "institutionalTrust": 65,
+      "mediaTrust": 66,
+      "brandTrust": 36
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "entertainment",
+        "healthcare",
+        "home_appliances"
+      ],
+      "brandLoyalty": 69,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "print_press",
+        "online_news"
+      ],
+      "dailyMediaHours": 4,
+      "responsiveTo": [
+        "social_proof",
+        "authority"
+      ]
+    },
+    "political": {
+      "affiliation": "pis",
+      "engagementLevel": 73,
+      "euAttitude": 53,
+      "securityFocus": 45,
+      "climateAwareness": 62,
+      "migrationAttitude": 1
+    }
+  },
+  {
+    "id": "b7389d68-f4c2-48a5-9a0d-769904e65a28",
+    "name": "Justyna",
+    "demographic": {
+      "age": 68,
+      "gender": "female",
+      "education": "higher",
+      "region": "kujawsko-pomorskie",
+      "settlementType": "village",
+      "householdType": "single"
+    },
+    "financial": {
+      "incomeLevel": "5000_8000",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 67
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 73,
+        "conscientiousness": 58,
+        "extraversion": 53,
+        "agreeableness": 68,
+        "neuroticism": 54
+      },
+      "riskTolerance": 59,
+      "traditionalism": 30,
+      "collectivism": 46,
+      "institutionalTrust": 45,
+      "mediaTrust": 58,
+      "brandTrust": 49
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "entertainment"
+      ],
+      "brandLoyalty": 96,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "tv_private",
+        "instagram",
+        "print_press",
+        "radio"
+      ],
+      "dailyMediaHours": 2,
+      "responsiveTo": [
+        "humorous",
+        "authority",
+        "aspirational"
+      ]
+    },
+    "political": {
+      "affiliation": "pis",
+      "engagementLevel": 35,
+      "euAttitude": 59,
+      "securityFocus": 43,
+      "climateAwareness": 53,
+      "migrationAttitude": 65
+    }
+  },
+  {
+    "id": "6fecde2c-ff92-4d99-9e5b-c8198edb8919",
+    "name": "Monika",
+    "demographic": {
+      "age": 32,
+      "gender": "female",
+      "education": "vocational",
+      "region": "malopolskie",
+      "settlementType": "village",
+      "householdType": "family_teen_kids"
+    },
+    "financial": {
+      "incomeLevel": "3500_5000",
+      "ownsProperty": false,
+      "hasSavings": true,
+      "hasDebt": true,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 57
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 38,
+        "conscientiousness": 75,
+        "extraversion": 76,
+        "agreeableness": 59,
+        "neuroticism": 47
+      },
+      "riskTolerance": 72,
+      "traditionalism": 58,
+      "collectivism": 39,
+      "institutionalTrust": 46,
+      "mediaTrust": 27,
+      "brandTrust": 44
+    },
+    "consumer": {
+      "primaryCategories": [
+        "electronics",
+        "fashion",
+        "food_delivery",
+        "travel",
+        "home_appliances"
+      ],
+      "brandLoyalty": 30,
+      "shoppingChannels": [
+        "mixed"
+      ],
+      "mediaHabits": [
+        "instagram",
+        "youtube",
+        "linkedin",
+        "online_news",
+        "podcast"
+      ],
+      "dailyMediaHours": 4,
+      "responsiveTo": [
+        "social_proof",
+        "authority"
+      ]
+    },
+    "political": {
+      "affiliation": "td",
+      "engagementLevel": 36,
+      "euAttitude": 37,
+      "securityFocus": 67,
+      "climateAwareness": 40,
+      "migrationAttitude": 82
+    }
+  },
+  {
+    "id": "54111745-e2d7-4ebc-a99e-b7a89151d40d",
+    "name": "Jakub",
+    "demographic": {
+      "age": 61,
+      "gender": "male",
+      "education": "secondary",
+      "region": "dolnoslaskie",
+      "settlementType": "medium_city",
+      "householdType": "couple_no_kids"
+    },
+    "financial": {
+      "incomeLevel": "below_2000",
+      "ownsProperty": false,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "positive",
+      "priceSensitivity": 49
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 83,
+        "conscientiousness": 43,
+        "extraversion": 51,
+        "agreeableness": 32,
+        "neuroticism": 56
+      },
+      "riskTolerance": 42,
+      "traditionalism": 83,
+      "collectivism": 46,
+      "institutionalTrust": 50,
+      "mediaTrust": 6,
+      "brandTrust": 61
+    },
+    "consumer": {
+      "primaryCategories": [
+        "electronics",
+        "fashion",
+        "financial_services",
+        "home_appliances"
+      ],
+      "brandLoyalty": 56,
+      "shoppingChannels": [
+        "mixed"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "facebook",
+        "tiktok",
+        "print_press"
+      ],
+      "dailyMediaHours": 3,
+      "responsiveTo": [
+        "emotional",
+        "rational",
+        "aspirational"
+      ]
+    },
+    "political": {
+      "affiliation": "td",
+      "engagementLevel": 72,
+      "euAttitude": 75,
+      "securityFocus": 70,
+      "climateAwareness": 40,
+      "migrationAttitude": 30
+    }
+  },
+  {
+    "id": "cd540d4e-8fb4-42f2-a0b4-3edaf9e9390b",
+    "name": "Ewa",
+    "demographic": {
+      "age": 36,
+      "gender": "female",
+      "education": "vocational",
+      "region": "lubuskie",
+      "settlementType": "small_city",
+      "householdType": "couple_no_kids"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": true,
+      "hasSavings": true,
+      "hasDebt": true,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 70
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 30,
+        "conscientiousness": 74,
+        "extraversion": 29,
+        "agreeableness": 59,
+        "neuroticism": 40
+      },
+      "riskTolerance": 66,
+      "traditionalism": 35,
+      "collectivism": 21,
+      "institutionalTrust": 85,
+      "mediaTrust": 20,
+      "brandTrust": 56
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "fashion",
+        "financial_services",
+        "food_delivery",
+        "healthcare",
+        "home_appliances"
+      ],
+      "brandLoyalty": 28,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "tiktok",
+        "online_news"
+      ],
+      "dailyMediaHours": 5,
+      "responsiveTo": [
+        "aspirational",
+        "fear_of_missing",
+        "authority"
+      ]
+    },
+    "political": {
+      "affiliation": "pis",
+      "engagementLevel": 100,
+      "euAttitude": 28,
+      "securityFocus": 71,
+      "climateAwareness": 79,
+      "migrationAttitude": 4
+    }
+  },
+  {
+    "id": "8135d13a-2956-4cd7-9352-33defc539777",
+    "name": "Damian",
+    "demographic": {
+      "age": 20,
+      "gender": "male",
+      "education": "secondary",
+      "region": "lubuskie",
+      "settlementType": "small_city",
+      "householdType": "single"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": false,
+      "hasSavings": true,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 55
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 28,
+        "conscientiousness": 55,
+        "extraversion": 35,
+        "agreeableness": 84,
+        "neuroticism": 48
+      },
+      "riskTolerance": 53,
+      "traditionalism": 48,
+      "collectivism": 65,
+      "institutionalTrust": 61,
+      "mediaTrust": 37,
+      "brandTrust": 82
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "fashion",
+        "food_delivery",
+        "healthcare",
+        "home_appliances"
+      ],
+      "brandLoyalty": 42,
+      "shoppingChannels": [
+        "online"
+      ],
+      "mediaHabits": [
+        "instagram",
+        "tiktok",
+        "youtube",
+        "online_news"
+      ],
+      "dailyMediaHours": 3,
+      "responsiveTo": [
+        "humorous",
+        "fear_of_missing",
+        "rational",
+        "social_proof"
+      ]
+    },
+    "political": {
+      "affiliation": "ko",
+      "engagementLevel": 26,
+      "euAttitude": 56,
+      "securityFocus": 63,
+      "climateAwareness": 34,
+      "migrationAttitude": 21
+    }
+  },
+  {
+    "id": "943a5752-bfce-42cd-ac09-c33a97ce1935",
+    "name": "Tomasz",
+    "demographic": {
+      "age": 19,
+      "gender": "male",
+      "education": "higher",
+      "region": "mazowieckie",
+      "settlementType": "medium_city",
+      "householdType": "couple_no_kids"
+    },
+    "financial": {
+      "incomeLevel": "3500_5000",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 42
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 61,
+        "conscientiousness": 13,
+        "extraversion": 52,
+        "agreeableness": 84,
+        "neuroticism": 37
+      },
+      "riskTolerance": 75,
+      "traditionalism": 48,
+      "collectivism": 32,
+      "institutionalTrust": 26,
+      "mediaTrust": 78,
+      "brandTrust": 51
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "fashion",
+        "home_appliances"
+      ],
+      "brandLoyalty": 78,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "tiktok",
+        "online_news"
+      ],
+      "dailyMediaHours": 4,
+      "responsiveTo": [
+        "social_proof",
+        "authority",
+        "rational"
+      ]
+    },
+    "political": {
+      "affiliation": "pis",
+      "engagementLevel": 1,
+      "euAttitude": 53,
+      "securityFocus": 43,
+      "climateAwareness": 41,
+      "migrationAttitude": 66
+    }
+  },
+  {
+    "id": "8c185297-c06a-4d32-8ea9-6022566b4150",
+    "name": "Paweł",
+    "demographic": {
+      "age": 72,
+      "gender": "male",
+      "education": "secondary",
+      "region": "podlaskie",
+      "settlementType": "medium_city",
+      "householdType": "couple_no_kids"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": false,
+      "hasSavings": true,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 55
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 50,
+        "conscientiousness": 43,
+        "extraversion": 41,
+        "agreeableness": 40,
+        "neuroticism": 40
+      },
+      "riskTolerance": 34,
+      "traditionalism": 64,
+      "collectivism": 57,
+      "institutionalTrust": 48,
+      "mediaTrust": 12,
+      "brandTrust": 76
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "entertainment",
+        "home_appliances"
+      ],
+      "brandLoyalty": 87,
+      "shoppingChannels": [
+        "mixed"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "facebook",
+        "youtube",
+        "print_press",
+        "radio"
+      ],
+      "dailyMediaHours": 6,
+      "responsiveTo": [
+        "authority",
+        "humorous"
+      ]
+    },
+    "political": {
+      "affiliation": "ko",
+      "engagementLevel": 7,
+      "euAttitude": 100,
+      "securityFocus": 50,
+      "climateAwareness": 16,
+      "migrationAttitude": 49
+    }
+  },
+  {
+    "id": "3d588fb0-86fd-426c-9763-cef99987668c",
+    "name": "Marek",
+    "demographic": {
+      "age": 31,
+      "gender": "male",
+      "education": "secondary",
+      "region": "lubelskie",
+      "settlementType": "village",
+      "householdType": "family_young_kids"
+    },
+    "financial": {
+      "incomeLevel": "below_2000",
+      "ownsProperty": false,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 70
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 55,
+        "conscientiousness": 50,
+        "extraversion": 54,
+        "agreeableness": 55,
+        "neuroticism": 32
+      },
+      "riskTolerance": 54,
+      "traditionalism": 54,
+      "collectivism": 38,
+      "institutionalTrust": 55,
+      "mediaTrust": 41,
+      "brandTrust": 64
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "fashion",
+        "food_delivery"
+      ],
+      "brandLoyalty": 62,
+      "shoppingChannels": [
+        "mixed"
+      ],
+      "mediaHabits": [
+        "facebook",
+        "tiktok",
+        "youtube",
+        "linkedin",
+        "online_news",
+        "radio"
+      ],
+      "dailyMediaHours": 6,
+      "responsiveTo": [
+        "authority",
+        "fear_of_missing",
+        "humorous"
+      ]
+    },
+    "political": {
+      "affiliation": "pis",
+      "engagementLevel": 34,
+      "euAttitude": 27,
+      "securityFocus": 37,
+      "climateAwareness": 74,
+      "migrationAttitude": 33
+    }
+  },
+  {
+    "id": "b5da6b47-4338-44d8-b374-a48f867b1c35",
+    "name": "Rafał",
+    "demographic": {
+      "age": 55,
+      "gender": "male",
+      "education": "higher",
+      "region": "zachodniopomorskie",
+      "settlementType": "small_city",
+      "householdType": "family_teen_kids"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 64
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 85,
+        "conscientiousness": 60,
+        "extraversion": 25,
+        "agreeableness": 56,
+        "neuroticism": 71
+      },
+      "riskTolerance": 18,
+      "traditionalism": 34,
+      "collectivism": 31,
+      "institutionalTrust": 53,
+      "mediaTrust": 27,
+      "brandTrust": 26
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "entertainment"
+      ],
+      "brandLoyalty": 53,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "facebook",
+        "x_twitter",
+        "print_press",
+        "online_news"
+      ],
+      "dailyMediaHours": 5,
+      "responsiveTo": [
+        "authority",
+        "emotional",
+        "social_proof",
+        "humorous"
+      ]
+    },
+    "political": {
+      "affiliation": "konfederacja",
+      "engagementLevel": 27,
+      "euAttitude": 40,
+      "securityFocus": 61,
+      "climateAwareness": 73,
+      "migrationAttitude": 34
+    }
+  },
+  {
+    "id": "201bcf0a-d98c-43f3-b6d5-cc85bcae9702",
+    "name": "Jan",
+    "demographic": {
+      "age": 54,
+      "gender": "male",
+      "education": "higher",
+      "region": "wielkopolskie",
+      "settlementType": "medium_city",
+      "householdType": "single"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": true,
+      "creditAttitude": "negative",
+      "priceSensitivity": 52
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 62,
+        "conscientiousness": 51,
+        "extraversion": 65,
+        "agreeableness": 43,
+        "neuroticism": 43
+      },
+      "riskTolerance": 40,
+      "traditionalism": 67,
+      "collectivism": 39,
+      "institutionalTrust": 69,
+      "mediaTrust": 23,
+      "brandTrust": 46
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "food_delivery",
+        "entertainment",
+        "automotive"
+      ],
+      "brandLoyalty": 48,
+      "shoppingChannels": [
+        "mixed"
+      ],
+      "mediaHabits": [
+        "facebook"
+      ],
+      "dailyMediaHours": 4,
+      "responsiveTo": [
+        "emotional",
+        "social_proof"
+      ]
+    },
+    "political": {
+      "affiliation": "pis",
+      "engagementLevel": 77,
+      "euAttitude": 80,
+      "securityFocus": 57,
+      "climateAwareness": 65,
+      "migrationAttitude": 35
+    }
+  },
+  {
+    "id": "38e25a5e-a2aa-4c7b-8da5-bd0b9ca6b73e",
+    "name": "Sławomir",
+    "demographic": {
+      "age": 36,
+      "gender": "male",
+      "education": "higher",
+      "region": "opolskie",
+      "settlementType": "metropolis",
+      "householdType": "family_teen_kids"
+    },
+    "financial": {
+      "incomeLevel": "3500_5000",
+      "ownsProperty": true,
+      "hasSavings": true,
+      "hasDebt": false,
+      "creditAttitude": "positive",
+      "priceSensitivity": 35
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 67,
+        "conscientiousness": 69,
+        "extraversion": 69,
+        "agreeableness": 69,
+        "neuroticism": 66
+      },
+      "riskTolerance": 23,
+      "traditionalism": 76,
+      "collectivism": 0,
+      "institutionalTrust": 28,
+      "mediaTrust": 50,
+      "brandTrust": 69
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "financial_services",
+        "food_delivery",
+        "travel",
+        "healthcare",
+        "home_appliances"
+      ],
+      "brandLoyalty": 49,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "tv_private",
+        "facebook",
+        "linkedin",
+        "podcast"
+      ],
+      "dailyMediaHours": 2,
+      "responsiveTo": [
+        "emotional",
+        "authority",
+        "social_proof"
+      ]
+    },
+    "political": {
+      "affiliation": "pis",
+      "engagementLevel": 67,
+      "euAttitude": 45,
+      "securityFocus": 57,
+      "climateAwareness": 87,
+      "migrationAttitude": 70
+    }
+  },
+  {
+    "id": "44ec47ab-8b31-4251-abbd-b1286c1ab3f9",
+    "name": "Anna",
+    "demographic": {
+      "age": 58,
+      "gender": "female",
+      "education": "higher",
+      "region": "lubelskie",
+      "settlementType": "medium_city",
+      "householdType": "couple_no_kids"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": true,
+      "creditAttitude": "positive",
+      "priceSensitivity": 63
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 60,
+        "conscientiousness": 46,
+        "extraversion": 47,
+        "agreeableness": 46,
+        "neuroticism": 8
+      },
+      "riskTolerance": 41,
+      "traditionalism": 62,
+      "collectivism": 48,
+      "institutionalTrust": 39,
+      "mediaTrust": 80,
+      "brandTrust": 32
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "entertainment",
+        "healthcare",
+        "automotive"
+      ],
+      "brandLoyalty": 29,
+      "shoppingChannels": [
+        "online"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "tv_private",
+        "facebook",
+        "linkedin",
+        "print_press"
+      ],
+      "dailyMediaHours": 10,
+      "responsiveTo": [
+        "aspirational",
+        "emotional"
+      ]
+    },
+    "political": {
+      "affiliation": "td",
+      "engagementLevel": 85,
+      "euAttitude": 43,
+      "securityFocus": 67,
+      "climateAwareness": 54,
+      "migrationAttitude": 30
+    }
+  },
+  {
+    "id": "a23a3c75-4092-4ae3-af64-a69f1ed92691",
+    "name": "Magdalena",
+    "demographic": {
+      "age": 53,
+      "gender": "female",
+      "education": "secondary",
+      "region": "wielkopolskie",
+      "settlementType": "village",
+      "householdType": "single"
+    },
+    "financial": {
+      "incomeLevel": "3500_5000",
+      "ownsProperty": false,
+      "hasSavings": false,
+      "hasDebt": true,
+      "creditAttitude": "positive",
+      "priceSensitivity": 35
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 58,
+        "conscientiousness": 9,
+        "extraversion": 40,
+        "agreeableness": 57,
+        "neuroticism": 63
+      },
+      "riskTolerance": 0,
+      "traditionalism": 31,
+      "collectivism": 45,
+      "institutionalTrust": 81,
+      "mediaTrust": 90,
+      "brandTrust": 64
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "financial_services",
+        "entertainment",
+        "travel",
+        "healthcare",
+        "home_appliances"
+      ],
+      "brandLoyalty": 50,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "tv_private",
+        "facebook",
+        "radio"
+      ],
+      "dailyMediaHours": 6,
+      "responsiveTo": [
+        "humorous",
+        "rational",
+        "fear_of_missing",
+        "emotional"
+      ]
+    },
+    "political": {
+      "affiliation": "undecided",
+      "engagementLevel": 54,
+      "euAttitude": 34,
+      "securityFocus": 57,
+      "climateAwareness": 49,
+      "migrationAttitude": 45
+    }
+  },
+  {
+    "id": "8a669654-7bf2-4856-aad3-dd96f9ffc033",
+    "name": "Michał",
+    "demographic": {
+      "age": 18,
+      "gender": "male",
+      "education": "secondary",
+      "region": "slaskie",
+      "settlementType": "small_city",
+      "householdType": "single"
+    },
+    "financial": {
+      "incomeLevel": "below_2000",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "negative",
+      "priceSensitivity": 68
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 64,
+        "conscientiousness": 45,
+        "extraversion": 45,
+        "agreeableness": 35,
+        "neuroticism": 36
+      },
+      "riskTolerance": 30,
+      "traditionalism": 23,
+      "collectivism": 31,
+      "institutionalTrust": 61,
+      "mediaTrust": 69,
+      "brandTrust": 34
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "food_delivery",
+        "entertainment",
+        "healthcare"
+      ],
+      "brandLoyalty": 50,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "tv_private",
+        "facebook",
+        "instagram",
+        "youtube"
+      ],
+      "dailyMediaHours": 6,
+      "responsiveTo": [
+        "fear_of_missing",
+        "emotional",
+        "rational"
+      ]
+    },
+    "political": {
+      "affiliation": "td",
+      "engagementLevel": 0,
+      "euAttitude": 98,
+      "securityFocus": 83,
+      "climateAwareness": 20,
+      "migrationAttitude": 70
+    }
+  },
+  {
+    "id": "6831c6a0-7377-4698-952c-fc724d0b9e86",
+    "name": "Kamil",
+    "demographic": {
+      "age": 75,
+      "gender": "male",
+      "education": "secondary",
+      "region": "wielkopolskie",
+      "settlementType": "metropolis",
+      "householdType": "single"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": false,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "positive",
+      "priceSensitivity": 53
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 57,
+        "conscientiousness": 40,
+        "extraversion": 27,
+        "agreeableness": 52,
+        "neuroticism": 40
+      },
+      "riskTolerance": 34,
+      "traditionalism": 34,
+      "collectivism": 44,
+      "institutionalTrust": 32,
+      "mediaTrust": 9,
+      "brandTrust": 66
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "financial_services",
+        "food_delivery",
+        "entertainment",
+        "travel",
+        "healthcare"
+      ],
+      "brandLoyalty": 46,
+      "shoppingChannels": [
+        "online"
+      ],
+      "mediaHabits": [
+        "tv_private",
+        "facebook",
+        "online_news"
+      ],
+      "dailyMediaHours": 4,
+      "responsiveTo": [
+        "authority",
+        "humorous",
+        "aspirational",
+        "social_proof"
+      ]
+    },
+    "political": {
+      "affiliation": "ko",
+      "engagementLevel": 75,
+      "euAttitude": 70,
+      "securityFocus": 55,
+      "climateAwareness": 11,
+      "migrationAttitude": 39
+    }
+  },
+  {
+    "id": "8b9993a6-dbe2-410b-a05f-2193eb67c8d0",
+    "name": "Stanisław",
+    "demographic": {
+      "age": 41,
+      "gender": "male",
+      "education": "vocational",
+      "region": "lubuskie",
+      "settlementType": "medium_city",
+      "householdType": "couple_no_kids"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "positive",
+      "priceSensitivity": 40
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 40,
+        "conscientiousness": 49,
+        "extraversion": 20,
+        "agreeableness": 25,
+        "neuroticism": 63
+      },
+      "riskTolerance": 37,
+      "traditionalism": 44,
+      "collectivism": 64,
+      "institutionalTrust": 33,
+      "mediaTrust": 24,
+      "brandTrust": 36
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "food_delivery",
+        "entertainment"
+      ],
+      "brandLoyalty": 50,
+      "shoppingChannels": [
+        "online"
+      ],
+      "mediaHabits": [
+        "tv_private",
+        "facebook",
+        "youtube"
+      ],
+      "dailyMediaHours": 4,
+      "responsiveTo": [
+        "rational",
+        "emotional",
+        "aspirational"
+      ]
+    },
+    "political": {
+      "affiliation": "ko",
+      "engagementLevel": 35,
+      "euAttitude": 81,
+      "securityFocus": 30,
+      "climateAwareness": 67,
+      "migrationAttitude": 61
+    }
+  },
+  {
+    "id": "f6a86c71-092d-4394-b5f0-5f65cb68cb69",
+    "name": "Wojciech",
+    "demographic": {
+      "age": 77,
+      "gender": "male",
+      "education": "secondary",
+      "region": "lubelskie",
+      "settlementType": "medium_city",
+      "householdType": "single"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": false,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "negative",
+      "priceSensitivity": 40
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 36,
+        "conscientiousness": 57,
+        "extraversion": 84,
+        "agreeableness": 69,
+        "neuroticism": 28
+      },
+      "riskTolerance": 28,
+      "traditionalism": 95,
+      "collectivism": 23,
+      "institutionalTrust": 58,
+      "mediaTrust": 37,
+      "brandTrust": 58
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "fashion",
+        "entertainment",
+        "healthcare",
+        "home_appliances"
+      ],
+      "brandLoyalty": 36,
+      "shoppingChannels": [
+        "online"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "online_news",
+        "radio"
+      ],
+      "dailyMediaHours": 7,
+      "responsiveTo": [
+        "emotional",
+        "fear_of_missing"
+      ]
+    },
+    "political": {
+      "affiliation": "td",
+      "engagementLevel": 45,
+      "euAttitude": 64,
+      "securityFocus": 59,
+      "climateAwareness": 74,
+      "migrationAttitude": 0
+    }
+  },
+  {
+    "id": "51f5f9ca-cc89-4050-a501-4ac1d395e2b3",
+    "name": "Ewa",
+    "demographic": {
+      "age": 75,
+      "gender": "female",
+      "education": "secondary",
+      "region": "slaskie",
+      "settlementType": "metropolis",
+      "householdType": "family_adult_kids"
+    },
+    "financial": {
+      "incomeLevel": "above_8000",
+      "ownsProperty": false,
+      "hasSavings": true,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 58
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 40,
+        "conscientiousness": 57,
+        "extraversion": 56,
+        "agreeableness": 38,
+        "neuroticism": 37
+      },
+      "riskTolerance": 91,
+      "traditionalism": 79,
+      "collectivism": 15,
+      "institutionalTrust": 81,
+      "mediaTrust": 71,
+      "brandTrust": 88
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "financial_services",
+        "entertainment"
+      ],
+      "brandLoyalty": 32,
+      "shoppingChannels": [
+        "mixed"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "tv_private",
+        "facebook",
+        "youtube"
+      ],
+      "dailyMediaHours": 4,
+      "responsiveTo": [
+        "authority",
+        "rational",
+        "humorous"
+      ]
+    },
+    "political": {
+      "affiliation": "konfederacja",
+      "engagementLevel": 65,
+      "euAttitude": 68,
+      "securityFocus": 42,
+      "climateAwareness": 60,
+      "migrationAttitude": 25
+    }
+  },
+  {
+    "id": "0dc76eac-5752-4002-9532-456ec98709ef",
+    "name": "Krzysztof",
+    "demographic": {
+      "age": 52,
+      "gender": "male",
+      "education": "secondary",
+      "region": "dolnoslaskie",
+      "settlementType": "village",
+      "householdType": "family_teen_kids"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "negative",
+      "priceSensitivity": 33
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 61,
+        "conscientiousness": 35,
+        "extraversion": 56,
+        "agreeableness": 62,
+        "neuroticism": 29
+      },
+      "riskTolerance": 47,
+      "traditionalism": 52,
+      "collectivism": 49,
+      "institutionalTrust": 79,
+      "mediaTrust": 58,
+      "brandTrust": 57
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "entertainment",
+        "travel",
+        "automotive"
+      ],
+      "brandLoyalty": 70,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "tv_private",
+        "print_press"
+      ],
+      "dailyMediaHours": 7,
+      "responsiveTo": [
+        "social_proof",
+        "emotional",
+        "rational"
+      ]
+    },
+    "political": {
+      "affiliation": "ko",
+      "engagementLevel": 27,
+      "euAttitude": 53,
+      "securityFocus": 77,
+      "climateAwareness": 39,
+      "migrationAttitude": 33
+    }
+  },
+  {
+    "id": "59b78351-bcc8-4e51-bb9f-e8ebefd3c47f",
+    "name": "Andrzej",
+    "demographic": {
+      "age": 55,
+      "gender": "male",
+      "education": "vocational",
+      "region": "mazowieckie",
+      "settlementType": "small_city",
+      "householdType": "couple_no_kids"
+    },
+    "financial": {
+      "incomeLevel": "above_8000",
+      "ownsProperty": true,
+      "hasSavings": true,
+      "hasDebt": true,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 41
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 37,
+        "conscientiousness": 38,
+        "extraversion": 68,
+        "agreeableness": 69,
+        "neuroticism": 35
+      },
+      "riskTolerance": 60,
+      "traditionalism": 34,
+      "collectivism": 44,
+      "institutionalTrust": 81,
+      "mediaTrust": 9,
+      "brandTrust": 36
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "food_delivery",
+        "home_appliances"
+      ],
+      "brandLoyalty": 34,
+      "shoppingChannels": [
+        "online"
+      ],
+      "mediaHabits": [
+        "tv_private",
+        "instagram",
+        "print_press",
+        "radio"
+      ],
+      "dailyMediaHours": 5,
+      "responsiveTo": [
+        "social_proof",
+        "fear_of_missing"
+      ]
+    },
+    "political": {
+      "affiliation": "undecided",
+      "engagementLevel": 62,
+      "euAttitude": 26,
+      "securityFocus": 100,
+      "climateAwareness": 34,
+      "migrationAttitude": 4
+    }
+  },
+  {
+    "id": "00eeebc2-8b0b-45b3-bd43-5255bee6243f",
+    "name": "Wojciech",
+    "demographic": {
+      "age": 36,
+      "gender": "male",
+      "education": "vocational",
+      "region": "slaskie",
+      "settlementType": "metropolis",
+      "householdType": "family_young_kids"
+    },
+    "financial": {
+      "incomeLevel": "above_8000",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "negative",
+      "priceSensitivity": 39
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 54,
+        "conscientiousness": 23,
+        "extraversion": 90,
+        "agreeableness": 41,
+        "neuroticism": 56
+      },
+      "riskTolerance": 35,
+      "traditionalism": 18,
+      "collectivism": 48,
+      "institutionalTrust": 42,
+      "mediaTrust": 30,
+      "brandTrust": 42
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "fashion",
+        "travel",
+        "home_appliances"
+      ],
+      "brandLoyalty": 44,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "facebook",
+        "instagram",
+        "youtube",
+        "linkedin",
+        "print_press",
+        "online_news"
+      ],
+      "dailyMediaHours": 5,
+      "responsiveTo": [
+        "fear_of_missing",
+        "social_proof"
+      ]
+    },
+    "political": {
+      "affiliation": "pis",
+      "engagementLevel": 39,
+      "euAttitude": 48,
+      "securityFocus": 61,
+      "climateAwareness": 86,
+      "migrationAttitude": 14
+    }
+  },
+  {
+    "id": "5818414d-06a7-4eed-b49d-ab5b23ecde85",
+    "name": "Zofia",
+    "demographic": {
+      "age": 31,
+      "gender": "female",
+      "education": "secondary",
+      "region": "dolnoslaskie",
+      "settlementType": "medium_city",
+      "householdType": "couple_no_kids"
+    },
+    "financial": {
+      "incomeLevel": "5000_8000",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "positive",
+      "priceSensitivity": 60
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 13,
+        "conscientiousness": 41,
+        "extraversion": 52,
+        "agreeableness": 46,
+        "neuroticism": 61
+      },
+      "riskTolerance": 40,
+      "traditionalism": 42,
+      "collectivism": 57,
+      "institutionalTrust": 29,
+      "mediaTrust": 8,
+      "brandTrust": 72
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "fashion",
+        "automotive"
+      ],
+      "brandLoyalty": 33,
+      "shoppingChannels": [
+        "online"
+      ],
+      "mediaHabits": [
+        "tv_private",
+        "facebook",
+        "tiktok",
+        "youtube",
+        "linkedin",
+        "print_press",
+        "online_news"
+      ],
+      "dailyMediaHours": 5,
+      "responsiveTo": [
+        "humorous",
+        "rational",
+        "aspirational"
+      ]
+    },
+    "political": {
+      "affiliation": "konfederacja",
+      "engagementLevel": 83,
+      "euAttitude": 68,
+      "securityFocus": 0,
+      "climateAwareness": 45,
+      "migrationAttitude": 30
+    }
+  },
+  {
+    "id": "4f525710-e6d5-4c92-b3b9-7dfc13ab1888",
+    "name": "Justyna",
+    "demographic": {
+      "age": 65,
+      "gender": "female",
+      "education": "vocational",
+      "region": "mazowieckie",
+      "settlementType": "medium_city",
+      "householdType": "couple_no_kids"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 69
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 72,
+        "conscientiousness": 32,
+        "extraversion": 39,
+        "agreeableness": 49,
+        "neuroticism": 22
+      },
+      "riskTolerance": 15,
+      "traditionalism": 73,
+      "collectivism": 22,
+      "institutionalTrust": 6,
+      "mediaTrust": 51,
+      "brandTrust": 38
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "financial_services",
+        "entertainment"
+      ],
+      "brandLoyalty": 42,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "facebook",
+        "online_news",
+        "radio"
+      ],
+      "dailyMediaHours": 2,
+      "responsiveTo": [
+        "emotional",
+        "humorous",
+        "fear_of_missing"
+      ]
+    },
+    "political": {
+      "affiliation": "lewica",
+      "engagementLevel": 29,
+      "euAttitude": 44,
+      "securityFocus": 77,
+      "climateAwareness": 53,
+      "migrationAttitude": 44
+    }
+  },
+  {
+    "id": "e74eeb52-7f82-4643-9551-d756c6a06707",
+    "name": "Justyna",
+    "demographic": {
+      "age": 69,
+      "gender": "female",
+      "education": "secondary",
+      "region": "mazowieckie",
+      "settlementType": "village",
+      "householdType": "family_adult_kids"
+    },
+    "financial": {
+      "incomeLevel": "below_2000",
+      "ownsProperty": false,
+      "hasSavings": false,
+      "hasDebt": false,
+      "creditAttitude": "negative",
+      "priceSensitivity": 96
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 35,
+        "conscientiousness": 61,
+        "extraversion": 53,
+        "agreeableness": 45,
+        "neuroticism": 55
+      },
+      "riskTolerance": 43,
+      "traditionalism": 35,
+      "collectivism": 70,
+      "institutionalTrust": 63,
+      "mediaTrust": 27,
+      "brandTrust": 42
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "entertainment",
+        "home_appliances"
+      ],
+      "brandLoyalty": 64,
+      "shoppingChannels": [
+        "online"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "tv_private",
+        "instagram"
+      ],
+      "dailyMediaHours": 5,
+      "responsiveTo": [
+        "fear_of_missing",
+        "aspirational",
+        "authority",
+        "rational"
+      ]
+    },
+    "political": {
+      "affiliation": "konfederacja",
+      "engagementLevel": 55,
+      "euAttitude": 50,
+      "securityFocus": 64,
+      "climateAwareness": 36,
+      "migrationAttitude": 52
+    }
+  },
+  {
+    "id": "b4408481-2d04-4243-a8a5-de6fcfbb509f",
+    "name": "Bartosz",
+    "demographic": {
+      "age": 77,
+      "gender": "male",
+      "education": "higher",
+      "region": "malopolskie",
+      "settlementType": "metropolis",
+      "householdType": "couple_no_kids"
+    },
+    "financial": {
+      "incomeLevel": "above_8000",
+      "ownsProperty": false,
+      "hasSavings": true,
+      "hasDebt": false,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 44
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 53,
+        "conscientiousness": 50,
+        "extraversion": 36,
+        "agreeableness": 65,
+        "neuroticism": 37
+      },
+      "riskTolerance": 57,
+      "traditionalism": 70,
+      "collectivism": 63,
+      "institutionalTrust": 57,
+      "mediaTrust": 50,
+      "brandTrust": 58
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "financial_services",
+        "food_delivery",
+        "travel",
+        "home_appliances",
+        "automotive"
+      ],
+      "brandLoyalty": 48,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "tv_public",
+        "tv_private",
+        "facebook",
+        "online_news"
+      ],
+      "dailyMediaHours": 5,
+      "responsiveTo": [
+        "rational",
+        "emotional"
+      ]
+    },
+    "political": {
+      "affiliation": "td",
+      "engagementLevel": 6,
+      "euAttitude": 81,
+      "securityFocus": 80,
+      "climateAwareness": 72,
+      "migrationAttitude": 56
+    }
+  },
+  {
+    "id": "86898551-686b-4596-ae94-108d7b030bbd",
+    "name": "Andrzej",
+    "demographic": {
+      "age": 44,
+      "gender": "male",
+      "education": "higher",
+      "region": "pomorskie",
+      "settlementType": "small_city",
+      "householdType": "multigenerational"
+    },
+    "financial": {
+      "incomeLevel": "3500_5000",
+      "ownsProperty": false,
+      "hasSavings": false,
+      "hasDebt": true,
+      "creditAttitude": "negative",
+      "priceSensitivity": 27
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 75,
+        "conscientiousness": 46,
+        "extraversion": 18,
+        "agreeableness": 43,
+        "neuroticism": 19
+      },
+      "riskTolerance": 42,
+      "traditionalism": 65,
+      "collectivism": 38,
+      "institutionalTrust": 73,
+      "mediaTrust": 22,
+      "brandTrust": 60
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "food_delivery"
+      ],
+      "brandLoyalty": 92,
+      "shoppingChannels": [
+        "mixed"
+      ],
+      "mediaHabits": [
+        "instagram",
+        "tiktok",
+        "youtube",
+        "online_news",
+        "radio"
+      ],
+      "dailyMediaHours": 4,
+      "responsiveTo": [
+        "aspirational",
+        "humorous"
+      ]
+    },
+    "political": {
+      "affiliation": "konfederacja",
+      "engagementLevel": 85,
+      "euAttitude": 72,
+      "securityFocus": 59,
+      "climateAwareness": 58,
+      "migrationAttitude": 71
+    }
+  },
+  {
+    "id": "2be1604a-4822-4d5e-be9e-743f600d5ae3",
+    "name": "Jan",
+    "demographic": {
+      "age": 39,
+      "gender": "male",
+      "education": "secondary",
+      "region": "lodzkie",
+      "settlementType": "village",
+      "householdType": "family_young_kids"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": true,
+      "hasSavings": false,
+      "hasDebt": true,
+      "creditAttitude": "neutral",
+      "priceSensitivity": 65
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 63,
+        "conscientiousness": 78,
+        "extraversion": 0,
+        "agreeableness": 47,
+        "neuroticism": 43
+      },
+      "riskTolerance": 22,
+      "traditionalism": 64,
+      "collectivism": 43,
+      "institutionalTrust": 35,
+      "mediaTrust": 29,
+      "brandTrust": 51
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "financial_services",
+        "entertainment",
+        "travel"
+      ],
+      "brandLoyalty": 79,
+      "shoppingChannels": [
+        "offline"
+      ],
+      "mediaHabits": [
+        "instagram",
+        "linkedin",
+        "online_news"
+      ],
+      "dailyMediaHours": 3,
+      "responsiveTo": [
+        "emotional",
+        "aspirational",
+        "authority"
+      ]
+    },
+    "political": {
+      "affiliation": "lewica",
+      "engagementLevel": 74,
+      "euAttitude": 52,
+      "securityFocus": 65,
+      "climateAwareness": 75,
+      "migrationAttitude": 39
+    }
+  },
+  {
+    "id": "fbe8bb92-7667-4f64-955a-f9b201141728",
+    "name": "Paweł",
+    "demographic": {
+      "age": 52,
+      "gender": "male",
+      "education": "secondary",
+      "region": "lodzkie",
+      "settlementType": "medium_city",
+      "householdType": "single"
+    },
+    "financial": {
+      "incomeLevel": "2000_3500",
+      "ownsProperty": false,
+      "hasSavings": false,
+      "hasDebt": true,
+      "creditAttitude": "positive",
+      "priceSensitivity": 62
+    },
+    "psychographic": {
+      "ocean": {
+        "openness": 21,
+        "conscientiousness": 64,
+        "extraversion": 31,
+        "agreeableness": 51,
+        "neuroticism": 55
+      },
+      "riskTolerance": 62,
+      "traditionalism": 62,
+      "collectivism": 22,
+      "institutionalTrust": 0,
+      "mediaTrust": 54,
+      "brandTrust": 70
+    },
+    "consumer": {
+      "primaryCategories": [
+        "fmcg",
+        "electronics",
+        "fashion",
+        "food_delivery",
+        "entertainment",
+        "travel",
+        "home_appliances"
+      ],
+      "brandLoyalty": 58,
+      "shoppingChannels": [
+        "mixed"
+      ],
+      "mediaHabits": [
+        "facebook",
+        "x_twitter"
+      ],
+      "dailyMediaHours": 8,
+      "responsiveTo": [
+        "rational",
+        "fear_of_missing",
+        "social_proof",
+        "emotional"
+      ]
+    },
+    "political": {
+      "affiliation": "ko",
+      "engagementLevel": 31,
+      "euAttitude": 33,
+      "securityFocus": 64,
+      "climateAwareness": 58,
+      "migrationAttitude": 10
+    }
+  }
+]

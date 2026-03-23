@@ -12,10 +12,12 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
-    "dotenv": "^16.4.0"
+    "dotenv": "^16.4.0",
+    "pdfkit": "^0.18.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
+    "@types/pdfkit": "^0.17.5",
     "tsx": "^4.19.0",
     "typescript": "^5.7.0"
   }

@@ -6,6 +6,7 @@
 //   tsx src/cli.ts --generate 50   (tylko generuje populację, bez badania)
 // ─────────────────────────────────────────────────────────────────────────────
 
+import "dotenv/config";
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { join, resolve } from "path";
 import { generatePopulation } from "./personas/generator.js";
