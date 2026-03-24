@@ -105,11 +105,12 @@ export async function runSpreadSimulation(
 ): Promise<SpreadReport> {
   const personaMap = new Map(population.map((p) => [p.id, p]));
 
-  // Top 5 spreaderów: najwyższy attention + pozytywny WOM
+  // Top spreaderów: najwyższy attention + WOM (bez twardego progu – adaptuje się do populacji)
+  const minSpreaders = Math.max(1, Math.min(5, Math.floor(responses.length * 0.2)));
   const spreaders = [...responses]
-    .filter((r) => r.womSimulation.trim() && r.attentionScore >= 5)
+    .filter((r) => r.womSimulation.trim())
     .sort((a, b) => (b.attentionScore + b.purchaseIntentDelta) - (a.attentionScore + a.purchaseIntentDelta))
-    .slice(0, 5);
+    .slice(0, minSpreaders);
 
   const spreaderIds = new Set(spreaders.map((s) => s.personaId));
   const pool = population.filter((p) => !spreaderIds.has(p.id));
