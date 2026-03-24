@@ -470,7 +470,7 @@ const HTML = `<!DOCTYPE html>
           : '';
         const valA = m.delta ? cd(m.valA) : \`<span style="color:#6366f1">\${m.valA}\${m.suffix??''}</span>\`;
         const valB = m.valB !== undefined ? (m.delta ? cd(m.valB) : \`<span style="color:#f59e0b">\${m.valB}\${m.suffix??''}</span>\`) : '';
-        return \`<div class="metric"><div class="metric-value">\${valA}\${isABResult?\` / \${valB}\':\''}</div><div class="metric-label">\${m.label}\${winner}</div></div>\`;
+        return \`<div class="metric"><div class="metric-value">\${valA}\${isABResult?\` / \${valB}\`:\''}</div><div class="metric-label">\${m.label}\${winner}</div></div>\`;
       }).join('');
 
       renderRadar(reportA, reportB);
@@ -574,8 +574,8 @@ const HTML = `<!DOCTYPE html>
           <div class="persona-scores">
             <div class="persona-score"><strong>\${r.attentionScore}</strong>Attention</div>
             <div class="persona-score"><strong>\${r.resonanceScore}</strong>Resonance</div>
-            <div class="persona-score"><strong \${r.purchaseIntentDelta>0?'style="color:#22c55e"':r.purchaseIntentDelta<0?'style="color:#ef4444"':''}>\${r.purchaseIntentDelta>0?'+':''}{\${r.purchaseIntentDelta}}</strong>Purchase</div>
-            <div class="persona-score"><strong \${r.trustImpact>0?'style="color:#22c55e"':r.trustImpact<0?'style="color:#ef4444"':''}>\${r.trustImpact>0?'+':''}{\${r.trustImpact}}</strong>Trust</div>
+            <div class="persona-score"><strong \${r.purchaseIntentDelta>0?'style="color:#22c55e"':r.purchaseIntentDelta<0?'style="color:#ef4444"':''}>\${r.purchaseIntentDelta>0?'+':''}\${r.purchaseIntentDelta}</strong>Purchase</div>
+            <div class="persona-score"><strong \${r.trustImpact>0?'style="color:#22c55e"':r.trustImpact<0?'style="color:#ef4444"':''}>\${r.trustImpact>0?'+':''}\${r.trustImpact}</strong>Trust</div>
           </div>
           \${r.recall ? \`<div style="font-size:.8rem;color:#a1a1aa;margin-bottom:.3rem">📌 \${r.recall}</div>\` : ''}
           \${r.womSimulation ? \`<div class="persona-wom">„\${r.womSimulation}"</div>\` : ''}
