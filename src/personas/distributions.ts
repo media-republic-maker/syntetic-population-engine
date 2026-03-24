@@ -40,21 +40,22 @@ export function normalInt(mean: number, std: number, min: number, max: number): 
 // Demograficzne
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Wiek: populacja 18–80 lat, rozkład GUS 2023
+// Wiek: populacja 18–80 lat
+// Źródło: GUS Rocznik Demograficzny 2023 – ludność wg wieku (dane za 2022 r.)
+// Udziały grupy wiekowej w populacji 18–80+: przeliczone na wagi.
 export function sampleAge(): number {
-  return weightedRandom<number>([
-    [20, 8],   // 18–24
-    [27, 9],   // 25–29
-    [32, 10],  // 30–34
-    [37, 10],  // 35–39
-    [42, 10],  // 40–44
-    [47, 9],   // 45–49
-    [52, 9],   // 50–54
-    [57, 9],   // 55–59
-    [63, 11],  // 60–65
-    [70, 8],   // 66–74
-    [77, 7],   // 75–80
-  ]) + Math.floor(Math.random() * 5) - 2; // ±2 lata wariancji
+  // Losujemy grupę wiekową wg rzeczywistych udziałów GUS
+  const group = weightedRandom<[number, number]>([
+    [[18, 24], 85],   // 8.5%
+    [[25, 34], 138],  // 13.8%
+    [[35, 44], 165],  // 16.5%
+    [[45, 54], 141],  // 14.1%
+    [[55, 64], 154],  // 15.4%
+    [[65, 74], 128],  // 12.8%
+    [[75, 80], 45],   // 4.5%  (przycięte do 80)
+  ]);
+  // Jednostajny losowy wiek w obrębie grupy
+  return group[0] + Math.floor(Math.random() * (group[1] - group[0] + 1));
 }
 
 export function sampleGender(): Gender {
@@ -178,35 +179,50 @@ export function sampleOwnsProperty(age: number, incomeLevel: IncomeLevel): boole
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Polityczne
-// Rozkład: CBOS preferencje partyjne 2024 (wśród deklarujących)
+// Źródło: CBOS Komunikat BS/9/2025 „Preferencje partyjne w styczniu 2025"
+// Udziały wśród wszystkich dorosłych (w tym niezdecydowanych i niedeklarujących)
+// PiS 28%, KO 27%, TD 9%, Lewica 7%, Konfederacja 11%,
+// niezdecydowani 11%, apolityczni 7% (łącznie ~100%)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export function samplePoliticalAffiliation(age: number, settlementType: SettlementType): PoliticalAffiliation {
-  // Bazowy rozkład wśród ogółu dorosłych Polaków
   const base: [PoliticalAffiliation, number][] = [
-    ["pis", 28],
-    ["ko", 27],
-    ["td", 10],
-    ["lewica", 8],
-    ["konfederacja", 12],
-    ["undecided", 10],
-    ["apolitical", 5],
+    ["pis",          28],
+    ["ko",           27],
+    ["td",            9],
+    ["lewica",        7],
+    ["konfederacja", 11],
+    ["undecided",    11],
+    ["apolitical",    7],
   ];
-
-  // Korekta wiekowa: PiS silniejszy 55+, Konfederacja silniejsza 18–35
-  const youngBoost = age < 35 ? 3 : 0;
-  const oldBoost = age > 55 ? 3 : 0;
-
-  // Korekta geograficzna: wieś → PiS, metropolia → KO
-  const ruralBoost = settlementType === "village" ? 5 : 0;
-  const urbanBoost = settlementType === "metropolis" ? 5 : 0;
 
   const adjusted: [PoliticalAffiliation, number][] = base.map(([party, w]) => {
     let weight = w;
-    if (party === "pis") weight += oldBoost + ruralBoost;
-    if (party === "ko") weight += urbanBoost;
-    if (party === "konfederacja") weight += youngBoost;
-    if (party === "lewica") weight += (age < 40 ? 2 : 0) + (urbanBoost > 0 ? 2 : 0);
+    // PiS: silniejszy wśród 55+ i mieszkańców wsi (CBOS segmentacja 2024)
+    if (party === "pis") {
+      if (age > 55) weight += 8;
+      if (settlementType === "village") weight += 6;
+    }
+    // KO: silniejszy w metropoliach i wśród wyborców 30–55
+    if (party === "ko") {
+      if (settlementType === "metropolis") weight += 8;
+      if (settlementType === "large_city") weight += 4;
+      if (age >= 30 && age <= 55) weight += 3;
+    }
+    // Konfederacja: silna wśród mężczyzn 18–35
+    if (party === "konfederacja") {
+      if (age < 35) weight += 6;
+      if (age < 28) weight += 4;
+    }
+    // Lewica: urbańska, młodsi wyborcy
+    if (party === "lewica") {
+      if (age < 40) weight += 3;
+      if (settlementType === "metropolis" || settlementType === "large_city") weight += 4;
+    }
+    // TD: wieś i małe miasta (PSL-baza)
+    if (party === "td") {
+      if (settlementType === "village" || settlementType === "small_city") weight += 4;
+    }
     return [party, Math.max(1, weight)];
   });
 
@@ -215,26 +231,40 @@ export function samplePoliticalAffiliation(age: number, settlementType: Settleme
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Media habits
-// Źródła: Gemius/PBI, Kantar Media 2023
+// Źródło: Gemius/PBI Megapanel 2024 Q3 – zasięg tygodniowy wśród dorosłych
+// TV: Kantar Media 2024 (% oglądalności tygodniowej)
+// Wartości = % populacji korzystających regularnie (p * 100)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export function sampleMediaHabits(age: number, settlementType: SettlementType): MediaPlatform[] {
+  // Zasięg tygodniowy (%) – dane Gemius/PBI/Kantar 2024, segmentowane wg wieku
   const platforms: [MediaPlatform, number][] = [
-    ["tv_public", age > 55 ? 70 : 30],
-    ["tv_private", age > 40 ? 60 : 35],
-    ["facebook", age > 25 ? 65 : 40],
-    ["instagram", age < 40 ? 60 : 25],
-    ["tiktok", age < 30 ? 65 : age < 45 ? 30 : 10],
-    ["youtube", age < 50 ? 55 : 30],
-    ["x_twitter", 15],
-    ["linkedin", age > 25 && age < 55 ? 30 : 10],
-    ["print_press", age > 50 ? 35 : 10],
-    ["online_news", 50],
-    ["podcast", age > 20 && age < 50 ? 30 : 10],
-    ["radio", age > 35 ? 40 : 20],
+    // TV publiczna (TVP): wysoki zasięg 55+, mocny na wsi; Kantar: 63% tygodniowo ogółem
+    ["tv_public",   age > 65 ? 72 : age > 50 ? 58 : age > 35 ? 38 : 22],
+    // TV prywatna (TVN/Polsat): 70% ogółem, silna 35–65
+    ["tv_private",  age > 65 ? 65 : age > 40 ? 68 : age > 25 ? 55 : 38],
+    // Facebook: Gemius 2024 – 73% dorosłych internautów, dominuje 30–55
+    ["facebook",    age > 65 ? 40 : age > 45 ? 68 : age > 25 ? 78 : 62],
+    // Instagram: silna 18–34 (68%), spada po 45
+    ["instagram",   age < 25 ? 72 : age < 35 ? 65 : age < 45 ? 48 : age < 55 ? 28 : 12],
+    // TikTok: silny 18–24 (74%), spada gwałtownie po 35
+    ["tiktok",      age < 20 ? 78 : age < 25 ? 72 : age < 30 ? 55 : age < 40 ? 32 : age < 50 ? 15 : 6],
+    // YouTube: najszerszy zasięg 18–44 (80%), utrzymuje się do 60+
+    ["youtube",     age < 35 ? 82 : age < 50 ? 75 : age < 65 ? 52 : 30],
+    // X/Twitter: niszowy w PL (~14% aktywnych internautów)
+    ["x_twitter",   age < 35 ? 18 : age < 50 ? 14 : 8],
+    // LinkedIn: profesjonalne, głównie 25–50 w miastach
+    ["linkedin",    (age > 25 && age < 55 && settlementType !== "village") ? 32 : 8],
+    // Prasa drukowana: mocno spada; Kantar: 22% tygodniowo ogółem, głównie 50+
+    ["print_press", age > 65 ? 38 : age > 50 ? 28 : age > 35 ? 14 : 6],
+    // Serwisy informacyjne online: bardzo wysoki zasięg (85% internautów)
+    ["online_news", age > 65 ? 52 : age > 50 ? 68 : 82],
+    // Podcasty: rosnące, głównie 25–45, wyższe wykształcenie i miasta
+    ["podcast",     age < 25 ? 28 : age < 40 ? 38 : age < 55 ? 25 : 10],
+    // Radio: Kantar 2024 – 62% tygodniowo; głównie 35+ (w samochodzie)
+    ["radio",       age > 55 ? 55 : age > 35 ? 62 : age > 25 ? 48 : 32],
   ];
 
-  // Każda platforma jest wybierana niezależnie, proporcjonalnie do wagi
   return platforms
     .filter(([, w]) => Math.random() * 100 < w)
     .map(([p]) => p);

@@ -1,0 +1,252 @@
+[
+  {
+    "brandName": "PKO BP",
+    "category": "financial_services",
+    "awareness": 0.95,
+    "sentimentWeights": { "negative": 20, "neutral": 50, "positive": 30 },
+    "ageAffinity": [35, 80],
+    "incomeAffinity": ["below_2000", "2000_3500", "3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": [],
+    "tags": ["bank", "kredyt", "konto"]
+  },
+  {
+    "brandName": "mBank",
+    "category": "financial_services",
+    "awareness": 0.75,
+    "sentimentWeights": { "negative": 15, "neutral": 40, "positive": 45 },
+    "ageAffinity": [22, 50],
+    "incomeAffinity": ["2000_3500", "3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": ["medium_city", "large_city", "metropolis"],
+    "tags": ["bank", "konto", "online"]
+  },
+  {
+    "brandName": "Revolut",
+    "category": "financial_services",
+    "awareness": 0.55,
+    "sentimentWeights": { "negative": 10, "neutral": 30, "positive": 60 },
+    "ageAffinity": [18, 40],
+    "incomeAffinity": ["3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": ["large_city", "metropolis"],
+    "tags": ["fintech", "karta", "podróże"]
+  },
+  {
+    "brandName": "Biedronka",
+    "category": "fmcg",
+    "awareness": 0.99,
+    "sentimentWeights": { "negative": 10, "neutral": 35, "positive": 55 },
+    "ageAffinity": [18, 80],
+    "incomeAffinity": ["below_2000", "2000_3500", "3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": [],
+    "tags": ["sklep", "zakupy", "dyskonty"]
+  },
+  {
+    "brandName": "Lidl",
+    "category": "fmcg",
+    "awareness": 0.97,
+    "sentimentWeights": { "negative": 8, "neutral": 32, "positive": 60 },
+    "ageAffinity": [18, 80],
+    "incomeAffinity": ["below_2000", "2000_3500", "3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": [],
+    "tags": ["sklep", "zakupy", "dyskonty"]
+  },
+  {
+    "brandName": "Allegro",
+    "category": "electronics",
+    "awareness": 0.97,
+    "sentimentWeights": { "negative": 12, "neutral": 35, "positive": 53 },
+    "ageAffinity": [18, 70],
+    "incomeAffinity": ["below_2000", "2000_3500", "3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": [],
+    "tags": ["e-commerce", "zakupy online", "marketplace"]
+  },
+  {
+    "brandName": "Samsung",
+    "category": "electronics",
+    "awareness": 0.95,
+    "sentimentWeights": { "negative": 10, "neutral": 35, "positive": 55 },
+    "ageAffinity": [18, 65],
+    "incomeAffinity": ["2000_3500", "3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": [],
+    "tags": ["smartfon", "telewizor", "elektronika"]
+  },
+  {
+    "brandName": "Apple",
+    "category": "electronics",
+    "awareness": 0.92,
+    "sentimentWeights": { "negative": 20, "neutral": 30, "positive": 50 },
+    "ageAffinity": [18, 45],
+    "incomeAffinity": ["3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": ["large_city", "metropolis"],
+    "tags": ["iPhone", "premium", "ekosystem"]
+  },
+  {
+    "brandName": "Xiaomi",
+    "category": "electronics",
+    "awareness": 0.75,
+    "sentimentWeights": { "negative": 12, "neutral": 38, "positive": 50 },
+    "ageAffinity": [18, 40],
+    "incomeAffinity": ["below_2000", "2000_3500", "3500_5000"],
+    "settlementBoost": [],
+    "tags": ["smartfon", "budżet", "tech"]
+  },
+  {
+    "brandName": "Reserved",
+    "category": "fashion",
+    "awareness": 0.90,
+    "sentimentWeights": { "negative": 12, "neutral": 38, "positive": 50 },
+    "ageAffinity": [18, 45],
+    "incomeAffinity": ["2000_3500", "3500_5000", "5000_8000"],
+    "settlementBoost": ["medium_city", "large_city", "metropolis"],
+    "tags": ["ubrania", "moda", "galeria"]
+  },
+  {
+    "brandName": "CCC",
+    "category": "fashion",
+    "awareness": 0.88,
+    "sentimentWeights": { "negative": 15, "neutral": 40, "positive": 45 },
+    "ageAffinity": [18, 60],
+    "incomeAffinity": ["below_2000", "2000_3500", "3500_5000"],
+    "settlementBoost": [],
+    "tags": ["obuwie", "akcesoria", "moda"]
+  },
+  {
+    "brandName": "Netflix",
+    "category": "entertainment",
+    "awareness": 0.90,
+    "sentimentWeights": { "negative": 15, "neutral": 30, "positive": 55 },
+    "ageAffinity": [18, 50],
+    "incomeAffinity": ["2000_3500", "3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": ["medium_city", "large_city", "metropolis"],
+    "tags": ["streaming", "filmy", "seriale"]
+  },
+  {
+    "brandName": "Spotify",
+    "category": "entertainment",
+    "awareness": 0.80,
+    "sentimentWeights": { "negative": 10, "neutral": 30, "positive": 60 },
+    "ageAffinity": [18, 45],
+    "incomeAffinity": ["2000_3500", "3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": [],
+    "tags": ["muzyka", "streaming", "podcast"]
+  },
+  {
+    "brandName": "Glovo",
+    "category": "food_delivery",
+    "awareness": 0.70,
+    "sentimentWeights": { "negative": 20, "neutral": 35, "positive": 45 },
+    "ageAffinity": [18, 40],
+    "incomeAffinity": ["2000_3500", "3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": ["medium_city", "large_city", "metropolis"],
+    "tags": ["dostawa", "jedzenie", "aplikacja"]
+  },
+  {
+    "brandName": "Żywiec",
+    "category": "fmcg",
+    "awareness": 0.92,
+    "sentimentWeights": { "negative": 10, "neutral": 40, "positive": 50 },
+    "ageAffinity": [20, 70],
+    "incomeAffinity": ["below_2000", "2000_3500", "3500_5000", "5000_8000"],
+    "settlementBoost": [],
+    "tags": ["piwo", "alkohol", "imprezy"]
+  },
+  {
+    "brandName": "Tymbark",
+    "category": "fmcg",
+    "awareness": 0.93,
+    "sentimentWeights": { "negative": 5, "neutral": 35, "positive": 60 },
+    "ageAffinity": [18, 80],
+    "incomeAffinity": ["below_2000", "2000_3500", "3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": [],
+    "tags": ["soki", "napoje", "dzieci"]
+  },
+  {
+    "brandName": "Wedel",
+    "category": "fmcg",
+    "awareness": 0.95,
+    "sentimentWeights": { "negative": 5, "neutral": 30, "positive": 65 },
+    "ageAffinity": [18, 80],
+    "incomeAffinity": ["below_2000", "2000_3500", "3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": [],
+    "tags": ["czekolada", "słodycze", "polskie"]
+  },
+  {
+    "brandName": "LOT",
+    "category": "travel",
+    "awareness": 0.88,
+    "sentimentWeights": { "negative": 25, "neutral": 40, "positive": 35 },
+    "ageAffinity": [25, 70],
+    "incomeAffinity": ["3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": ["large_city", "metropolis"],
+    "tags": ["loty", "podróże", "polskie linie"]
+  },
+  {
+    "brandName": "Wizz Air",
+    "category": "travel",
+    "awareness": 0.80,
+    "sentimentWeights": { "negative": 30, "neutral": 35, "positive": 35 },
+    "ageAffinity": [18, 45],
+    "incomeAffinity": ["2000_3500", "3500_5000"],
+    "settlementBoost": [],
+    "tags": ["loty", "tanie linie", "podróże"]
+  },
+  {
+    "brandName": "T-Mobile",
+    "category": "electronics",
+    "awareness": 0.90,
+    "sentimentWeights": { "negative": 18, "neutral": 40, "positive": 42 },
+    "ageAffinity": [18, 65],
+    "incomeAffinity": ["below_2000", "2000_3500", "3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": [],
+    "tags": ["internet", "telefon", "operator"]
+  },
+  {
+    "brandName": "Play",
+    "category": "electronics",
+    "awareness": 0.88,
+    "sentimentWeights": { "negative": 20, "neutral": 40, "positive": 40 },
+    "ageAffinity": [18, 55],
+    "incomeAffinity": ["below_2000", "2000_3500", "3500_5000"],
+    "settlementBoost": [],
+    "tags": ["internet", "telefon", "operator"]
+  },
+  {
+    "brandName": "LUX MED",
+    "category": "healthcare",
+    "awareness": 0.72,
+    "sentimentWeights": { "negative": 15, "neutral": 40, "positive": 45 },
+    "ageAffinity": [25, 70],
+    "incomeAffinity": ["3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": ["medium_city", "large_city", "metropolis"],
+    "tags": ["prywatna opieka", "lekarz", "ubezpieczenie"]
+  },
+  {
+    "brandName": "Volkswagen",
+    "category": "automotive",
+    "awareness": 0.90,
+    "sentimentWeights": { "negative": 15, "neutral": 40, "positive": 45 },
+    "ageAffinity": [25, 70],
+    "incomeAffinity": ["3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": [],
+    "tags": ["samochód", "auto", "niemiecka jakość"]
+  },
+  {
+    "brandName": "Toyota",
+    "category": "automotive",
+    "awareness": 0.88,
+    "sentimentWeights": { "negative": 8, "neutral": 40, "positive": 52 },
+    "ageAffinity": [30, 75],
+    "incomeAffinity": ["3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": [],
+    "tags": ["samochód", "niezawodność", "hybryda"]
+  },
+  {
+    "brandName": "Bosch",
+    "category": "home_appliances",
+    "awareness": 0.85,
+    "sentimentWeights": { "negative": 8, "neutral": 35, "positive": 57 },
+    "ageAffinity": [25, 70],
+    "incomeAffinity": ["3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": [],
+    "tags": ["AGD", "jakość", "niemieckie"]
+  }
+]

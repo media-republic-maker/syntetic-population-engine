@@ -22,10 +22,12 @@ import {
   sampleProductCategories,
   sampleName,
 } from "./distributions.js";
+import { assignBrandMemory } from "./brandMemory.js";
 
 function generatePersona(): Persona {
   const gender = sampleGender();
   const age = sampleAge();
+
   const education = sampleEducation();
   const settlementType = sampleSettlementType();
   const region = sampleRegion();
@@ -35,7 +37,7 @@ function generatePersona(): Persona {
   const eduOpenness = { primary: -10, vocational: -5, secondary: 0, higher: 10 }[education];
   const ageNeuroticism = age > 50 ? -5 : age < 30 ? 5 : 0;
 
-  return {
+  const persona: Persona = {
     id: randomUUID(),
     name: sampleName(gender),
     demographic: {
@@ -93,6 +95,8 @@ function generatePersona(): Persona {
       migrationAttitude: normalInt(age > 50 ? 40 : 50, 22, 0, 100),
     },
   };
+  persona.brandMemory = assignBrandMemory(persona);
+  return persona;
 }
 
 export function generatePopulation(size: number = 50): Persona[] {
