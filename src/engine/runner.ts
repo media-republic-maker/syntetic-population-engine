@@ -54,6 +54,7 @@ async function queryPersona(
     const message = await client.messages.create({
       model: MODEL,
       max_tokens: 512,
+      temperature: 1.2,
       system: buildSystemPrompt(persona),
       messages: [{ role: "user", content: buildUserPrompt(ad) }],
     });
