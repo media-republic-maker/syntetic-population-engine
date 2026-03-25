@@ -682,12 +682,12 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
     return;
   }
 
-  // ── Stary UI (legacy HTML) ─────────────────────────────────────────────────
-  if (url.pathname === "/" && req.method === "GET") {
-    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-    res.end(HTML);
-    return;
-  }
+  // ── Stary UI (legacy HTML) – wyłączony, zastąpiony przez React frontend ────
+  // if (url.pathname === "/" && req.method === "GET") {
+  //   res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+  //   res.end(HTML);
+  //   return;
+  // }
 
   // ── API: Population stats ──────────────────────────────────────────────────
   if (url.pathname === "/api/population" && req.method === "GET") {
