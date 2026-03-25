@@ -293,6 +293,7 @@ export function sampleProductCategories(): ProductCategory[] {
     ["healthcare", 40],
     ["home_appliances", 45],
     ["automotive", 30],
+    ["beauty", 65],   // pielęgnacja włosów/ciała – wysoka penetracja kategorii w PL
   ];
   return all.filter(([, w]) => Math.random() * 100 < w).map(([c]) => c);
 }

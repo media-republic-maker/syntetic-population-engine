@@ -116,7 +116,8 @@ export type ProductCategory =
   | "food_delivery"
   | "travel"
   | "healthcare"
-  | "entertainment";
+  | "entertainment"
+  | "beauty";
 
 export type MediaPlatform =
   | "tv_public"           // TVP

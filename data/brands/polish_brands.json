@@ -242,11 +242,177 @@
   {
     "brandName": "Bosch",
     "category": "home_appliances",
-    "awareness": 0.85,
+    "awareness": 0.88,
     "sentimentWeights": { "negative": 8, "neutral": 35, "positive": 57 },
     "ageAffinity": [25, 70],
     "incomeAffinity": ["3500_5000", "5000_8000", "above_8000"],
     "settlementBoost": [],
     "tags": ["AGD", "jakość", "niemieckie"]
+  },
+  {
+    "brandName": "Beko",
+    "category": "home_appliances",
+    "awareness": 0.55,
+    "sentimentWeights": { "negative": 22, "neutral": 52, "positive": 26 },
+    "ageAffinity": [25, 55],
+    "incomeAffinity": ["below_2000", "2000_3500", "3500_5000"],
+    "settlementBoost": [],
+    "tags": ["AGD", "pralka", "lodówka", "budżet"],
+    "_source": "4P/MediaRepublic Beko 2024-08: spontaniczne recall 18%, blind test brand ID 5%"
+  },
+  {
+    "brandName": "Amica",
+    "category": "home_appliances",
+    "awareness": 0.68,
+    "sentimentWeights": { "negative": 12, "neutral": 45, "positive": 43 },
+    "ageAffinity": [30, 65],
+    "incomeAffinity": ["below_2000", "2000_3500", "3500_5000"],
+    "settlementBoost": [],
+    "tags": ["AGD", "polskie", "pralka", "kuchenka"],
+    "_source": "4P/MediaRepublic Beko 2024-08: spontaniczne recall kategorii AGD 16%"
+  },
+  {
+    "brandName": "Electrolux",
+    "category": "home_appliances",
+    "awareness": 0.62,
+    "sentimentWeights": { "negative": 12, "neutral": 42, "positive": 46 },
+    "ageAffinity": [30, 65],
+    "incomeAffinity": ["2000_3500", "3500_5000", "5000_8000"],
+    "settlementBoost": [],
+    "tags": ["AGD", "pralka", "lodówka"],
+    "_source": "4P/MediaRepublic Beko 2024-08: spontaniczne recall kategorii AGD 11%"
+  },
+  {
+    "brandName": "Whirlpool",
+    "category": "home_appliances",
+    "awareness": 0.52,
+    "sentimentWeights": { "negative": 15, "neutral": 48, "positive": 37 },
+    "ageAffinity": [30, 65],
+    "incomeAffinity": ["2000_3500", "3500_5000", "5000_8000"],
+    "settlementBoost": [],
+    "tags": ["AGD", "pralka", "zmywarka"],
+    "_source": "4P/MediaRepublic Beko 2024-08: spontaniczne recall kategorii AGD 7%"
+  },
+  {
+    "brandName": "Siemens",
+    "category": "home_appliances",
+    "awareness": 0.58,
+    "sentimentWeights": { "negative": 8, "neutral": 38, "positive": 54 },
+    "ageAffinity": [35, 70],
+    "incomeAffinity": ["3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": ["large_city", "metropolis"],
+    "tags": ["AGD", "premium", "niemieckie"],
+    "_source": "4P/MediaRepublic Beko 2024-08: spontaniczne recall kategorii AGD 2%"
+  },
+  {
+    "brandName": "Gorenje",
+    "category": "home_appliances",
+    "awareness": 0.42,
+    "sentimentWeights": { "negative": 10, "neutral": 52, "positive": 38 },
+    "ageAffinity": [30, 65],
+    "incomeAffinity": ["2000_3500", "3500_5000"],
+    "settlementBoost": [],
+    "tags": ["AGD", "pralka", "lodówka"],
+    "_source": "4P/MediaRepublic Beko 2024-08: spontaniczne recall kategorii AGD 4%"
+  },
+
+  {
+    "brandName": "L'Oréal",
+    "category": "beauty",
+    "awareness": 0.88,
+    "sentimentWeights": { "negative": 10, "neutral": 32, "positive": 58 },
+    "ageAffinity": [22, 65],
+    "incomeAffinity": ["2000_3500", "3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": ["medium_city", "large_city", "metropolis"],
+    "tags": ["pielęgnacja włosów", "kosmetyki", "premium"],
+    "_source": "4P/MediaRepublic Wella 2024: świadomość spontaniczna haircare PRE=41% POST=39% (N~500)"
+  },
+  {
+    "brandName": "Garnier",
+    "category": "beauty",
+    "awareness": 0.80,
+    "sentimentWeights": { "negative": 8, "neutral": 35, "positive": 57 },
+    "ageAffinity": [18, 55],
+    "incomeAffinity": ["2000_3500", "3500_5000", "5000_8000"],
+    "settlementBoost": [],
+    "tags": ["pielęgnacja włosów", "szampon", "dostępny"],
+    "_source": "4P/MediaRepublic Wella 2024: świadomość spontaniczna haircare PRE=28% POST=20%"
+  },
+  {
+    "brandName": "Pantene",
+    "category": "beauty",
+    "awareness": 0.72,
+    "sentimentWeights": { "negative": 8, "neutral": 37, "positive": 55 },
+    "ageAffinity": [25, 60],
+    "incomeAffinity": ["2000_3500", "3500_5000", "5000_8000"],
+    "settlementBoost": [],
+    "tags": ["szampon", "odżywka", "pielęgnacja"],
+    "_source": "4P/MediaRepublic Wella 2024: świadomość spontaniczna haircare PRE=17% POST=17%"
+  },
+  {
+    "brandName": "Syoss",
+    "category": "beauty",
+    "awareness": 0.68,
+    "sentimentWeights": { "negative": 10, "neutral": 45, "positive": 45 },
+    "ageAffinity": [20, 50],
+    "incomeAffinity": ["below_2000", "2000_3500", "3500_5000"],
+    "settlementBoost": [],
+    "tags": ["szampon", "budżet", "pielęgnacja"],
+    "_source": "4P/MediaRepublic Wella 2024: świadomość spontaniczna haircare PRE=16% POST=17%"
+  },
+  {
+    "brandName": "Head & Shoulders",
+    "category": "beauty",
+    "awareness": 0.70,
+    "sentimentWeights": { "negative": 10, "neutral": 40, "positive": 50 },
+    "ageAffinity": [20, 55],
+    "incomeAffinity": ["below_2000", "2000_3500", "3500_5000", "5000_8000"],
+    "settlementBoost": [],
+    "tags": ["szampon", "łupież", "funkcjonalny"],
+    "_source": "4P/MediaRepublic Wella 2024: świadomość spontaniczna haircare PRE=13% POST=10%"
+  },
+  {
+    "brandName": "Schwarzkopf",
+    "category": "beauty",
+    "awareness": 0.65,
+    "sentimentWeights": { "negative": 8, "neutral": 38, "positive": 54 },
+    "ageAffinity": [25, 60],
+    "incomeAffinity": ["2000_3500", "3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": ["medium_city", "large_city", "metropolis"],
+    "tags": ["farba", "pielęgnacja włosów", "premium", "salon"],
+    "_source": "4P/MediaRepublic Wella 2024: świadomość spontaniczna haircare PRE=11% POST=11%"
+  },
+  {
+    "brandName": "Gliss Kur",
+    "category": "beauty",
+    "awareness": 0.62,
+    "sentimentWeights": { "negative": 8, "neutral": 40, "positive": 52 },
+    "ageAffinity": [20, 50],
+    "incomeAffinity": ["2000_3500", "3500_5000"],
+    "settlementBoost": [],
+    "tags": ["odżywka", "regeneracja", "pielęgnacja"],
+    "_source": "4P/MediaRepublic Wella 2024: świadomość spontaniczna haircare PRE=11% POST=10%"
+  },
+  {
+    "brandName": "Wella",
+    "category": "beauty",
+    "awareness": 0.55,
+    "sentimentWeights": { "negative": 8, "neutral": 42, "positive": 50 },
+    "ageAffinity": [28, 60],
+    "incomeAffinity": ["2000_3500", "3500_5000", "5000_8000", "above_8000"],
+    "settlementBoost": ["medium_city", "large_city", "metropolis"],
+    "tags": ["pielęgnacja włosów", "profesjonalna", "salon"],
+    "_source": "4P/MediaRepublic Wella 2024: świadomość spontaniczna haircare PRE=10% POST=11% (kampania MR +1pp lift)"
+  },
+  {
+    "brandName": "Dove",
+    "category": "beauty",
+    "awareness": 0.75,
+    "sentimentWeights": { "negative": 6, "neutral": 32, "positive": 62 },
+    "ageAffinity": [20, 65],
+    "incomeAffinity": ["below_2000", "2000_3500", "3500_5000", "5000_8000"],
+    "settlementBoost": [],
+    "tags": ["pielęgnacja", "delikatny", "nawilżanie", "szampon"],
+    "_source": "4P/MediaRepublic Wella 2024: świadomość spontaniczna haircare PRE=8% POST=7%"
   }
 ]

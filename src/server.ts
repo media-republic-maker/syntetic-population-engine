@@ -4,7 +4,7 @@
 
 import "dotenv/config";
 import { createServer, IncomingMessage, ServerResponse } from "http";
-import { readFileSync, existsSync, writeFileSync, mkdirSync } from "fs";
+import { readFileSync, existsSync, writeFileSync, mkdirSync, statSync } from "fs";
 import { join } from "path";
 import { generatePopulation } from "./personas/generator.js";
 import { runStudy } from "./engine/runner.js";
@@ -81,7 +81,8 @@ const CATEGORY_OPTIONS = `
   <option value="travel">Podróże</option>
   <option value="healthcare">Zdrowie</option>
   <option value="entertainment">Rozrywka</option>
-  <option value="home_appliances">AGD/RTV</option>`;
+  <option value="home_appliances">AGD/RTV</option>
+  <option value="beauty">Uroda / Pielęgnacja</option>`;
 
 const HTML = `<!DOCTYPE html>
 <html lang="pl">
@@ -374,7 +375,7 @@ const HTML = `<!DOCTYPE html>
         filterIncome: data.filterIncome || 'all',
       });
 
-      const es = new EventSource('/study?' + params);
+      const es = new EventSource('/api/study?' + params);
 
       es.addEventListener('progress', (e) => {
         const { done, total, phase } = JSON.parse(e.data);
@@ -414,7 +415,7 @@ const HTML = `<!DOCTYPE html>
       document.getElementById('progress').style.display = 'block';
 
       try {
-        const res = await fetch('/spread', {
+        const res = await fetch('/api/spread', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ responsesA: lastResult.responsesA, population: lastResult.population }),
@@ -640,7 +641,7 @@ const HTML = `<!DOCTYPE html>
       if (!lastResult) return;
       const btn = document.getElementById('pdfBtn');
       btn.disabled = true; btn.textContent = 'Generuję...';
-      const res = await fetch('/export-pdf', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(lastResult) });
+      const res = await fetch('/api/export-pdf', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(lastResult) });
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -653,25 +654,114 @@ const HTML = `<!DOCTYPE html>
 </html>`;
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Helpers
+// ─────────────────────────────────────────────────────────────────────────────
+
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+function json(res: ServerResponse, data: unknown, status = 200) {
+  res.writeHead(status, { "Content-Type": "application/json", ...CORS_HEADERS });
+  res.end(JSON.stringify(data));
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Server
 // ─────────────────────────────────────────────────────────────────────────────
 
 const server = createServer(async (req: IncomingMessage, res: ServerResponse) => {
   const url = new URL(req.url ?? "/", `http://localhost:${PORT}`);
 
+  // Preflight CORS
+  if (req.method === "OPTIONS") {
+    res.writeHead(204, CORS_HEADERS);
+    res.end();
+    return;
+  }
+
+  // ── Stary UI (legacy HTML) ─────────────────────────────────────────────────
   if (url.pathname === "/" && req.method === "GET") {
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
     res.end(HTML);
     return;
   }
 
-  if (url.pathname === "/study" && req.method === "GET") {
-    if (!process.env.ANTHROPIC_API_KEY) { res.writeHead(500); res.end(); return; }
+  // ── API: Population stats ──────────────────────────────────────────────────
+  if (url.pathname === "/api/population" && req.method === "GET") {
+    const population = getPopulation();
+    const stats = {
+      total: population.length,
+      avgAge: Math.round(population.reduce((s, p) => s + p.demographic.age, 0) / population.length),
+      gender: population.reduce((acc, p) => { acc[p.demographic.gender] = (acc[p.demographic.gender] ?? 0) + 1; return acc; }, {} as Record<string, number>),
+      settlement: population.reduce((acc, p) => { acc[p.demographic.settlementType] = (acc[p.demographic.settlementType] ?? 0) + 1; return acc; }, {} as Record<string, number>),
+      incomeLevel: population.reduce((acc, p) => { acc[p.financial.incomeLevel] = (acc[p.financial.incomeLevel] ?? 0) + 1; return acc; }, {} as Record<string, number>),
+      education: population.reduce((acc, p) => { acc[p.demographic.education] = (acc[p.demographic.education] ?? 0) + 1; return acc; }, {} as Record<string, number>),
+      political: population.reduce((acc, p) => { acc[p.political.affiliation] = (acc[p.political.affiliation] ?? 0) + 1; return acc; }, {} as Record<string, number>),
+    };
+    json(res, stats);
+    return;
+  }
+
+  // ── API: Campaigns list ────────────────────────────────────────────────────
+  if (url.pathname === "/api/campaigns" && req.method === "GET") {
+    const { readdirSync } = await import("fs");
+    const campaignsDir = join(process.cwd(), "campaigns");
+    try {
+      const files = readdirSync(campaignsDir).filter(f => f.endsWith(".json"));
+      const campaigns = files.map(f => {
+        const data = JSON.parse(readFileSync(join(campaignsDir, f), "utf8"));
+        return { file: f, ...data };
+      });
+      json(res, campaigns);
+    } catch {
+      json(res, []);
+    }
+    return;
+  }
+
+  // ── API: Brands list ───────────────────────────────────────────────────────
+  if (url.pathname === "/api/brands" && req.method === "GET") {
+    const brandsPath = join(process.cwd(), "data", "brands", "polish_brands.json");
+    try {
+      const brands = JSON.parse(readFileSync(brandsPath, "utf8"));
+      json(res, brands);
+    } catch {
+      json(res, []);
+    }
+    return;
+  }
+
+  // ── API: Results history ───────────────────────────────────────────────────
+  if (url.pathname === "/api/results" && req.method === "GET") {
+    const { readdirSync } = await import("fs");
+    try {
+      const files = readdirSync(RESULTS_DIR)
+        .filter(f => f.endsWith(".json"))
+        .sort()
+        .reverse()
+        .slice(0, 20);
+      const results = files.map(f => {
+        const data = JSON.parse(readFileSync(join(RESULTS_DIR, f), "utf8"));
+        return { file: f, ts: f.replace(/^report_?(ab_)?/, "").replace(".json", ""), ...data };
+      });
+      json(res, results);
+    } catch {
+      json(res, []);
+    }
+    return;
+  }
+
+  if (url.pathname === "/api/study" && req.method === "GET") {
+    if (!process.env.ANTHROPIC_API_KEY) { res.writeHead(500, CORS_HEADERS); res.end(); return; }
 
     res.writeHead(200, {
       "Content-Type": "text/event-stream",
       "Cache-Control": "no-cache",
       "Connection": "keep-alive",
+      ...CORS_HEADERS,
     });
 
     const send = (event: string, data: unknown) =>
@@ -740,9 +830,9 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
     return;
   }
 
-  // ── Social Spread endpoint ─────────────────────────────────────────────────
-  if (url.pathname === "/spread" && req.method === "POST") {
-    if (!process.env.ANTHROPIC_API_KEY) { res.writeHead(500); res.end(); return; }
+  // ── API: Social Spread ────────────────────────────────────────────────────
+  if (url.pathname === "/api/spread" && req.method === "POST") {
+    if (!process.env.ANTHROPIC_API_KEY) { res.writeHead(500, CORS_HEADERS); res.end(); return; }
     const body = await readBody(req);
     const { responsesA, population } = JSON.parse(body) as {
       responsesA: BotResponse[];
@@ -750,17 +840,15 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
     };
     try {
       const spreadReport = await runSpreadSimulation(population, responsesA);
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify(spreadReport));
+      json(res, spreadReport);
     } catch (err) {
-      res.writeHead(500, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ error: String(err) }));
+      json(res, { error: String(err) }, 500);
     }
     return;
   }
 
-  // ── PDF export ─────────────────────────────────────────────────────────────
-  if (url.pathname === "/export-pdf" && req.method === "POST") {
+  // ── API: PDF export ───────────────────────────────────────────────────────
+  if (url.pathname === "/api/export-pdf" && req.method === "POST") {
     const body = await readBody(req);
     const { reportA, reportB, adA, adB } = JSON.parse(body);
     const pdf = generatePDF(adA, reportA, adB, reportB);
@@ -768,8 +856,33 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
       "Content-Type": "application/pdf",
       "Content-Disposition": "attachment; filename=raport-sandbox.pdf",
       "Content-Length": pdf.length,
+      ...CORS_HEADERS,
     });
     res.end(pdf);
+    return;
+  }
+
+  // ── Static frontend (React build) ────────────────────────────────────────
+  const FRONTEND_DIST = join(process.cwd(), "frontend", "dist");
+  if (existsSync(FRONTEND_DIST)) {
+    let filePath = join(FRONTEND_DIST, url.pathname === "/" ? "index.html" : url.pathname);
+    // SPA fallback – wszystkie nieznane ścieżki → index.html
+    if (!existsSync(filePath) || statSync(filePath).isDirectory()) {
+      filePath = join(FRONTEND_DIST, "index.html");
+    }
+    const ext = filePath.split(".").pop() ?? "";
+    const mime: Record<string, string> = {
+      html: "text/html; charset=utf-8",
+      js: "application/javascript",
+      css: "text/css",
+      svg: "image/svg+xml",
+      png: "image/png",
+      ico: "image/x-icon",
+      woff2: "font/woff2",
+      json: "application/json",
+    };
+    res.writeHead(200, { "Content-Type": mime[ext] ?? "application/octet-stream" });
+    res.end(readFileSync(filePath));
     return;
   }
 
