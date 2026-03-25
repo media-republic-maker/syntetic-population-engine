@@ -1,0 +1,61 @@
+{
+  "_meta": {
+    "source": "GUS Bank Danych Lokalnych (BDL API)",
+    "url": "https://bdl.stat.gov.pl/api/v1/",
+    "generated": "2026-03-25T14:30:51.631Z",
+    "note": "Dane dochodowe aktualne (2024). Dane demograficzne (wiek, wykształcenie) pochodzi z BAEL Q2 2025 – nowsze niż NSP 2011 dostępne w BDL."
+  },
+  "income": {
+    "disposable_per_capita_pln": {
+      "latest_year": 2024,
+      "latest_value": 3103.06,
+      "timeseries": [
+        {
+          "year": 2020,
+          "val": 1874.24
+        },
+        {
+          "year": 2021,
+          "val": 2014.61
+        },
+        {
+          "year": 2022,
+          "val": 2194.62
+        },
+        {
+          "year": 2023,
+          "val": 2622.11
+        },
+        {
+          "year": 2024,
+          "val": 3103.06
+        }
+      ],
+      "yoy_growth_pct": 18.3
+    },
+    "structure_pct": {
+      "from_employment": 56,
+      "from_selfemployment": 10,
+      "from_social_benefits": 31
+    }
+  },
+  "suggested_income_brackets": {
+    "note": "Progi przeskalowane z 2023 wg wzrostu dochodu rozporządzalnego (×1.183)",
+    "below_2000_threshold": 2400,
+    "lower_threshold": 4100,
+    "middle_threshold": 5900,
+    "upper_threshold": 9500
+  },
+  "region_weights_pct": {
+    "011200000000": 14,
+    "012400000000": 19.4,
+    "020800000000": 4.3,
+    "023000000000": 14.4,
+    "023200000000": 7.2,
+    "030200000000": 12.2,
+    "031600000000": 4.2,
+    "040400000000": 8.8,
+    "042200000000": 9.5,
+    "042800000000": 6.1
+  }
+}

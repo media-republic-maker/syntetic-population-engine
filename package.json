@@ -8,7 +8,8 @@
     "build": "tsc",
     "generate": "tsx src/cli.ts --generate",
     "study": "tsx src/cli.ts --ad",
-    "web": "tsx src/server.ts"
+    "web": "tsx src/server.ts",
+    "calibrate": "tsx scripts/calibrate-from-bdl.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
