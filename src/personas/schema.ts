@@ -202,6 +202,8 @@ export interface AdMaterial {
   brandName?: string;
   productCategory?: ProductCategory;
   context?: string;               // opcjonalny kontekst medium (np. "scroll Instagram")
+  imageBase64?: string;           // base64 kreacji graficznej (opcjonalny)
+  imageMimeType?: "image/jpeg" | "image/png" | "image/gif" | "image/webp";
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

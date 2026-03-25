@@ -268,6 +268,7 @@ export interface StudyFormData {
   brand?: string;
   category?: string;
   context?: string;
+  creativeId?: string;            // ID tymczasowego pliku kreacji graficznej
   abMode?: boolean;
   headlineB?: string;
   bodyB?: string;
@@ -279,6 +280,32 @@ export interface StudyFormData {
   filterAgeMax?: string;
   filterSettlement?: string;
   filterIncome?: string;
+}
+
+export async function uploadCreative(file: File): Promise<string> {
+  const base64 = await new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      resolve(result.split(",")[1]); // strip data:...;base64, prefix
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+
+  const res = await fetch(`${BASE}/api/upload-creative`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ base64, mimeType: file.type, filename: file.name }),
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: "Upload failed" }));
+    throw new Error(err.error ?? "Upload failed");
+  }
+
+  const { creativeId } = await res.json();
+  return creativeId as string;
 }
 
 export async function runStudy(
@@ -294,6 +321,7 @@ export async function runStudy(
     brandName: formData.brand ?? "",
     productCategory: formData.category ?? "",
     context: formData.context ?? "",
+    ...(formData.creativeId ? { creativeId: formData.creativeId } : {}),
     ab: formData.abMode ? "1" : "0",
     headlineB: formData.headlineB ?? "",
     bodyB: formData.bodyB ?? "",

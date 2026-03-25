@@ -51,12 +51,27 @@ async function queryPersona(
   attempt = 0
 ): Promise<BotResponse> {
   try {
+    const userContent: Anthropic.MessageParam["content"] =
+      ad.imageBase64 && ad.imageMimeType
+        ? [
+            {
+              type: "image" as const,
+              source: {
+                type: "base64" as const,
+                media_type: ad.imageMimeType,
+                data: ad.imageBase64,
+              },
+            },
+            { type: "text" as const, text: buildUserPrompt(ad) },
+          ]
+        : buildUserPrompt(ad);
+
     const message = await client.messages.create({
       model: MODEL,
       max_tokens: 512,
       temperature: 1.0,
       system: buildSystemPrompt(persona),
-      messages: [{ role: "user", content: buildUserPrompt(ad) }],
+      messages: [{ role: "user", content: userContent }],
     });
 
     const raw = message.content

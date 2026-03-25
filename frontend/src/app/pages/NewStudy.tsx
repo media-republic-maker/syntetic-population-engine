@@ -7,8 +7,8 @@ import { Label } from '../components/ui/label';
 import { Switch } from '../components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Progress } from '../components/ui/progress';
-import { runStudy, getBrands, mockCategories, mockContexts, type StudyResult } from '../utils/api';
-import { Loader2, ChevronDown, Filter } from 'lucide-react';
+import { runStudy, uploadCreative, getBrands, mockCategories, mockContexts, type StudyResult } from '../utils/api';
+import { Loader2, Filter, ImagePlus, X } from 'lucide-react';
 
 export function NewStudy() {
   const navigate = useNavigate();
@@ -23,6 +23,13 @@ export function NewStudy() {
   const [abMode, setAbMode] = useState(false);
   const [targeting, setTargeting] = useState(false);
   const [socialSpread, setSocialSpread] = useState(false);
+
+  // Kreacja graficzna
+  const [creativeFile, setCreativeFile] = useState<File | null>(null);
+  const [creativePreview, setCreativePreview] = useState<string | null>(null);
+  const [creativeId, setCreativeId] = useState<string | null>(null);
+  const [creativeUploading, setCreativeUploading] = useState(false);
+  const [creativeError, setCreativeError] = useState<string | null>(null);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -48,6 +55,29 @@ export function NewStudy() {
     income: 'all',
   });
 
+  const handleCreativeSelect = async (file: File) => {
+    setCreativeError(null);
+    setCreativeFile(file);
+    setCreativePreview(URL.createObjectURL(file));
+    setCreativeUploading(true);
+    try {
+      const id = await uploadCreative(file);
+      setCreativeId(id);
+    } catch (err: any) {
+      setCreativeError(err.message ?? 'Błąd uploadu');
+      setCreativeId(null);
+    } finally {
+      setCreativeUploading(false);
+    }
+  };
+
+  const handleCreativeClear = () => {
+    setCreativeFile(null);
+    setCreativePreview(null);
+    setCreativeId(null);
+    setCreativeError(null);
+  };
+
   const handleRunStudy = async () => {
     setIsRunning(true);
     setProgress(0);
@@ -61,6 +91,7 @@ export function NewStudy() {
         brand: formData.brand,
         category: formData.category,
         context: formData.context,
+        creativeId: creativeId ?? undefined,
         abMode,
         headlineB: formDataB.headline,
         bodyB: formDataB.body,
@@ -305,6 +336,54 @@ export function NewStudy() {
         </div>
       )}
 
+      {/* Creative Upload */}
+      <div className="bg-[#18181b] border border-[#27272a] rounded-xl p-5">
+        <div className="flex items-center gap-2 mb-4">
+          <ImagePlus className="w-4 h-4 text-[#6366f1]" />
+          <h3 className="text-sm font-semibold text-white">Kreacja graficzna</h3>
+          <span className="text-xs text-[#52525b] ml-1">(opcjonalnie – JPG, PNG, WEBP)</span>
+        </div>
+
+        {!creativeFile ? (
+          <label className="flex flex-col items-center justify-center w-full h-28 border-2 border-dashed border-[#27272a] rounded-lg cursor-pointer hover:border-[#6366f1] transition-colors">
+            <ImagePlus className="w-6 h-6 text-[#52525b] mb-2" />
+            <span className="text-sm text-[#52525b]">Kliknij lub przeciągnij plik kreacji</span>
+            <input
+              type="file"
+              className="hidden"
+              accept="image/jpeg,image/png,image/gif,image/webp"
+              onChange={(e) => { const f = e.target.files?.[0]; if (f) handleCreativeSelect(f); }}
+            />
+          </label>
+        ) : (
+          <div className="flex items-start gap-4">
+            {creativePreview && (
+              <img src={creativePreview} alt="podgląd kreacji" className="h-24 rounded-lg object-contain bg-[#0f0f11]" />
+            )}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-white truncate">{creativeFile.name}</span>
+                <button onClick={handleCreativeClear} className="text-[#52525b] hover:text-white">
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+              {creativeUploading && (
+                <div className="flex items-center gap-2 mt-1">
+                  <Loader2 className="w-3 h-3 text-[#6366f1] animate-spin" />
+                  <span className="text-xs text-[#a1a1aa]">Przesyłanie...</span>
+                </div>
+              )}
+              {creativeId && !creativeUploading && (
+                <span className="text-xs text-green-400 mt-1 block">Gotowe – kreacja zostanie przesłana do modelu</span>
+              )}
+              {creativeError && (
+                <span className="text-xs text-red-400 mt-1 block">{creativeError}</span>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+
       {/* Form */}
       <div className={abMode ? 'grid grid-cols-2 gap-6' : ''}>
         <div className="bg-[#18181b] border border-[#27272a] rounded-xl p-6">
@@ -338,7 +417,7 @@ export function NewStudy() {
       <div className="flex justify-end">
         <Button
           onClick={handleRunStudy}
-          disabled={isRunning || !formData.headline || !formData.brand}
+          disabled={isRunning || (!formData.headline && !creativeId) || !formData.brand || creativeUploading}
           className="bg-[#6366f1] hover:bg-[#5558e3] text-white px-8 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isRunning ? (

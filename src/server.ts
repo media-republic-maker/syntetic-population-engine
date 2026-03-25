@@ -4,8 +4,9 @@
 
 import "dotenv/config";
 import { createServer, IncomingMessage, ServerResponse } from "http";
-import { readFileSync, existsSync, writeFileSync, mkdirSync, statSync } from "fs";
+import { readFileSync, existsSync, writeFileSync, mkdirSync, statSync, unlinkSync } from "fs";
 import { join } from "path";
+import { randomUUID } from "crypto";
 import { generatePopulation } from "./personas/generator.js";
 import { runStudy } from "./engine/runner.js";
 import { runSpreadSimulation } from "./engine/spread.js";
@@ -17,6 +18,7 @@ const PORT = parseInt(process.env.PORT ?? "3000", 10);
 const DATA_DIR = join(process.cwd(), "data");
 const POPULATION_PATH = join(DATA_DIR, "population.json");
 const RESULTS_DIR = join(DATA_DIR, "results");
+const TEMP_DIR = join(DATA_DIR, "temp");
 
 function getPopulation(): Persona[] {
   if (existsSync(POPULATION_PATH)) {
@@ -64,6 +66,31 @@ function adFromParams(p: URLSearchParams, prefix = ""): AdMaterial {
     productCategory: (p.get(prefix + "productCategory") || undefined) as AdMaterial["productCategory"],
     context: p.get(prefix + "context") || undefined,
   };
+}
+
+function loadCreativeAsset(creativeId: string): Pick<AdMaterial, "imageBase64" | "imageMimeType"> | null {
+  const ALLOWED_TYPES: Record<string, AdMaterial["imageMimeType"]> = {
+    jpg: "image/jpeg", jpeg: "image/jpeg",
+    png: "image/png", gif: "image/gif", webp: "image/webp",
+  };
+  for (const [ext, mime] of Object.entries(ALLOWED_TYPES)) {
+    const filePath = join(TEMP_DIR, `${creativeId}.${ext}`);
+    if (existsSync(filePath)) {
+      return {
+        imageBase64: readFileSync(filePath).toString("base64"),
+        imageMimeType: mime,
+      };
+    }
+  }
+  return null;
+}
+
+function deleteCreativeAsset(creativeId: string): void {
+  const exts = ["jpg", "jpeg", "png", "gif", "webp"];
+  for (const ext of exts) {
+    const filePath = join(TEMP_DIR, `${creativeId}.${ext}`);
+    if (existsSync(filePath)) { try { unlinkSync(filePath); } catch {} }
+  }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -754,6 +781,31 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
     return;
   }
 
+  // ── API: Upload Creative ───────────────────────────────────────────────────
+  if (url.pathname === "/api/upload-creative" && req.method === "POST") {
+    const body = await readBody(req);
+    let parsed: { base64: string; mimeType: string; filename?: string };
+    try {
+      parsed = JSON.parse(body);
+    } catch {
+      return json(res, { error: "Invalid JSON" }, 400);
+    }
+
+    const ALLOWED: Record<string, string> = {
+      "image/jpeg": "jpg", "image/png": "png",
+      "image/gif": "gif", "image/webp": "webp",
+    };
+    const ext = ALLOWED[parsed.mimeType];
+    if (!ext) return json(res, { error: "Nieobsługiwany format. Dozwolone: JPEG, PNG, GIF, WEBP." }, 400);
+
+    const creativeId = randomUUID();
+    mkdirSync(TEMP_DIR, { recursive: true });
+    const filePath = join(TEMP_DIR, `${creativeId}.${ext}`);
+    writeFileSync(filePath, Buffer.from(parsed.base64, "base64"));
+
+    return json(res, { creativeId, mimeType: parsed.mimeType });
+  }
+
   if (url.pathname === "/api/study" && req.method === "GET") {
     if (!process.env.ANTHROPIC_API_KEY) { res.writeHead(500, CORS_HEADERS); res.end(); return; }
 
@@ -767,10 +819,12 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
     const send = (event: string, data: unknown) =>
       res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
 
+    const creativeId = url.searchParams.get("creativeId") || undefined;
     try {
       const fullPopulation = getPopulation();
       const population = filterPopulation(fullPopulation, url.searchParams);
       const adA = adFromParams(url.searchParams);
+      if (creativeId) Object.assign(adA, loadCreativeAsset(creativeId) ?? {});
       const isAB = url.searchParams.get("ab") === "1";
 
       // Opis filtra dla UI
@@ -825,6 +879,7 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
     } catch (err) {
       send("error", { message: String(err) });
     } finally {
+      if (creativeId) deleteCreativeAsset(creativeId);
       res.end();
     }
     return;
