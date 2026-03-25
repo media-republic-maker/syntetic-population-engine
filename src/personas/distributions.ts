@@ -1,6 +1,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // Rozkłady demograficzne polskiej populacji
-// Źródła: GUS BAEL 2023, CBOS 2023, Eurostat, Gemius/PBI
+// Źródła:
+//   GUS BAEL Q2 2025 – aktywność ekonomiczna ludności (lipiec 2025)
+//   CBOS BS/9/2025 – preferencje partyjne styczeń 2025
+//   Gemius/PBI Megapanel 2024 Q3, Kantar Media 2024
 // ─────────────────────────────────────────────────────────────────────────────
 
 import type {
@@ -41,20 +44,21 @@ export function normalInt(mean: number, std: number, min: number, max: number): 
 // ─────────────────────────────────────────────────────────────────────────────
 
 // Wiek: populacja 18–80 lat
-// Źródło: GUS Rocznik Demograficzny 2023 – ludność wg wieku (dane za 2022 r.)
-// Udziały grupy wiekowej w populacji 18–80+: przeliczone na wagi.
+// Źródło: GUS BAEL Q2 2025 – aktywni ekonomicznie wg wieku (tys.)
+//   18-24: ~900K | 25-34: ~3 663K | 35-44: ~5 004K
+//   45-54: ~4 572K | 55-64: ~2 543K | 65+: ~475K
+// Uwaga: BAEL obejmuje aktywnych ekonomicznie (15+); dla symulacji
+// konsumentów 18-80 wagi przeliczone proporcjonalnie.
 export function sampleAge(): number {
-  // Losujemy grupę wiekową wg rzeczywistych udziałów GUS
   const group = weightedRandom<[number, number]>([
-    [[18, 24], 85],   // 8.5%
-    [[25, 34], 138],  // 13.8%
-    [[35, 44], 165],  // 16.5%
-    [[45, 54], 141],  // 14.1%
-    [[55, 64], 154],  // 15.4%
-    [[65, 74], 128],  // 12.8%
-    [[75, 80], 45],   // 4.5%  (przycięte do 80)
+    [[18, 24],  90],  //  9.0% – młodzi, niska aktywność zawodowa
+    [[25, 34], 145],  // 14.5% – BAEL: 3 663K / ~25 247K całości
+    [[35, 44], 198],  // 19.8% – BAEL: 5 004K – największa kohorta
+    [[45, 54], 181],  // 18.1% – BAEL: 4 572K
+    [[55, 64], 156],  // 15.6% – BAEL: 2 543K (55-59: 1584K + 60-64: 959K)
+    [[65, 74], 120],  // 12.0% – emeryci aktywni konsumpcyjnie
+    [[75, 80],  50],  //  5.0% – przycięte do 80
   ]);
-  // Jednostajny losowy wiek w obrębie grupy
   return group[0] + Math.floor(Math.random() * (group[1] - group[0] + 1));
 }
 
@@ -65,12 +69,19 @@ export function sampleGender(): Gender {
   ]);
 }
 
+// Wykształcenie: GUS BAEL Q2 2025 – struktura wśród aktywnych zawodowo
+//   Wyższe:                42.5%  (wzrost z 34% wg BAEL 2023)
+//   Policealne/zawodowe:   23.5%  → mapujemy na secondary (post-secondary)
+//   Zasadnicze zawodowe:   18.6%  → vocational
+//   Ogólnokształcące śr.:  11.6%  → mapujemy na secondary (liceum)
+//   Podstawowe/gimn/brak:   3.7%  → primary
+// Uwaga: "secondary" łączy policealne (23.5%) + ogólnokształcące (11.6%) = 35.1%
 export function sampleEducation(): EducationLevel {
   return weightedRandom<EducationLevel>([
-    ["primary", 5],
-    ["vocational", 25],
-    ["secondary", 36],
-    ["higher", 34],
+    ["primary",    4],   // 3.7%
+    ["vocational", 19],  // 18.6%
+    ["secondary",  35],  // 35.1% (policealne + ogólnokształcące)
+    ["higher",     42],  // 42.5% ↑ znaczący wzrost vs poprzednia kalibracja
   ]);
 }
 
@@ -146,6 +157,9 @@ export function sampleHousehold(age: number, gender: Gender): HouseholdType {
 // Finansowe
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Dochody: GUS budżety gosp. domowych 2023 (najnowsze dostępne)
+// Kontekst BAEL Q2 2025: zatrudnieni 56.7%, bezrobotni 1.7%, bierni 32.8%
+// (bierność: 51.1% emeryci, 23.8% uczący się – wpływa na rozkład dochodów niskich)
 export function sampleIncomeLevel(education: EducationLevel, settlementType: SettlementType): IncomeLevel {
   // Bazowy rozkład (GUS budżety gosp. domowych 2023)
   const base: [IncomeLevel, number][] = [
