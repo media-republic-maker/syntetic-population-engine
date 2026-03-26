@@ -33,13 +33,7 @@ export function Dashboard() {
 
   const uniqueBrands = new Set(allCampaigns.map((c) => c.brand).filter((b) => b && b !== '–')).size;
 
-  if (loading || !population) {
-    return (
-      <div className="flex items-center justify-center h-96">
-        <div className="text-[#a1a1aa]">Ładowanie...</div>
-      </div>
-    );
-  }
+  const sk = 'bg-[#27272a] rounded animate-pulse';
 
   return (
     <div className="space-y-6">
@@ -77,23 +71,27 @@ export function Dashboard() {
               <Users className="w-4 h-4" />
               <span>Wielkość próby</span>
             </div>
-            <p className="text-3xl font-semibold text-white">n={population.total}</p>
+            {population ? <p className="text-3xl font-semibold text-white">n={population.total}</p> : <div className={`h-9 w-24 ${sk}`} />}
           </div>
 
           <div className="space-y-1">
             <div className="text-[#a1a1aa] text-sm">Średni wiek</div>
-            <p className="text-3xl font-semibold text-white">{population.averageAge} lat</p>
+            {population ? <p className="text-3xl font-semibold text-white">{population.averageAge} lat</p> : <div className={`h-9 w-20 ${sk}`} />}
           </div>
 
           <div className="space-y-1">
             <div className="text-[#a1a1aa] text-sm">Płeć</div>
-            <p className="text-3xl font-semibold text-white">{population.genderDistribution.female}% K</p>
-            <p className="text-xs text-[#a1a1aa]">{population.genderDistribution.male}% M</p>
+            {population ? (
+              <>
+                <p className="text-3xl font-semibold text-white">{population.genderDistribution.female}% K</p>
+                <p className="text-xs text-[#a1a1aa]">{population.genderDistribution.male}% M</p>
+              </>
+            ) : <div className={`h-9 w-20 ${sk}`} />}
           </div>
 
           <div className="space-y-1">
             <div className="text-[#a1a1aa] text-sm">Miasta {'>'}100k</div>
-            <p className="text-3xl font-semibold text-white">{population.regions.urban}%</p>
+            {population ? <p className="text-3xl font-semibold text-white">{population.regions.urban}%</p> : <div className={`h-9 w-16 ${sk}`} />}
           </div>
         </div>
       </div>
@@ -105,7 +103,20 @@ export function Dashboard() {
         </div>
 
         <div className="space-y-3">
-          {recentCampaigns.map((campaign, index) => (
+          {loading && [0, 1, 2].map((i) => (
+            <div key={i} className="bg-[#18181b] border border-[#27272a] rounded-xl p-5">
+              <div className="flex items-center justify-between">
+                <div className="flex-1 space-y-2">
+                  <div className={`h-4 w-48 ${sk}`} />
+                  <div className={`h-3 w-24 ${sk}`} />
+                </div>
+                <div className="flex gap-8 mr-4">
+                  {[0,1,2,3].map(j => <div key={j} className={`h-6 w-12 ${sk}`} />)}
+                </div>
+              </div>
+            </div>
+          ))}
+          {!loading && recentCampaigns.map((campaign) => (
             <Link key={campaign.id} to={`/results/${campaign.id}`}>
               <div className="bg-[#18181b] border border-[#27272a] rounded-xl p-5 hover:border-[#6366f1] transition-colors cursor-pointer group">
                 <div className="flex items-center justify-between">

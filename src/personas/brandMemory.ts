@@ -32,8 +32,9 @@ function loadBrands(): BrandDefinition[] {
 function computeAwareness(brand: BrandDefinition, persona: Persona): number {
   let p = brand.awareness;
 
-  // Wzmocnienie wiekowe – persona w przedziałe affinity zna markę lepiej
-  const [minAge, maxAge] = brand.ageAffinity;
+  // Wzmocnienie wiekowe – persona w przedziale affinity zna markę lepiej
+  const ageAffinity: [number, number] = brand.ageAffinity ?? [18, 80];
+  const [minAge, maxAge] = ageAffinity;
   if (persona.demographic.age >= minAge && persona.demographic.age <= maxAge) {
     p = Math.min(1, p + 0.1);
   } else {
@@ -41,7 +42,8 @@ function computeAwareness(brand: BrandDefinition, persona: Persona): number {
   }
 
   // Wzmocnienie geograficzne
-  if (brand.settlementBoost.includes(persona.demographic.settlementType)) {
+  const settlementBoost: string[] = brand.settlementBoost ?? [];
+  if (settlementBoost.includes(persona.demographic.settlementType)) {
     p = Math.min(1, p + 0.08);
   }
 
@@ -55,7 +57,8 @@ function computeSentiment(
   const w = { ...brand.sentimentWeights };
 
   // Persona z dochodem w income affinity – boost positive
-  if (brand.incomeAffinity.includes(persona.financial.incomeLevel)) {
+  const incomeAffinity: string[] = brand.incomeAffinity ?? [];
+  if (incomeAffinity.includes(persona.financial.incomeLevel)) {
     w.positive += 15;
   } else {
     w.negative += 10;
