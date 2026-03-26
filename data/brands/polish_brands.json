@@ -1630,5 +1630,462 @@
       "budżetowy SUV",
       "rosnący"
     ]
+  },
+  {
+    "brandName": "Magne B6",
+    "category": "healthcare",
+    "subcategory": "otc_magnez",
+    "awareness": 0.82,
+    "sentimentWeights": {
+      "negative": 8,
+      "neutral": 42,
+      "positive": 50
+    },
+    "ageAffinity": [
+      25,
+      70
+    ],
+    "genderSkew": "female_primary",
+    "incomeAffinity": [
+      "below_2000",
+      "2000_3500",
+      "3500_5000",
+      "5000_8000"
+    ],
+    "settlementBoost": [],
+    "tags": [
+      "magnez",
+      "suplement",
+      "otc",
+      "apteka",
+      "stres",
+      "zmęczenie",
+      "sanofi"
+    ],
+    "marketSharePct": 51.2,
+    "notes": "Lider kategorii magnez w PL; silna wieloletnia obecność TV"
+  },
+  {
+    "brandName": "Magnefar B6",
+    "category": "healthcare",
+    "subcategory": "otc_magnez",
+    "awareness": 0.48,
+    "sentimentWeights": {
+      "negative": 10,
+      "neutral": 52,
+      "positive": 38
+    },
+    "ageAffinity": [
+      30,
+      65
+    ],
+    "genderSkew": "female_primary",
+    "incomeAffinity": [
+      "below_2000",
+      "2000_3500",
+      "3500_5000"
+    ],
+    "settlementBoost": [],
+    "tags": [
+      "magnez",
+      "suplement",
+      "otc",
+      "apteka",
+      "biofarm",
+      "tańsza_alternatywa"
+    ],
+    "marketSharePct": 10.4,
+    "notes": "Nr 2 rynku; dokument 4P: NISKI brand awareness; cena 2/3 vs Magne"
+  },
+  {
+    "brandName": "Maglek",
+    "category": "healthcare",
+    "subcategory": "otc_magnez",
+    "awareness": 0.35,
+    "sentimentWeights": {
+      "negative": 12,
+      "neutral": 58,
+      "positive": 30
+    },
+    "ageAffinity": [
+      30,
+      65
+    ],
+    "genderSkew": "female_primary",
+    "incomeAffinity": [
+      "below_2000",
+      "2000_3500"
+    ],
+    "settlementBoost": [],
+    "tags": [
+      "magnez",
+      "suplement",
+      "otc",
+      "apteka"
+    ],
+    "marketSharePct": 6.3
+  },
+  {
+    "brandName": "Ibuvit D",
+    "category": "healthcare",
+    "subcategory": "otc_witamina_d",
+    "awareness": 0.8,
+    "sentimentWeights": {
+      "negative": 8,
+      "neutral": 38,
+      "positive": 54
+    },
+    "ageAffinity": [
+      25,
+      75
+    ],
+    "genderSkew": "female_primary",
+    "incomeAffinity": [
+      "2000_3500",
+      "3500_5000",
+      "5000_8000",
+      "above_8000"
+    ],
+    "settlementBoost": [
+      "medium_city",
+      "large_city",
+      "metropolis"
+    ],
+    "tags": [
+      "witamina_d",
+      "odpornosc",
+      "otc",
+      "apteka",
+      "jesien_zima",
+      "suplement"
+    ],
+    "marketSharePct": 53.7,
+    "notes": "Lider wit. D; +43% r/r; dominuje kategorię; silna kampania TV"
+  },
+  {
+    "brandName": "Vigalex",
+    "category": "healthcare",
+    "subcategory": "otc_witamina_d",
+    "awareness": 0.45,
+    "sentimentWeights": {
+      "negative": 10,
+      "neutral": 55,
+      "positive": 35
+    },
+    "ageAffinity": [
+      30,
+      70
+    ],
+    "genderSkew": "female_primary",
+    "incomeAffinity": [
+      "below_2000",
+      "2000_3500",
+      "3500_5000"
+    ],
+    "settlementBoost": [],
+    "tags": [
+      "witamina_d",
+      "odpornosc",
+      "otc",
+      "apteka",
+      "biofarm",
+      "tańsza_alternatywa"
+    ],
+    "marketSharePct": 10.4,
+    "notes": "Nr 2 rynku; dokument 4P: NISKI brand awareness; tańsza alternatywa Ibuvit"
+  },
+  {
+    "brandName": "Vigantoletten",
+    "category": "healthcare",
+    "subcategory": "otc_witamina_d",
+    "awareness": 0.52,
+    "sentimentWeights": {
+      "negative": 8,
+      "neutral": 52,
+      "positive": 40
+    },
+    "ageAffinity": [
+      35,
+      75
+    ],
+    "genderSkew": "female_primary",
+    "incomeAffinity": [
+      "2000_3500",
+      "3500_5000",
+      "5000_8000"
+    ],
+    "settlementBoost": [
+      "large_city",
+      "metropolis"
+    ],
+    "tags": [
+      "witamina_d",
+      "odpornosc",
+      "otc",
+      "apteka",
+      "merck",
+      "premium"
+    ],
+    "marketSharePct": 10.3
+  },
+  {
+    "brandName": "Ginkofar",
+    "category": "healthcare",
+    "subcategory": "otc_ginko",
+    "awareness": 0.65,
+    "sentimentWeights": {
+      "negative": 8,
+      "neutral": 48,
+      "positive": 44
+    },
+    "ageAffinity": [
+      55,
+      80
+    ],
+    "genderSkew": "female_primary",
+    "incomeAffinity": [
+      "2000_3500",
+      "3500_5000",
+      "5000_8000"
+    ],
+    "settlementBoost": [
+      "small_city",
+      "medium_city"
+    ],
+    "tags": [
+      "ginko",
+      "pamiec",
+      "koncentracja",
+      "otc",
+      "apteka",
+      "biofarm",
+      "senior"
+    ],
+    "marketSharePct": 51.9,
+    "notes": "Lider kategorii ginko; jedyna aktywna marka ATL w kategorii; target 55+"
+  },
+  {
+    "brandName": "Bilobil",
+    "category": "healthcare",
+    "subcategory": "otc_ginko",
+    "awareness": 0.45,
+    "sentimentWeights": {
+      "negative": 10,
+      "neutral": 55,
+      "positive": 35
+    },
+    "ageAffinity": [
+      55,
+      80
+    ],
+    "genderSkew": "female_primary",
+    "incomeAffinity": [
+      "2000_3500",
+      "3500_5000"
+    ],
+    "settlementBoost": [],
+    "tags": [
+      "ginko",
+      "pamiec",
+      "otc",
+      "apteka",
+      "krka"
+    ],
+    "marketSharePct": 16.4
+  },
+  {
+    "brandName": "Dorminox",
+    "category": "healthcare",
+    "subcategory": "otc_sen_doksylamina",
+    "awareness": 0.62,
+    "sentimentWeights": {
+      "negative": 12,
+      "neutral": 45,
+      "positive": 43
+    },
+    "ageAffinity": [
+      35,
+      65
+    ],
+    "genderSkew": "female_primary",
+    "incomeAffinity": [
+      "2000_3500",
+      "3500_5000",
+      "5000_8000"
+    ],
+    "settlementBoost": [
+      "medium_city",
+      "large_city",
+      "metropolis"
+    ],
+    "tags": [
+      "sen",
+      "bezsennosc",
+      "otc",
+      "apteka",
+      "sanofi",
+      "doksylamina"
+    ],
+    "marketSharePct": 37,
+    "notes": "Lider kategorii leków nasennych OTC; 3015 GRP Q1-Q2 2025"
+  },
+  {
+    "brandName": "Noctis Noc",
+    "category": "healthcare",
+    "subcategory": "otc_sen_doksylamina",
+    "awareness": 0.4,
+    "sentimentWeights": {
+      "negative": 10,
+      "neutral": 50,
+      "positive": 40
+    },
+    "ageAffinity": [
+      35,
+      55
+    ],
+    "genderSkew": "female_primary",
+    "incomeAffinity": [
+      "2000_3500",
+      "3500_5000",
+      "5000_8000"
+    ],
+    "settlementBoost": [
+      "medium_city",
+      "large_city",
+      "metropolis"
+    ],
+    "tags": [
+      "sen",
+      "bezsennosc",
+      "otc",
+      "apteka",
+      "biofarm",
+      "doksylamina",
+      "nowy"
+    ],
+    "marketSharePct": 27,
+    "notes": "Wejście 2024; 27% share po roku; 1300 GRP Q1-Q2 2025; tańszy od Dorminox"
+  },
+  {
+    "brandName": "Senamina",
+    "category": "healthcare",
+    "subcategory": "otc_sen_doksylamina",
+    "awareness": 0.45,
+    "sentimentWeights": {
+      "negative": 10,
+      "neutral": 52,
+      "positive": 38
+    },
+    "ageAffinity": [
+      35,
+      65
+    ],
+    "genderSkew": "female_primary",
+    "incomeAffinity": [
+      "2000_3500",
+      "3500_5000"
+    ],
+    "settlementBoost": [],
+    "tags": [
+      "sen",
+      "bezsennosc",
+      "otc",
+      "apteka",
+      "doksylamina"
+    ],
+    "marketSharePct": 20
+  },
+  {
+    "brandName": "Melatonina Lek-am",
+    "category": "healthcare",
+    "subcategory": "otc_melatonina",
+    "awareness": 0.62,
+    "sentimentWeights": {
+      "negative": 8,
+      "neutral": 45,
+      "positive": 47
+    },
+    "ageAffinity": [
+      35,
+      65
+    ],
+    "genderSkew": "female_primary",
+    "incomeAffinity": [
+      "2000_3500",
+      "3500_5000",
+      "5000_8000"
+    ],
+    "settlementBoost": [],
+    "tags": [
+      "melatonina",
+      "sen",
+      "ritm_dobowy",
+      "otc",
+      "apteka",
+      "lider"
+    ],
+    "marketSharePct": 71.3,
+    "notes": "Dominujący lider melatoniny; 1663 GRP Q1-Q2 2025; spada z ~80% do 71%"
+  },
+  {
+    "brandName": "Melatonina Biofarm",
+    "category": "healthcare",
+    "subcategory": "otc_melatonina",
+    "awareness": 0.22,
+    "sentimentWeights": {
+      "negative": 10,
+      "neutral": 62,
+      "positive": 28
+    },
+    "ageAffinity": [
+      35,
+      60
+    ],
+    "genderSkew": "female_primary",
+    "incomeAffinity": [
+      "below_2000",
+      "2000_3500",
+      "3500_5000"
+    ],
+    "settlementBoost": [],
+    "tags": [
+      "melatonina",
+      "sen",
+      "ritm_dobowy",
+      "otc",
+      "apteka",
+      "biofarm",
+      "nowy"
+    ],
+    "marketSharePct": 8.1,
+    "notes": "Wejście sierpień 2024; bardzo niski awareness; najtańsza opcja; 434 GRP Q1-Q2 2025"
+  },
+  {
+    "brandName": "Melabiorytm",
+    "category": "healthcare",
+    "subcategory": "otc_melatonina",
+    "awareness": 0.35,
+    "sentimentWeights": {
+      "negative": 8,
+      "neutral": 58,
+      "positive": 34
+    },
+    "ageAffinity": [
+      35,
+      65
+    ],
+    "genderSkew": "female_primary",
+    "incomeAffinity": [
+      "2000_3500",
+      "3500_5000"
+    ],
+    "settlementBoost": [],
+    "tags": [
+      "melatonina",
+      "sen",
+      "otc",
+      "apteka"
+    ],
+    "marketSharePct": 11
   }
 ]

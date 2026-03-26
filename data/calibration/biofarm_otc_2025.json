@@ -1,0 +1,183 @@
+{
+  "_meta": {
+    "source": "Strategie OTC dla Media Republic – Biofarm 2025",
+    "document_date": "2023-07-07",
+    "data_horizon": "MAT 03/2025 + prognozy 2025–2026",
+    "categories": ["magnez", "witamina_d", "ginko", "leki_nasenne_doksylamina", "melatonina"],
+    "notes": "Dane rynkowe z hurtowni farmaceutycznych (IMS/IQVIA), GRP z monitoringu mediów Q1-Q2 2025. Awareness szacowany z udziałów rynkowych + jawna informacja o niskim brand awareness Magnefar i Vigalex."
+  },
+
+  "categories": {
+    "magnez": {
+      "market_size_pln": {
+        "2022": 380900000,
+        "2023": 422800000,
+        "2024": 469300000,
+        "2025_forecast": 507000000,
+        "2026_forecast": 543800000
+      },
+      "yoy_value_growth_pct": 11,
+      "yoy_volume_growth_pct": -1,
+      "seasonality": "non_seasonal",
+      "trend_note": "Wzrost wartości przy spadku wolumenu — migracja do wyższych dawek i większych opakowań",
+      "brands": [
+        { "name": "Magne",         "share_pct": 51.2, "awareness_estimated": 0.82, "manufacturer": "Sanofi", "note": "dominujący lider; silna obecność ATL od lat" },
+        { "name": "Magnefar B6",   "share_pct": 10.4, "awareness_estimated": 0.48, "manufacturer": "Biofarm", "note": "2. miejsce; dokument: NISKI brand awareness" },
+        { "name": "Maglek",        "share_pct": 6.3,  "awareness_estimated": 0.35, "manufacturer": "Lek-am" },
+        { "name": "Magvit",        "share_pct": 4.4,  "awareness_estimated": 0.28, "manufacturer": "nieznany" },
+        { "name": "inne_magnez",   "share_pct": 27.7, "awareness_estimated": 0.20 }
+      ],
+      "target_profile": {
+        "primary_gender": "female",
+        "primary_age_range": [35, 60],
+        "motivations": ["stres", "zmęczenie", "skurcze mięśni", "energia"],
+        "purchase_occasion": "apteka_stacjonarna"
+      },
+      "biofarm_target_2025": { "revenue_pln": 57000000, "growth_pct": 16.2, "share_pct": 10.8 },
+      "biofarm_target_2026": { "revenue_pln": 65400000, "growth_pct": 16.0, "share_pct": 12.2 }
+    },
+
+    "witamina_d": {
+      "market_size_pln": {
+        "2022": 300600000,
+        "2023": 349000000,
+        "2024": 374000000,
+        "2025_forecast": 363600000,
+        "2026_forecast": 398400000
+      },
+      "yoy_value_growth_pct": 16,
+      "yoy_volume_growth_pct": 8,
+      "seasonality": "seasonal_autumn_winter",
+      "trend_note": "Migracja do wyższych dawek (4000 IU = 50% sprzedaży); kategorię napędza Ibuvit rosnący 43% r/r",
+      "brands": [
+        { "name": "Ibuvit D",      "share_pct": 53.7, "awareness_estimated": 0.80, "manufacturer": "Biofarm Sp.z o.o./Teva", "note": "dominujący lider; +43.3% r/r; silne ATL" },
+        { "name": "Vigalex",       "share_pct": 10.4, "awareness_estimated": 0.45, "manufacturer": "Biofarm", "note": "2. miejsce; dokument: NISKI brand awareness" },
+        { "name": "Vigantoletten", "share_pct": 10.3, "awareness_estimated": 0.52, "manufacturer": "Merck" },
+        { "name": "Dvitum",        "share_pct": 8.4,  "awareness_estimated": 0.40, "manufacturer": "Adamed" },
+        { "name": "inne_vit_d",    "share_pct": 17.2, "awareness_estimated": 0.18 }
+      ],
+      "target_profile": {
+        "primary_gender": "female",
+        "primary_age_range": [35, 70],
+        "secondary_segments": ["dzieci", "seniorzy_75+"],
+        "motivations": ["odporność", "kości", "jesień_zima"],
+        "purchase_occasion": "apteka_stacjonarna"
+      },
+      "biofarm_target_2025": { "revenue_pln": 45500000, "growth_pct": 23.0, "share_pct": 11.7 },
+      "biofarm_target_2026": { "revenue_pln": 49100000, "growth_pct": 8.0, "share_pct": 12.3 }
+    },
+
+    "ginko": {
+      "market_size_pln": {
+        "2022": 38900000,
+        "2023": 36300000,
+        "2024": 39400000,
+        "2025_forecast": 40800000,
+        "2026_forecast": 41600000
+      },
+      "yoy_value_growth_pct": 7,
+      "seasonality": "non_seasonal",
+      "trend_note": "Kategoria długo w regresji; Ginkofar odbił kategorię dzięki ATL (+3x tempo wzrostu vs rynek)",
+      "brands": [
+        { "name": "Ginkofar",  "share_pct": 51.9, "awareness_estimated": 0.65, "manufacturer": "Biofarm", "note": "lider kategorii; +3.6pp r/r; jedyna aktywna marka ATL" },
+        { "name": "Bilobil",   "share_pct": 16.4, "awareness_estimated": 0.45, "manufacturer": "Krka" },
+        { "name": "Bilomag",   "share_pct": 15.3, "awareness_estimated": 0.40, "manufacturer": "nieznany" },
+        { "name": "inne_ginko","share_pct": 16.4, "awareness_estimated": 0.15 }
+      ],
+      "target_profile": {
+        "primary_gender": "female",
+        "primary_age_range": [55, 75],
+        "motivations": ["pamięć", "koncentracja", "krążenie_mózgowe"],
+        "purchase_occasion": "apteka_stacjonarna",
+        "note": "Wąski target; niska świadomość kategorii poza 55+"
+      },
+      "biofarm_target_2025": { "revenue_pln": 21700000, "growth_pct": 15.8, "share_pct": 55.1 },
+      "biofarm_target_2026": { "revenue_pln": 22900000, "growth_pct": 5.6,  "share_pct": 55.1 }
+    },
+
+    "leki_nasenne_doksylamina": {
+      "market_size_pln": {
+        "2022": 11400000,
+        "2023": 26400000,
+        "2024": 37700000,
+        "2025_forecast": 50000000,
+        "2026_forecast": 58700000
+      },
+      "yoy_value_growth_pct_avg": 55,
+      "seasonality": "seasonal_spring_autumn",
+      "peak_months": ["marzec", "kwiecień", "wrzesień", "październik", "listopad", "grudzień"],
+      "trend_note": "Kategoria eksploduje — +131% 2022→2023. Wejście nowych graczy (Noctis Noc 2024, Sentino) aktywizuje kategorię",
+      "brands": [
+        { "name": "Dorminox",    "share_pct": 37, "awareness_estimated": 0.62, "manufacturer": "Sanofi", "note": "lider, ale spada (był >50%)" },
+        { "name": "Noctis Noc",  "share_pct": 27, "awareness_estimated": 0.40, "manufacturer": "Biofarm", "note": "wejście 2024; błyskawiczny wzrost do 27%" },
+        { "name": "Senamina",    "share_pct": 20, "awareness_estimated": 0.45, "manufacturer": "nieznany" },
+        { "name": "Sentino",     "share_pct": 16, "awareness_estimated": 0.38, "manufacturer": "nieznany" },
+        { "name": "Sonoxen",     "share_pct": 1,  "awareness_estimated": 0.10 }
+      ],
+      "target_profile": {
+        "primary_gender": "female",
+        "primary_age_range": [35, 55],
+        "motivations": ["bezsenność_okazjonalna", "stres_w_pracy", "problemy_z_zasypianiem"],
+        "purchase_occasion": "apteka_stacjonarna",
+        "note": "Aktywna zawodowo kobieta, nieregularny sen — nie chroniczna bezsenność"
+      },
+      "media_grp_q1_q2_2025": {
+        "Dorminox":   3015,
+        "Sentino":    2527,
+        "Luminastil": 1819,
+        "Senamina":   1563,
+        "Noctis Noc": 1300
+      },
+      "biofarm_target_2025": { "revenue_pln": 14400000, "growth_pct": 38.5, "share_pct": 28.7 },
+      "biofarm_target_2026": { "revenue_pln": 14900000, "growth_pct": 3.5,  "share_pct": 28.7 }
+    },
+
+    "melatonina": {
+      "market_size_pln": {
+        "2024": 37500000,
+        "2025_forecast": 49700000,
+        "2026_forecast": 57300000
+      },
+      "yoy_value_growth_pct": 32.5,
+      "seasonality": "seasonal_bimodal",
+      "peak_months": ["sierpień", "wrzesień", "grudzień", "styczeń"],
+      "trend_note": "Dynamicznie rosnąca kategoria; Melatonina Biofarm weszła sierpień 2024",
+      "brands": [
+        { "name": "Melatonina Lek-am",    "share_pct": 71.3, "awareness_estimated": 0.62, "manufacturer": "Lek-am", "note": "dominujący lider, ale spada (był ~80%)" },
+        { "name": "Melabiorytm",          "share_pct": 11,   "awareness_estimated": 0.35, "manufacturer": "nieznany" },
+        { "name": "Melatonina Biofarm",   "share_pct": 8.1,  "awareness_estimated": 0.22, "manufacturer": "Biofarm", "note": "wejście sierpień 2024; bardzo niski awareness — nowa marka" },
+        { "name": "inne_melatonina",      "share_pct": 9.6,  "awareness_estimated": 0.12 }
+      ],
+      "target_profile": {
+        "primary_gender": "female",
+        "primary_age_range": [35, 65],
+        "motivations": ["zaburzenia_rytmu_snu", "jet_lag", "praca_zmianowa", "wiek_menopauzalny"],
+        "purchase_occasion": "apteka_stacjonarna"
+      },
+      "media_grp_q1_q2_2025": {
+        "Melatonina Lek-am":  1663,
+        "Melabiorytm":         594,
+        "Melatonina Biofarm":  434
+      },
+      "biofarm_target_2025": { "revenue_pln": 11500000, "growth_pct": 255, "share_pct": 7.3 },
+      "biofarm_target_2026": { "revenue_pln": 20900000, "growth_pct": 82,  "share_pct": 11.5 }
+    }
+  },
+
+  "biofarm_portfolio_summary": {
+    "total_revenue_target_2025_pln": 150100000,
+    "key_strategic_insight": "Wszystkie produkty Biofarm są na 2. lub 3. miejscu z niskim brand awareness — strategia VALUE FOLLOWER: niższa cena, aktywne ATL dla budowania awareness",
+    "common_target": "Kobieta 35+, aktywna zawodowo lub wchodząca w wiek menopauzalny, apteka stacjonarna",
+    "price_positioning": "Wszystkie produkty 10-40% tańsze od lidera kategorii",
+    "media_mix_2025": ["TV", "VOD", "Radio", "YouTube", "Search", "Display", "Social_Media"],
+    "btl": ["konferencje_farmaceutyczne", "szkolenia_farmaceutów", "próbki_lekarskie"]
+  },
+
+  "simulation_hints": {
+    "low_awareness_challengers": ["Magnefar B6", "Vigalex", "Melatonina Biofarm"],
+    "category_awareness_note": "OTC pharma — awareness marek silnie skorelowany z wydatkami ATL; marki bez TV mają awareness <40% nawet przy 10% udziale rynkowym",
+    "gender_skew": "Wszystkie kategorie primarly F35+; mężczyźni 35+ reagują głównie na magnez (skurcze, sport) i ginkgo (pamięć)",
+    "age_note": "Ginkofar: praktycznie wyłącznie 55+. Sen/melatonina: silny trigger 35-54. Vit D: cross-age ale decyzja zakupowa przy kobietach 35+",
+    "price_sensitivity": "Kategorie OTC: wysoka wrażliwość na cenę (produkty paralelne, łatwe porównanie w aptece); Biofarm korzysta na tym jako tańsza alternatywa"
+  }
+}
