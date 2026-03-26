@@ -170,18 +170,18 @@ export function NewStudy() {
           <>
             <div className="space-y-2">
               <Label className="text-white text-sm">Marka</Label>
-              <Select value={data.brand} onValueChange={(value) => setData({ ...data, brand: value })}>
-                <SelectTrigger className="bg-[#18181b] border-[#27272a] text-white rounded-lg">
-                  <SelectValue placeholder="Wybierz markę..." />
-                </SelectTrigger>
-                <SelectContent className="bg-[#18181b] border-[#27272a]">
-                  {brands.map((brand) => (
-                    <SelectItem key={brand} value={brand} className="text-white hover:bg-[#27272a]">
-                      {brand}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <Input
+                value={data.brand}
+                onChange={(e) => setData({ ...data, brand: e.target.value })}
+                placeholder="Wpisz nazwę marki..."
+                list="brands-datalist"
+                className="bg-[#18181b] border-[#27272a] text-white placeholder:text-[#52525b] rounded-lg"
+              />
+              <datalist id="brands-datalist">
+                {brands.map((brand) => (
+                  <option key={brand} value={brand} />
+                ))}
+              </datalist>
             </div>
 
             <div className="space-y-2">
