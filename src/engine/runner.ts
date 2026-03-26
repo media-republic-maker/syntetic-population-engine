@@ -8,7 +8,7 @@ import { buildSystemPrompt, buildUserPrompt } from "./prompt.js";
 
 const MODEL = process.env.MODEL ?? "claude-sonnet-4-6";
 const CONCURRENCY = parseInt(process.env.CONCURRENCY ?? "5", 10);
-const MAX_RETRIES = 2;
+const MAX_RETRIES = 3;
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -45,11 +45,28 @@ function clamp(val: number, min: number, max: number): number {
 // Pojedyncze wywołanie dla jednej persony
 // ─────────────────────────────────────────────────────────────────────────────
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Globalny semaphore rate-limit: kiedy dostaniemy 429, wstrzymaj nowe żądania
+// ─────────────────────────────────────────────────────────────────────────────
+
+let rateLimitUntil = 0;
+
+async function waitForRateLimit(): Promise<void> {
+  const wait = rateLimitUntil - Date.now();
+  if (wait > 0) await sleep(wait);
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 async function queryPersona(
   persona: Persona,
   ad: AdMaterial,
   attempt = 0
 ): Promise<BotResponse> {
+  await waitForRateLimit();
+
   try {
     const userContent: Anthropic.MessageParam["content"] =
       ad.imageBase64 && ad.imageMimeType
@@ -80,13 +97,26 @@ async function queryPersona(
       .join("");
 
     return parseResponse(persona.id, raw);
-  } catch (err) {
+  } catch (err: any) {
+    // Rate limit (429) – wstrzymaj wszystkie workery i poczekaj
+    if (err?.status === 429 || err?.type === "rate_limit_error") {
+      const retryAfter = parseInt(err?.headers?.["retry-after"] ?? "0", 10);
+      const backoff = retryAfter > 0 ? retryAfter * 1000 : Math.min(5000 * 2 ** attempt, 60000);
+      rateLimitUntil = Math.max(rateLimitUntil, Date.now() + backoff);
+      console.warn(`⚠ Rate limit – czekam ${Math.round(backoff / 1000)}s (attempt ${attempt + 1})`);
+      if (attempt < MAX_RETRIES) {
+        await sleep(backoff);
+        return queryPersona(persona, ad, attempt + 1);
+      }
+    }
+
     if (attempt < MAX_RETRIES) {
+      // Inne błędy – krótki backoff
       await sleep(1000 * (attempt + 1));
       return queryPersona(persona, ad, attempt + 1);
     }
-    console.error(`✗ Błąd dla persony ${persona.name} (${persona.id}):`, err);
-    // Zwróć pusty wynik zamiast przerywać całe badanie
+
+    console.error(`✗ Błąd dla persony ${persona.name} (${persona.id}):`, (err as Error).message ?? err);
     return {
       personaId: persona.id,
       attentionScore: 0,
@@ -100,12 +130,10 @@ async function queryPersona(
   }
 }
 
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 // ─────────────────────────────────────────────────────────────────────────────
-// Równoległy runner z rate limitingiem (pula CONCURRENCY wątków)
+// Worker pool – CONCURRENCY workerów działa zawsze, nie czeka na najwolniejszego
+// Zamiast batch: start 20 → czekaj na WSZYSTKIE 20 → start następne 20
+// Teraz: skończyło 1 → od razu startuje następne (idle = 0)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export async function runStudy(
@@ -113,20 +141,23 @@ export async function runStudy(
   ad: AdMaterial,
   onProgress?: (done: number, total: number) => void
 ): Promise<BotResponse[]> {
-  const results: BotResponse[] = [];
   const total = population.length;
-  let done = 0;
+  const results: BotResponse[] = new Array(total);
+  let nextIdx = 0;
+  let doneCount = 0;
 
-  // Podziel na chunki po CONCURRENCY person
-  for (let i = 0; i < total; i += CONCURRENCY) {
-    const chunk = population.slice(i, i + CONCURRENCY);
-    const chunkResults = await Promise.all(
-      chunk.map((persona) => queryPersona(persona, ad))
-    );
-    results.push(...chunkResults);
-    done += chunk.length;
-    onProgress?.(Math.min(done, total), total);
+  async function worker(): Promise<void> {
+    while (true) {
+      const idx = nextIdx++;
+      if (idx >= total) return;
+      results[idx] = await queryPersona(population[idx], ad);
+      doneCount++;
+      onProgress?.(doneCount, total);
+    }
   }
+
+  const poolSize = Math.min(CONCURRENCY, total);
+  await Promise.all(Array.from({ length: poolSize }, worker));
 
   return results;
 }

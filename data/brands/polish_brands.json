@@ -1635,11 +1635,11 @@
     "brandName": "Magne B6",
     "category": "healthcare",
     "subcategory": "otc_magnez",
-    "awareness": 0.82,
+    "awareness": 0.68,
     "sentimentWeights": {
-      "negative": 8,
-      "neutral": 42,
-      "positive": 50
+      "negative": 10,
+      "neutral": 55,
+      "positive": 35
     },
     "ageAffinity": [
       25,
@@ -1701,7 +1701,7 @@
     "brandName": "Maglek",
     "category": "healthcare",
     "subcategory": "otc_magnez",
-    "awareness": 0.35,
+    "awareness": 0.28,
     "sentimentWeights": {
       "negative": 12,
       "neutral": 58,
@@ -1766,11 +1766,11 @@
     "brandName": "Vigalex",
     "category": "healthcare",
     "subcategory": "otc_witamina_d",
-    "awareness": 0.45,
+    "awareness": 0.22,
     "sentimentWeights": {
-      "negative": 10,
-      "neutral": 55,
-      "positive": 35
+      "negative": 8,
+      "neutral": 65,
+      "positive": 27
     },
     "ageAffinity": [
       30,
@@ -1798,7 +1798,7 @@
     "brandName": "Vigantoletten",
     "category": "healthcare",
     "subcategory": "otc_witamina_d",
-    "awareness": 0.52,
+    "awareness": 0.38,
     "sentimentWeights": {
       "negative": 8,
       "neutral": 52,
@@ -1832,11 +1832,11 @@
     "brandName": "Ginkofar",
     "category": "healthcare",
     "subcategory": "otc_ginko",
-    "awareness": 0.65,
+    "awareness": 0.52,
     "sentimentWeights": {
       "negative": 8,
-      "neutral": 48,
-      "positive": 44
+      "neutral": 52,
+      "positive": 40
     },
     "ageAffinity": [
       55,
@@ -1868,7 +1868,7 @@
     "brandName": "Bilobil",
     "category": "healthcare",
     "subcategory": "otc_ginko",
-    "awareness": 0.45,
+    "awareness": 0.25,
     "sentimentWeights": {
       "negative": 10,
       "neutral": 55,
@@ -1897,11 +1897,11 @@
     "brandName": "Dorminox",
     "category": "healthcare",
     "subcategory": "otc_sen_doksylamina",
-    "awareness": 0.62,
+    "awareness": 0.42,
     "sentimentWeights": {
       "negative": 12,
-      "neutral": 45,
-      "positive": 43
+      "neutral": 60,
+      "positive": 28
     },
     "ageAffinity": [
       35,
@@ -1933,11 +1933,11 @@
     "brandName": "Noctis Noc",
     "category": "healthcare",
     "subcategory": "otc_sen_doksylamina",
-    "awareness": 0.4,
+    "awareness": 0.32,
     "sentimentWeights": {
       "negative": 10,
-      "neutral": 50,
-      "positive": 40
+      "neutral": 62,
+      "positive": 28
     },
     "ageAffinity": [
       35,
@@ -1970,7 +1970,7 @@
     "brandName": "Senamina",
     "category": "healthcare",
     "subcategory": "otc_sen_doksylamina",
-    "awareness": 0.45,
+    "awareness": 0.28,
     "sentimentWeights": {
       "negative": 10,
       "neutral": 52,
@@ -1999,11 +1999,11 @@
     "brandName": "Melatonina Lek-am",
     "category": "healthcare",
     "subcategory": "otc_melatonina",
-    "awareness": 0.62,
+    "awareness": 0.58,
     "sentimentWeights": {
-      "negative": 8,
-      "neutral": 45,
-      "positive": 47
+      "negative": 10,
+      "neutral": 60,
+      "positive": 30
     },
     "ageAffinity": [
       35,
@@ -2031,11 +2031,11 @@
     "brandName": "Melatonina Biofarm",
     "category": "healthcare",
     "subcategory": "otc_melatonina",
-    "awareness": 0.22,
+    "awareness": 0.12,
     "sentimentWeights": {
-      "negative": 10,
-      "neutral": 62,
-      "positive": 28
+      "negative": 8,
+      "neutral": 70,
+      "positive": 22
     },
     "ageAffinity": [
       35,
@@ -2064,7 +2064,7 @@
     "brandName": "Melabiorytm",
     "category": "healthcare",
     "subcategory": "otc_melatonina",
-    "awareness": 0.35,
+    "awareness": 0.22,
     "sentimentWeights": {
       "negative": 8,
       "neutral": 58,
@@ -2087,5 +2087,71 @@
       "apteka"
     ],
     "marketSharePct": 11
+  },
+  {
+    "brandName": "Magnefar",
+    "category": "healthcare",
+    "awareness": 0.28,
+    "sentimentWeights": {
+      "negative": 8,
+      "neutral": 65,
+      "positive": 27
+    },
+    "notes": "OTC mag+B6 wice-lider, niska świadomość, model trade-based"
+  },
+  {
+    "brandName": "Magvit",
+    "category": "healthcare",
+    "awareness": 0.22,
+    "sentimentWeights": {
+      "negative": 8,
+      "neutral": 67,
+      "positive": 25
+    },
+    "notes": "OTC magnez Angelini, 4.4% share"
+  },
+  {
+    "brandName": "Ibuvit",
+    "category": "healthcare",
+    "awareness": 0.62,
+    "sentimentWeights": {
+      "negative": 8,
+      "neutral": 52,
+      "positive": 40
+    },
+    "notes": "OTC wit. D3 lider (53.7% share), silna kampania TV Polpharma"
+  },
+  {
+    "brandName": "DVitum",
+    "category": "healthcare",
+    "awareness": 0.32,
+    "sentimentWeights": {
+      "negative": 8,
+      "neutral": 65,
+      "positive": 27
+    },
+    "notes": "SD wit. D3 Oleofarm, 8.4% share"
+  },
+  {
+    "brandName": "Bilomag",
+    "category": "healthcare",
+    "awareness": 0.2,
+    "sentimentWeights": {
+      "negative": 10,
+      "neutral": 65,
+      "positive": 25
+    },
+    "notes": "SD Ginkgo Biloba, 15.3% share, trend spadkowy"
+  },
+  {
+    "brandName": "Sentino",
+    "category": "healthcare",
+    "awareness": 0.22,
+    "sentimentWeights": {
+      "negative": 8,
+      "neutral": 65,
+      "positive": 27
+    },
+    "notes": "OTC doksylamina USP Zdrowie, dynamiczny wzrost (486% r/r)"
   }
 ]
