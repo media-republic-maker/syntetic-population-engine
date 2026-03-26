@@ -7,17 +7,31 @@ import { Button } from '../components/ui/button';
 export function Dashboard() {
   const [population, setPopulation] = useState<PopulationStats | null>(null);
   const [recentCampaigns, setRecentCampaigns] = useState<Campaign[]>([]);
+  const [allCampaigns, setAllCampaigns] = useState<Campaign[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadData() {
       const [popData, campaigns] = await Promise.all([getPopulation(), getCampaigns()]);
       setPopulation(popData);
+      setAllCampaigns(campaigns);
       setRecentCampaigns(campaigns.slice(0, 3));
       setLoading(false);
     }
     loadData();
   }, []);
+
+  const now = new Date();
+  const studiesThisMonth = allCampaigns.filter((c) => {
+    const d = new Date(c.date);
+    return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+  }).length;
+
+  const avgAttention = allCampaigns.length > 0
+    ? (allCampaigns.reduce((s, c) => s + c.attentionScore, 0) / allCampaigns.length).toFixed(1)
+    : '—';
+
+  const uniqueBrands = new Set(allCampaigns.map((c) => c.brand).filter((b) => b && b !== '–')).size;
 
   if (loading || !population) {
     return (
@@ -47,7 +61,7 @@ export function Dashboard() {
         <div className="flex items-start justify-between mb-6">
           <div>
             <h3 className="text-lg font-semibold text-white mb-1">Stan populacji syntetycznej</h3>
-            <p className="text-sm text-[#a1a1aa]">Aktualna kalibracja: GUS BAEL 2023, CBOS 2025</p>
+            <p className="text-sm text-[#a1a1aa]">Aktualna kalibracja: GUS BDL 2024, NSP 2021, CBOS 2025</p>
           </div>
           <Link to="/population">
             <Button variant="ghost" size="sm" className="text-[#6366f1] hover:text-[#5558e3] hover:bg-[#27272a]">
@@ -78,7 +92,7 @@ export function Dashboard() {
           </div>
 
           <div className="space-y-1">
-            <div className="text-[#a1a1aa] text-sm">Miasta {'>'}500k</div>
+            <div className="text-[#a1a1aa] text-sm">Miasta {'>'}100k</div>
             <p className="text-3xl font-semibold text-white">{population.regions.urban}%</p>
           </div>
         </div>
@@ -149,7 +163,7 @@ export function Dashboard() {
             </div>
             <div>
               <div className="text-sm text-[#a1a1aa]">Badania w tym miesiącu</div>
-              <div className="text-xl font-semibold text-white">12</div>
+              <div className="text-xl font-semibold text-white">{studiesThisMonth}</div>
             </div>
           </div>
         </div>
@@ -161,7 +175,7 @@ export function Dashboard() {
             </div>
             <div>
               <div className="text-sm text-[#a1a1aa]">Śr. Attention Score</div>
-              <div className="text-xl font-semibold text-white">7.4</div>
+              <div className="text-xl font-semibold text-white">{avgAttention}</div>
             </div>
           </div>
         </div>
@@ -173,7 +187,7 @@ export function Dashboard() {
             </div>
             <div>
               <div className="text-sm text-[#a1a1aa]">Testowane marki</div>
-              <div className="text-xl font-semibold text-white">8</div>
+              <div className="text-xl font-semibold text-white">{uniqueBrands || '—'}</div>
             </div>
           </div>
         </div>
