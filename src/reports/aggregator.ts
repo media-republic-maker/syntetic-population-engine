@@ -11,6 +11,7 @@ export interface SegmentStats {
   resonanceScore: number;
   purchaseIntentDelta: number;
   trustImpact: number;
+  brandRecognitionScore: number;
   topRejections: string[];
 }
 
@@ -71,6 +72,7 @@ function buildStats(
     resonanceScore: avg(responses.map((r) => r.resonanceScore)),
     purchaseIntentDelta: avg(responses.map((r) => r.purchaseIntentDelta)),
     trustImpact: avg(responses.map((r) => r.trustImpact)),
+    brandRecognitionScore: avg(responses.map((r) => r.brandRecognitionScore ?? 0)),
     topRejections: topN(rejections, 3),
   };
 }

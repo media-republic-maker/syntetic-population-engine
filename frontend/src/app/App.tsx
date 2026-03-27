@@ -4,6 +4,7 @@ import { Dashboard } from './pages/Dashboard';
 import { NewStudy } from './pages/NewStudy';
 import { Results } from './pages/Results';
 import { Population } from './pages/Population';
+import { Studies } from './pages/Studies';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
       { path: 'new-study', element: <NewStudy /> },
       { path: 'results/:id', element: <Results /> },
       { path: 'population', element: <Population /> },
+      { path: 'studies', element: <Studies /> },
     ],
   },
 ]);

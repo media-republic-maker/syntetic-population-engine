@@ -216,6 +216,7 @@ export interface BotResponse {
   resonanceScore: number;         // 0–10
   purchaseIntentDelta: number;    // -5 do +5
   trustImpact: number;            // -5 do +5
+  brandRecognitionScore: number;  // 0–10
   recall: string;                 // co persona "zapamiętała"
   womSimulation: string;          // co powiedziałaby znajomemu
   rejectionSignals: string[];     // elementy wywołujące opór

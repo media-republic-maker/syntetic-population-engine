@@ -1,16 +1,40 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Silnik LLM – równoległe wywołania z rate limitingiem
+// Silnik LLM – równoległe wywołania z rate limitingiem, multi-model routing
 // ─────────────────────────────────────────────────────────────────────────────
 
 import Anthropic from "@anthropic-ai/sdk";
+import OpenAI from "openai";
 import type { Persona, AdMaterial, BotResponse } from "../personas/schema.js";
 import { buildSystemPrompt, buildUserPrompt } from "./prompt.js";
+import { selectModel, type ModelProvider } from "./modelRouter.js";
 
-const MODEL = process.env.MODEL ?? "claude-sonnet-4-6";
 const CONCURRENCY = parseInt(process.env.CONCURRENCY ?? "5", 10);
 const MAX_RETRIES = 3;
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+// ─── Klienci – tworzone leniwie, tylko gdy potrzebne ─────────────────────────
+
+const anthropicClient = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
+let _openaiClient: OpenAI | null = null;
+function getOpenAI(): OpenAI {
+  if (!_openaiClient) {
+    if (!process.env.OPENAI_API_KEY) throw new Error("Brak OPENAI_API_KEY w .env");
+    _openaiClient = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+  }
+  return _openaiClient;
+}
+
+let _groqClient: OpenAI | null = null;
+function getGroq(): OpenAI {
+  if (!_groqClient) {
+    if (!process.env.GROQ_API_KEY) throw new Error("Brak GROQ_API_KEY w .env");
+    _groqClient = new OpenAI({
+      apiKey: process.env.GROQ_API_KEY,
+      baseURL: "https://api.groq.com/openai/v1",
+    });
+  }
+  return _groqClient;
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Parser odpowiedzi JSON z fallbackiem
@@ -29,6 +53,7 @@ function parseResponse(personaId: string, raw: string): BotResponse {
     resonanceScore: clamp(Number(parsed.resonanceScore ?? 0), 0, 10),
     purchaseIntentDelta: clamp(Number(parsed.purchaseIntentDelta ?? 0), -5, 5),
     trustImpact: clamp(Number(parsed.trustImpact ?? 0), -5, 5),
+    brandRecognitionScore: clamp(Number(parsed.brandRecognitionScore ?? 0), 0, 10),
     recall: String(parsed.recall ?? ""),
     womSimulation: String(parsed.womSimulation ?? ""),
     rejectionSignals: Array.isArray(parsed.rejectionSignals)
@@ -42,68 +67,141 @@ function clamp(val: number, min: number, max: number): number {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Pojedyncze wywołanie dla jednej persony
+// Per-provider rate-limit tracking
 // ─────────────────────────────────────────────────────────────────────────────
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Globalny semaphore rate-limit: kiedy dostaniemy 429, wstrzymaj nowe żądania
-// ─────────────────────────────────────────────────────────────────────────────
-
-let rateLimitUntil = 0;
-
-async function waitForRateLimit(): Promise<void> {
-  const wait = rateLimitUntil - Date.now();
-  if (wait > 0) await sleep(wait);
-}
+const rateLimitUntil: Record<ModelProvider, number> = {
+  anthropic: 0,
+  openai: 0,
+  groq: 0,
+};
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+async function waitForRateLimit(provider: ModelProvider): Promise<void> {
+  const wait = rateLimitUntil[provider] - Date.now();
+  if (wait > 0) await sleep(wait);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Wywołanie przez Anthropic SDK
+// ─────────────────────────────────────────────────────────────────────────────
+
+async function callAnthropic(
+  persona: Persona,
+  ad: AdMaterial,
+  modelId: string
+): Promise<string> {
+  const userContent: Anthropic.MessageParam["content"] =
+    ad.imageBase64 && ad.imageMimeType
+      ? [
+          {
+            type: "image" as const,
+            source: {
+              type: "base64" as const,
+              media_type: ad.imageMimeType,
+              data: ad.imageBase64,
+            },
+          },
+          { type: "text" as const, text: buildUserPrompt(ad) },
+        ]
+      : buildUserPrompt(ad);
+
+  const message = await anthropicClient.messages.create({
+    model: modelId,
+    max_tokens: 512,
+    temperature: 1.0,
+    system: buildSystemPrompt(persona),
+    messages: [{ role: "user", content: userContent }],
+  });
+
+  return message.content
+    .filter((b) => b.type === "text")
+    .map((b) => (b as { type: "text"; text: string }).text)
+    .join("");
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Wywołanie przez OpenAI-compatible SDK (OpenAI + Groq)
+// ─────────────────────────────────────────────────────────────────────────────
+
+async function callOpenAICompatible(
+  client: OpenAI,
+  persona: Persona,
+  ad: AdMaterial,
+  modelId: string,
+  hasVision: boolean
+): Promise<string> {
+  const systemMsg: OpenAI.ChatCompletionMessageParam = {
+    role: "system",
+    content: buildSystemPrompt(persona),
+  };
+
+  let userMsg: OpenAI.ChatCompletionMessageParam;
+
+  if (hasVision && ad.imageBase64 && ad.imageMimeType) {
+    userMsg = {
+      role: "user",
+      content: [
+        {
+          type: "image_url",
+          image_url: {
+            url: `data:${ad.imageMimeType};base64,${ad.imageBase64}`,
+          },
+        },
+        { type: "text", text: buildUserPrompt(ad) },
+      ],
+    };
+  } else {
+    userMsg = { role: "user", content: buildUserPrompt(ad) };
+  }
+
+  const completion = await client.chat.completions.create({
+    model: modelId,
+    max_tokens: 512,
+    temperature: 1.0,
+    messages: [systemMsg, userMsg],
+  });
+
+  return completion.choices[0]?.message?.content ?? "";
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Pojedyncze wywołanie dla jednej persony (z retry + rate limiting)
+// ─────────────────────────────────────────────────────────────────────────────
 
 async function queryPersona(
   persona: Persona,
   ad: AdMaterial,
   attempt = 0
 ): Promise<BotResponse> {
-  await waitForRateLimit();
+  const model = selectModel(persona);
+  const { provider, modelId, hasVision, label } = model;
+
+  await waitForRateLimit(provider);
 
   try {
-    const userContent: Anthropic.MessageParam["content"] =
-      ad.imageBase64 && ad.imageMimeType
-        ? [
-            {
-              type: "image" as const,
-              source: {
-                type: "base64" as const,
-                media_type: ad.imageMimeType,
-                data: ad.imageBase64,
-              },
-            },
-            { type: "text" as const, text: buildUserPrompt(ad) },
-          ]
-        : buildUserPrompt(ad);
+    let raw: string;
 
-    const message = await client.messages.create({
-      model: MODEL,
-      max_tokens: 512,
-      temperature: 1.0,
-      system: buildSystemPrompt(persona),
-      messages: [{ role: "user", content: userContent }],
-    });
-
-    const raw = message.content
-      .filter((b) => b.type === "text")
-      .map((b) => (b as { type: "text"; text: string }).text)
-      .join("");
+    if (provider === "anthropic") {
+      raw = await callAnthropic(persona, ad, modelId);
+    } else if (provider === "openai") {
+      raw = await callOpenAICompatible(getOpenAI(), persona, ad, modelId, hasVision);
+    } else {
+      // groq
+      raw = await callOpenAICompatible(getGroq(), persona, ad, modelId, hasVision);
+    }
 
     return parseResponse(persona.id, raw);
   } catch (err: any) {
-    // Rate limit (429) – wstrzymaj wszystkie workery i poczekaj
-    if (err?.status === 429 || err?.type === "rate_limit_error") {
-      const retryAfter = parseInt(err?.headers?.["retry-after"] ?? "0", 10);
+    // Rate limit (429) – wstrzymaj workery dla tego providera
+    if (err?.status === 429 || err?.type === "rate_limit_error" || err?.error?.type === "rate_limit_error") {
+      const retryAfter = parseInt(err?.headers?.["retry-after"] ?? err?.response?.headers?.get?.("retry-after") ?? "0", 10);
       const backoff = retryAfter > 0 ? retryAfter * 1000 : Math.min(5000 * 2 ** attempt, 60000);
-      rateLimitUntil = Math.max(rateLimitUntil, Date.now() + backoff);
-      console.warn(`⚠ Rate limit – czekam ${Math.round(backoff / 1000)}s (attempt ${attempt + 1})`);
+      rateLimitUntil[provider] = Math.max(rateLimitUntil[provider], Date.now() + backoff);
+      console.warn(`⚠ Rate limit [${label}] – czekam ${Math.round(backoff / 1000)}s (attempt ${attempt + 1})`);
       if (attempt < MAX_RETRIES) {
         await sleep(backoff);
         return queryPersona(persona, ad, attempt + 1);
@@ -116,13 +214,14 @@ async function queryPersona(
       return queryPersona(persona, ad, attempt + 1);
     }
 
-    console.error(`✗ Błąd dla persony ${persona.name} (${persona.id}):`, (err as Error).message ?? err);
+    console.error(`✗ Błąd [${label}] persona ${persona.name} (${persona.id}):`, (err as Error).message ?? err);
     return {
       personaId: persona.id,
       attentionScore: 0,
       resonanceScore: 0,
       purchaseIntentDelta: 0,
       trustImpact: 0,
+      brandRecognitionScore: 0,
       recall: "",
       womSimulation: "",
       rejectionSignals: ["ERROR: nie udało się uzyskać odpowiedzi"],
@@ -132,8 +231,6 @@ async function queryPersona(
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Worker pool – CONCURRENCY workerów działa zawsze, nie czeka na najwolniejszego
-// Zamiast batch: start 20 → czekaj na WSZYSTKIE 20 → start następne 20
-// Teraz: skończyło 1 → od razu startuje następne (idle = 0)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export async function runStudy(

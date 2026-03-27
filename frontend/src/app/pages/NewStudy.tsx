@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -7,8 +7,189 @@ import { Label } from '../components/ui/label';
 import { Switch } from '../components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Progress } from '../components/ui/progress';
-import { runStudy, uploadCreative, getBrands, mockCategories, mockContexts, type StudyResult } from '../utils/api';
+import { runStudy, uploadCreative, getBrands, mockCategories } from '../utils/api';
 import { Loader2, Filter, ImagePlus, X } from 'lucide-react';
+
+// ─── Komponenty pomocnicze (POZA NewStudy – inaczej React robi remount przy każdym re-renderze) ───
+
+function BrandAutocomplete({
+  value,
+  onChange,
+  options,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  options: string[];
+}) {
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const filtered = value.trim().length > 0
+    ? options.filter((o) => o.toLowerCase().includes(value.toLowerCase())).slice(0, 8)
+    : [];
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  return (
+    <div ref={containerRef} className="relative">
+      <Input
+        value={value}
+        onChange={(e) => { onChange(e.target.value); setOpen(true); }}
+        onFocus={() => setOpen(true)}
+        placeholder="Wpisz nazwę marki..."
+        autoComplete="off"
+        className="bg-[#18181b] border-[#27272a] text-white placeholder:text-[#52525b] rounded-lg"
+      />
+      {open && filtered.length > 0 && (
+        <ul className="absolute z-20 mt-1 w-full bg-[#18181b] border border-[#27272a] rounded-lg shadow-lg overflow-hidden">
+          {filtered.map((brand) => (
+            <li
+              key={brand}
+              onMouseDown={(e) => {
+                e.preventDefault();
+                onChange(brand);
+                setOpen(false);
+              }}
+              className="px-3 py-2 text-sm text-white cursor-pointer hover:bg-[#27272a] transition-colors"
+            >
+              {brand}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+function FormFields({
+  data,
+  setData,
+  variant = 'A',
+  brands,
+}: {
+  data: any;
+  setData: (d: any) => void;
+  variant?: 'A' | 'B';
+  brands: string[];
+}) {
+  const isVariantB = variant === 'B';
+  const accentColor = isVariantB ? '#f59e0b' : '#6366f1';
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center gap-2 mb-3">
+        <div className="w-3 h-3 rounded-full" style={{ backgroundColor: accentColor }} />
+        <span className="text-sm font-semibold text-white">Wariant {variant}</span>
+      </div>
+
+      {!isVariantB && (
+        <div className="space-y-2">
+          <Label className="text-white text-sm">Nazwa badania <span className="text-[#52525b] font-normal">(opcjonalnie)</span></Label>
+          <Input
+            value={data.studyName ?? ''}
+            onChange={(e) => setData({ ...data, studyName: e.target.value })}
+            placeholder="np. Biofarm Magne B6 – wrzesień 2025"
+            className="bg-[#18181b] border-[#27272a] text-white placeholder:text-[#52525b] rounded-lg"
+          />
+        </div>
+      )}
+
+      <div className="space-y-2">
+        <Label className="text-white text-sm">Headline</Label>
+        <Input
+          value={data.headline}
+          onChange={(e) => setData({ ...data, headline: e.target.value })}
+          placeholder="Wpisz nagłówek kreacji..."
+          className="bg-[#18181b] border-[#27272a] text-white placeholder:text-[#52525b] rounded-lg"
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label className="text-white text-sm">Body</Label>
+        <Textarea
+          value={data.body}
+          onChange={(e) => setData({ ...data, body: e.target.value })}
+          placeholder="Wpisz treść komunikatu..."
+          rows={4}
+          className="bg-[#18181b] border-[#27272a] text-white placeholder:text-[#52525b] rounded-lg resize-none"
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label className="text-white text-sm">CTA (Call to Action)</Label>
+        <Input
+          value={data.cta}
+          onChange={(e) => setData({ ...data, cta: e.target.value })}
+          placeholder="np. Kup teraz, Dowiedz się więcej..."
+          className="bg-[#18181b] border-[#27272a] text-white placeholder:text-[#52525b] rounded-lg"
+        />
+      </div>
+
+      {!isVariantB && (
+        <>
+          <div className="space-y-2">
+            <Label className="text-white text-sm">Marka</Label>
+            <BrandAutocomplete
+              value={data.brand}
+              onChange={(v) => setData({ ...data, brand: v })}
+              options={brands}
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-white text-sm">Kategoria</Label>
+            <Select value={data.category} onValueChange={(value) => setData({ ...data, category: value })}>
+              <SelectTrigger className="bg-[#18181b] border-[#27272a] text-white rounded-lg">
+                <SelectValue placeholder="Wybierz kategorię..." />
+              </SelectTrigger>
+              <SelectContent className="bg-[#18181b] border-[#27272a]">
+                {mockCategories.map((cat) => (
+                  <SelectItem key={cat} value={cat} className="text-white hover:bg-[#27272a]">
+                    {cat}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-white text-sm">Kontekst ekspozycji</Label>
+            <Input
+              value={data.context}
+              onChange={(e) => setData({ ...data, context: e.target.value })}
+              placeholder="np. Facebook Feed, Ocena ogólna KV..."
+              list="contexts-datalist"
+              className="bg-[#18181b] border-[#27272a] text-white placeholder:text-[#52525b] rounded-lg"
+            />
+            <datalist id="contexts-datalist">
+              <option value="Ocena ogólna KV" />
+              <option value="Billboard / outdoor" />
+              <option value="Opakowanie produktu" />
+              <option value="Facebook Feed" />
+              <option value="Instagram Stories" />
+              <option value="YouTube Pre-roll" />
+              <option value="TikTok In-Feed" />
+              <option value="Desktop Display" />
+              <option value="Mobile Banner" />
+              <option value="LinkedIn Sponsored" />
+              <option value="Pre-roll radio online" />
+            </datalist>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+// ─── Główny komponent ──────────────────────────────────────────────────────────
 
 export function NewStudy() {
   const navigate = useNavigate();
@@ -20,6 +201,13 @@ export function NewStudy() {
   useEffect(() => {
     getBrands().then(setBrands).catch(() => {});
   }, []);
+
+  useEffect(() => {
+    if ('Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission();
+    }
+  }, []);
+
   const [abMode, setAbMode] = useState(false);
   const [targeting, setTargeting] = useState(false);
   const [socialSpread, setSocialSpread] = useState(false);
@@ -31,8 +219,8 @@ export function NewStudy() {
   const [creativeUploading, setCreativeUploading] = useState(false);
   const [creativeError, setCreativeError] = useState<string | null>(null);
 
-  // Form state
   const [formData, setFormData] = useState({
+    studyName: '',
     headline: '',
     body: '',
     cta: '',
@@ -45,6 +233,9 @@ export function NewStudy() {
     headline: '',
     body: '',
     cta: '',
+    brand: '',
+    category: '',
+    context: '',
   });
 
   const [targetingFilters, setTargetingFilters] = useState({
@@ -85,6 +276,7 @@ export function NewStudy() {
 
     await runStudy(
       {
+        studyName: formData.studyName,
         headline: formData.headline,
         body: formData.body,
         cta: formData.cta,
@@ -106,118 +298,25 @@ export function NewStudy() {
       (p, label) => { setProgress(p); setProgressLabel(label); },
       (result) => {
         setIsRunning(false);
+        // Browser notification
+        try {
+          if ('Notification' in window && Notification.permission === 'granted') {
+            new Notification('Badanie zakończone ✓', {
+              body: result.campaignName || 'Symulacja zakończona pomyślnie',
+              silent: false,
+            });
+          }
+        } catch {}
+        // Flash title
+        const prevTitle = document.title;
+        document.title = '✓ Gotowe! – Synthetic Population Sandbox';
+        setTimeout(() => { document.title = prevTitle; }, 5000);
         navigate(`/results/${result.id}`);
       },
       (msg) => {
         setIsRunning(false);
         setProgressLabel(`Błąd: ${msg}`);
       },
-    );
-  };
-
-  const FormFields = ({ data, setData, variant = 'A' }: { data: any; setData: any; variant?: 'A' | 'B' }) => {
-    const isVariantB = variant === 'B';
-    const accentColor = isVariantB ? '#f59e0b' : '#6366f1';
-
-    return (
-      <div className="space-y-4">
-        {!isVariantB && (
-          <div className="flex items-center gap-2 mb-3">
-            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: accentColor }} />
-            <span className="text-sm font-semibold text-white">Wariant {variant}</span>
-          </div>
-        )}
-
-        {isVariantB && (
-          <div className="flex items-center gap-2 mb-3">
-            <div className="w-3 h-3 rounded-full bg-[#f59e0b]" />
-            <span className="text-sm font-semibold text-white">Wariant B</span>
-          </div>
-        )}
-
-        <div className="space-y-2">
-          <Label className="text-white text-sm">Headline</Label>
-          <Input
-            value={data.headline}
-            onChange={(e) => setData({ ...data, headline: e.target.value })}
-            placeholder="Wpisz nagłówek kreacji..."
-            className="bg-[#18181b] border-[#27272a] text-white placeholder:text-[#52525b] rounded-lg"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label className="text-white text-sm">Body</Label>
-          <Textarea
-            value={data.body}
-            onChange={(e) => setData({ ...data, body: e.target.value })}
-            placeholder="Wpisz treść komunikatu..."
-            rows={4}
-            className="bg-[#18181b] border-[#27272a] text-white placeholder:text-[#52525b] rounded-lg resize-none"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label className="text-white text-sm">CTA (Call to Action)</Label>
-          <Input
-            value={data.cta}
-            onChange={(e) => setData({ ...data, cta: e.target.value })}
-            placeholder="np. Kup teraz, Dowiedz się więcej..."
-            className="bg-[#18181b] border-[#27272a] text-white placeholder:text-[#52525b] rounded-lg"
-          />
-        </div>
-
-        {!isVariantB && (
-          <>
-            <div className="space-y-2">
-              <Label className="text-white text-sm">Marka</Label>
-              <Input
-                value={data.brand}
-                onChange={(e) => setData({ ...data, brand: e.target.value })}
-                placeholder="Wpisz nazwę marki..."
-                list="brands-datalist"
-                className="bg-[#18181b] border-[#27272a] text-white placeholder:text-[#52525b] rounded-lg"
-              />
-              <datalist id="brands-datalist">
-                {brands.map((brand) => (
-                  <option key={brand} value={brand} />
-                ))}
-              </datalist>
-            </div>
-
-            <div className="space-y-2">
-              <Label className="text-white text-sm">Kategoria</Label>
-              <Select value={data.category} onValueChange={(value) => setData({ ...data, category: value })}>
-                <SelectTrigger className="bg-[#18181b] border-[#27272a] text-white rounded-lg">
-                  <SelectValue placeholder="Wybierz kategorię..." />
-                </SelectTrigger>
-                <SelectContent className="bg-[#18181b] border-[#27272a]">
-                  {mockCategories.map((cat) => (
-                    <SelectItem key={cat} value={cat} className="text-white hover:bg-[#27272a]">
-                      {cat}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label className="text-white text-sm">Kontekst ekspozycji</Label>
-              <Select value={data.context} onValueChange={(value) => setData({ ...data, context: value })}>
-                <SelectTrigger className="bg-[#18181b] border-[#27272a] text-white rounded-lg">
-                  <SelectValue placeholder="Wybierz kontekst..." />
-                </SelectTrigger>
-                <SelectContent className="bg-[#18181b] border-[#27272a]">
-                  {mockContexts.map((ctx) => (
-                    <SelectItem key={ctx} value={ctx} className="text-white hover:bg-[#27272a]">
-                      {ctx}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </>
-        )}
-      </div>
     );
   };
 
@@ -387,12 +486,12 @@ export function NewStudy() {
       {/* Form */}
       <div className={abMode ? 'grid grid-cols-2 gap-6' : ''}>
         <div className="bg-[#18181b] border border-[#27272a] rounded-xl p-6">
-          <FormFields data={formData} setData={setFormData} variant="A" />
+          <FormFields data={formData} setData={setFormData} variant="A" brands={brands} />
         </div>
 
         {abMode && (
           <div className="bg-[#18181b] border border-[#27272a] rounded-xl p-6">
-            <FormFields data={formDataB} setData={setFormDataB} variant="B" />
+            <FormFields data={formDataB} setData={setFormDataB} variant="B" brands={brands} />
           </div>
         )}
       </div>

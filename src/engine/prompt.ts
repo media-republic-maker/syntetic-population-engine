@@ -153,10 +153,14 @@ Oceń tę reklamę z perspektywy swojego profilu. Odpowiedz WYŁĄCZNIE w formac
   "resonanceScore": <liczba 0-10, jak bardzo przekaz rezonuje z Twoimi wartościami i stylem życia>,
   "purchaseIntentDelta": <liczba od -5 do +5, zmiana intencji zakupowej po zobaczeniu reklamy>,
   "trustImpact": <liczba od -5 do +5, wpływ na Twoje postrzeganie marki>,
+  "brandRecognitionScore": <0-10, jak bardzo ta marka jest Ci znana i rozpoznawalna — uwzględnij swoją dotychczasową znajomość marki oraz sygnały z kreacji>,
   "recall": "<jednozdaniowe podsumowanie: co zapamiętałeś/aś z tej reklamy>",
   "womSimulation": "<co powiedziałbyś/powiedziałabyś znajomemu o tej reklamie lub produkcie – jedno zdanie, naturalnym językiem>",
   "rejectionSignals": ["<element 1 wywołujący opór lub irytację>", "<element 2 jeśli dotyczy>"]
 }
+
+Opisy pól:
+- brandRecognitionScore (0–10): stopień rozpoznawalności marki przez respondenta. 0 = zupełnie nieznana, 10 = ikona rynku dobrze mi znana.
 
 Jeśli reklama nie wywołuje żadnych sygnałów odrzucenia, zwróć pustą tablicę dla rejectionSignals.`;
 }

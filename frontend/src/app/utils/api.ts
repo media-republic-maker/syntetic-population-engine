@@ -37,6 +37,7 @@ export interface StudyResult {
     resonance: number;
     purchaseIntentDelta: number;
     trustDelta: number;
+    brandRecognitionScore: number;
   };
   segmentData: {
     age: Array<{ segment: string; attention: number; resonance: number; purchaseIntent: number }>;
@@ -58,6 +59,7 @@ export interface StudyResult {
     responsesA: any[];
     population: any[];
     filterDesc?: string;
+    studyName?: string;
   };
 }
 
@@ -150,13 +152,14 @@ function mapSegment(segs: Record<string, any>, labels: Record<string, string>) {
   }));
 }
 
-function mapReportToStudyResult(raw: {
+export function mapReportToStudyResult(raw: {
   reportA: any;
   reportB?: any;
   adA: any;
   responsesA: any[];
   population: any[];
   filterDesc?: string;
+  studyName?: string;
   file?: string;
   ts?: string;
 }): StudyResult {
@@ -174,15 +177,16 @@ function mapReportToStudyResult(raw: {
 
   return {
     id: raw.file ?? `study-${Date.now()}`,
-    campaignName: adA?.brandName
+    campaignName: raw.studyName || (adA?.brandName
       ? `${adA.brandName} – ${adA.headline?.slice(0, 30) ?? "badanie"}`
-      : adA?.headline?.slice(0, 40) ?? "Nowe badanie",
+      : adA?.headline?.slice(0, 40) ?? "Nowe badanie"),
     date,
     metrics: {
       attention: agg.attentionScore ?? 0,
       resonance: agg.resonanceScore ?? 0,
       purchaseIntentDelta: agg.purchaseIntentDelta ?? 0,
       trustDelta: agg.trustImpact ?? 0,
+      brandRecognitionScore: agg.brandRecognitionScore ?? 0,
     },
     segmentData: {
       age: mapSegment(reportA?.byAgeGroup ?? {}, {}),
@@ -192,7 +196,7 @@ function mapReportToStudyResult(raw: {
     topRecall: reportA?.topRecalls ?? [],
     womQuotes,
     rejectionSignals: reportA?.allRejections ?? [],
-    _raw: raw,
+    _raw: { ...raw, studyName: raw.studyName },
   };
 }
 
@@ -225,6 +229,13 @@ export async function getCampaigns(): Promise<Campaign[]> {
       trustDelta: agg.trustImpact ?? 0,
     };
   });
+}
+
+export async function getStudies(): Promise<StudyResult[]> {
+  const res = await fetch(`${BASE}/api/results`);
+  if (!res.ok) return [];
+  const results: any[] = await res.json();
+  return results.map(mapReportToStudyResult);
 }
 
 export async function getBrands(): Promise<string[]> {
@@ -262,6 +273,7 @@ export const mockContexts = [
 // ─── Uruchamianie badania przez SSE ──────────────────────────────────────────
 
 export interface StudyFormData {
+  studyName?: string;
   headline: string;
   body: string;
   cta: string;
@@ -315,6 +327,7 @@ export async function runStudy(
   onError: (msg: string) => void,
 ): Promise<() => void> {
   const params = new URLSearchParams({
+    studyName: formData.studyName ?? "",
     headline: formData.headline,
     body: formData.body,
     cta: formData.cta,
@@ -381,6 +394,26 @@ export async function exportPDF(result: StudyResult): Promise<void> {
   a.download = "raport-sandbox.pdf";
   a.click();
   URL.revokeObjectURL(url);
+}
+
+// ─── Executive Summary ────────────────────────────────────────────────────────
+
+export async function fetchSummary(result: StudyResult): Promise<string> {
+  if (!result._raw) throw new Error("Brak danych do podsumowania");
+  const res = await fetch(`${BASE}/api/summarize`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      reportA: result._raw.reportA,
+      reportB: result._raw.reportB,
+      adA: result._raw.adA,
+      filterDesc: result._raw.filterDesc,
+    }),
+  });
+  if (!res.ok) throw new Error("Błąd generowania podsumowania");
+  const data = await res.json();
+  if (data.error) throw new Error(data.error);
+  return data.summary as string;
 }
 
 // ─── Social Spread ────────────────────────────────────────────────────────────

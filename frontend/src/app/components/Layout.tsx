@@ -1,5 +1,5 @@
 import { Outlet, Link, useLocation } from 'react-router';
-import { BarChart3, Users, FlaskConical, Home } from 'lucide-react';
+import { BarChart3, Users, FlaskConical, Home, History } from 'lucide-react';
 
 export function Layout() {
   const location = useLocation();
@@ -7,6 +7,7 @@ export function Layout() {
   const navItems = [
     { path: '/', label: 'Dashboard', icon: Home },
     { path: '/new-study', label: 'Nowe badanie', icon: FlaskConical },
+    { path: '/studies', label: 'Historia', icon: History },
     { path: '/population', label: 'Populacja', icon: Users },
   ];
 

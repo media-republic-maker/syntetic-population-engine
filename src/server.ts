@@ -761,6 +761,29 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
     return;
   }
 
+  // ── API: Single result by file id ─────────────────────────────────────────
+  if (url.pathname.startsWith("/api/results/") && req.method === "GET") {
+    const fileId = url.pathname.replace("/api/results/", "");
+    // fileId may be just the timestamp part or the full filename
+    const candidates = [
+      `${fileId}.json`,
+      `report_${fileId}.json`,
+      `report_ab_${fileId}.json`,
+    ];
+    let found = false;
+    for (const fname of candidates) {
+      const fpath = join(RESULTS_DIR, fname);
+      if (existsSync(fpath)) {
+        const data = JSON.parse(readFileSync(fpath, "utf8"));
+        json(res, { file: fname, ts: fileId, ...data });
+        found = true;
+        break;
+      }
+    }
+    if (!found) json(res, { error: "Not found" }, 404);
+    return;
+  }
+
   // ── API: Results history ───────────────────────────────────────────────────
   if (url.pathname === "/api/results" && req.method === "GET") {
     const { readdirSync } = await import("fs");
@@ -820,6 +843,7 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
       res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
 
     const creativeId = url.searchParams.get("creativeId") || undefined;
+    const studyName = url.searchParams.get("studyName") ?? "";
     try {
       const fullPopulation = getPopulation();
       const population = filterPopulation(fullPopulation, url.searchParams);
@@ -865,22 +889,87 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
         mkdirSync(RESULTS_DIR, { recursive: true });
         const ts = new Date().toISOString().replace(/[:.]/g, "-");
         writeFileSync(join(RESULTS_DIR, `report_ab_${ts}.json`),
-          JSON.stringify({ adA, reportA, reportB }, null, 2), "utf8");
+          JSON.stringify({ studyName, adA, reportA, reportB }, null, 2), "utf8");
 
-        send("result", { reportA, reportB, adA, responsesA, population, filterDesc });
+        send("result", { studyName, reportA, reportB, adA, responsesA, population, filterDesc });
       } else {
         mkdirSync(RESULTS_DIR, { recursive: true });
         const ts = new Date().toISOString().replace(/[:.]/g, "-");
         writeFileSync(join(RESULTS_DIR, `report_${ts}.json`),
-          JSON.stringify({ adA, reportA, responsesA }, null, 2), "utf8");
+          JSON.stringify({ studyName, adA, reportA, responsesA }, null, 2), "utf8");
 
-        send("result", { reportA, adA, responsesA, population, filterDesc });
+        send("result", { studyName, reportA, adA, responsesA, population, filterDesc });
       }
     } catch (err) {
       send("error", { message: String(err) });
     } finally {
       if (creativeId) deleteCreativeAsset(creativeId);
       res.end();
+    }
+    return;
+  }
+
+  // ── API: Executive Summary ────────────────────────────────────────────────
+  if (url.pathname === "/api/summarize" && req.method === "POST") {
+    if (!process.env.ANTHROPIC_API_KEY) { res.writeHead(500, CORS_HEADERS); res.end(); return; }
+    const body = await readBody(req);
+    const { reportA, reportB, adA, filterDesc } = JSON.parse(body) as {
+      reportA: StudyReport;
+      reportB?: StudyReport;
+      adA: AdMaterial;
+      filterDesc?: string;
+    };
+    try {
+      const Anthropic = (await import("@anthropic-ai/sdk")).default;
+      const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
+      const agg = reportA.aggregate;
+      const segAge = Object.values(reportA.byAgeGroup ?? {}) as Array<{ label: string; attentionScore: number }>;
+      const topRecall = (reportA.topRecalls ?? []).slice(0, 3).join(", ");
+      const topWom = (reportA.topWom ?? []).slice(0, 2).join(" | ");
+      const rejections = (reportA.allRejections ?? []).slice(0, 3).join(", ");
+
+      const bestAge = segAge.length ? segAge.reduce((a, b) => (b.attentionScore > a.attentionScore ? b : a)) : null;
+      const worstAge = segAge.length ? segAge.reduce((a, b) => (b.attentionScore < a.attentionScore ? b : a)) : null;
+
+      const abSection = reportB
+        ? `\nWariant B: headline="${adA.headline}", attention=${reportB.aggregate?.attentionScore?.toFixed(1)}, resonance=${reportB.aggregate?.resonanceScore?.toFixed(1)}`
+        : "";
+
+      const prompt = `Jesteś analitykiem badań reklamowych. Przeanalizuj wyniki badania na syntetycznej populacji polskich konsumentów i napisz zwięzłe executive summary (5-8 zdań) wyjaśniające DLACZEGO kreacja uzyskała takie wyniki.
+
+KREACJA (wariant A):
+- Headline: "${adA.headline}"
+- Body: "${adA.body}"
+- CTA: "${adA.cta}"
+- Marka: ${adA.brandName ?? "nieokreślona"}
+- Kategoria: ${adA.productCategory ?? "nieokreślona"}
+- Kontekst: ${adA.context ?? "nieokreślony"}
+${filterDesc ? `- Segment docelowy: ${filterDesc}` : ""}
+
+WYNIKI (n=${agg?.count ?? "?"}):
+- Attention Score: ${agg?.attentionScore?.toFixed(1)}/10
+- Resonance: ${agg?.resonanceScore?.toFixed(1)}/10
+- Purchase Intent Δ: +${agg?.purchaseIntentDelta?.toFixed(1)}%
+- Trust Δ: +${agg?.trustImpact?.toFixed(1)}%
+- Najlepszy segment wiekowy: ${bestAge?.label ?? "?"} (attention ${bestAge?.attentionScore?.toFixed(1)})
+- Najsłabszy segment wiekowy: ${worstAge?.label ?? "?"} (attention ${worstAge?.attentionScore?.toFixed(1)})
+- Zapamiętane elementy: ${topRecall || "brak danych"}
+- Przykłady WOM: ${topWom || "brak"}
+- Główne odrzucenia: ${rejections || "brak"}
+${abSection}
+
+Napisz analizę po polsku. Wyjaśnij przyczyny wyników (np. niska świadomość marki, niedopasowanie grupy docelowej, siła/słabość komunikatu). Bądź konkretny – odwołuj się do liczb i segmentów. Zakończ jednym zdaniem z rekomendacją.`;
+
+      const msg = await client.messages.create({
+        model: process.env.MODEL ?? "claude-sonnet-4-6",
+        max_tokens: 600,
+        messages: [{ role: "user", content: prompt }],
+      });
+      const summary = (msg.content[0] as { type: "text"; text: string }).text;
+      json(res, { summary });
+    } catch (err) {
+      json(res, { error: String(err) }, 500);
     }
     return;
   }
@@ -936,7 +1025,17 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
       woff2: "font/woff2",
       json: "application/json",
     };
-    res.writeHead(200, { "Content-Type": mime[ext] ?? "application/octet-stream" });
+    // index.html nigdy nie keszujemy; pliki z hashem w nazwie — rok
+    const isHashed = /\.[a-f0-9]{8,}\.\w+$/.test(filePath);
+    const cacheControl = ext === "html"
+      ? "no-cache, no-store, must-revalidate"
+      : isHashed
+        ? "public, max-age=31536000, immutable"
+        : "no-cache";
+    res.writeHead(200, {
+      "Content-Type": mime[ext] ?? "application/octet-stream",
+      "Cache-Control": cacheControl,
+    });
     res.end(readFileSync(filePath));
     return;
   }
