@@ -702,6 +702,12 @@ function json(res: ServerResponse, data: unknown, status = 200) {
 const server = createServer(async (req: IncomingMessage, res: ServerResponse) => {
   const url = new URL(req.url ?? "/", `http://localhost:${PORT}`);
 
+  // Strip /adstest prefix so routes work regardless of ngrok path routing
+  const BASE_PREFIX = "/adstest";
+  if (url.pathname.startsWith(BASE_PREFIX + "/") || url.pathname === BASE_PREFIX) {
+    url.pathname = url.pathname.slice(BASE_PREFIX.length) || "/";
+  }
+
   // Preflight CORS
   if (req.method === "OPTIONS") {
     res.writeHead(204, CORS_HEADERS);

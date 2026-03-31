@@ -18,7 +18,7 @@ const router = createBrowserRouter([
       { path: 'studies', element: <Studies /> },
     ],
   },
-]);
+], { basename: '/adstest' });
 
 export default function App() {
   return <RouterProvider router={router} />;
