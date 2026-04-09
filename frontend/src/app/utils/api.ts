@@ -302,9 +302,9 @@ function guessMimeType(file: File): string {
   return map[ext] ?? "";
 }
 
-// Resize + compress image to keep base64 payload under 400KB
+// Resize + compress image to keep base64 payload under 60KB
 // Iteratively lowers quality until target is met
-function compressImage(file: File, maxPx = 800, targetBytes = 400_000): Promise<{ base64: string; mimeType: string }> {
+function compressImage(file: File, maxPx = 768, targetBytes = 60_000): Promise<{ base64: string; mimeType: string }> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     const url = URL.createObjectURL(file);
