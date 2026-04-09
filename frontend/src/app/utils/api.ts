@@ -302,8 +302,9 @@ function guessMimeType(file: File): string {
   return map[ext] ?? "";
 }
 
-// Resize + compress image to keep base64 payload under ~500KB
-function compressImage(file: File, maxPx = 1024, quality = 0.82): Promise<{ base64: string; mimeType: string }> {
+// Resize + compress image to keep base64 payload under 400KB
+// Iteratively lowers quality until target is met
+function compressImage(file: File, maxPx = 800, targetBytes = 400_000): Promise<{ base64: string; mimeType: string }> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     const url = URL.createObjectURL(file);
@@ -316,8 +317,26 @@ function compressImage(file: File, maxPx = 1024, quality = 0.82): Promise<{ base
       canvas.width = w;
       canvas.height = h;
       canvas.getContext("2d")!.drawImage(img, 0, 0, w, h);
-      const dataUrl = canvas.toDataURL("image/jpeg", quality);
-      resolve({ base64: dataUrl.split(",")[1], mimeType: "image/jpeg" });
+
+      let quality = 0.75;
+      let base64 = "";
+      // Reduce quality until payload fits
+      while (quality >= 0.3) {
+        const dataUrl = canvas.toDataURL("image/jpeg", quality);
+        base64 = dataUrl.split(",")[1];
+        if (base64.length <= targetBytes) break;
+        quality -= 0.1;
+      }
+      // Last resort: shrink canvas by 50%
+      if (base64.length > targetBytes) {
+        const c2 = document.createElement("canvas");
+        c2.width = Math.round(w / 2);
+        c2.height = Math.round(h / 2);
+        c2.getContext("2d")!.drawImage(canvas, 0, 0, c2.width, c2.height);
+        base64 = c2.toDataURL("image/jpeg", 0.7).split(",")[1];
+      }
+
+      resolve({ base64, mimeType: "image/jpeg" });
     };
     img.onerror = reject;
     img.src = url;
