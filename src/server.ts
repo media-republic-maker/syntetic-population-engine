@@ -700,6 +700,7 @@ function json(res: ServerResponse, data: unknown, status = 200) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const server = createServer(async (req: IncomingMessage, res: ServerResponse) => {
+  try {
   const url = new URL(req.url ?? "/", `http://localhost:${PORT}`);
 
   // Strip /adstest prefix so routes work regardless of ngrok path routing
@@ -828,9 +829,13 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
     if (!ext) return json(res, { error: "Nieobsługiwany format. Dozwolone: JPEG, PNG, GIF, WEBP." }, 400);
 
     const creativeId = randomUUID();
-    mkdirSync(TEMP_DIR, { recursive: true });
-    const filePath = join(TEMP_DIR, `${creativeId}.${ext}`);
-    writeFileSync(filePath, Buffer.from(parsed.base64, "base64"));
+    try {
+      mkdirSync(TEMP_DIR, { recursive: true });
+      const filePath = join(TEMP_DIR, `${creativeId}.${ext}`);
+      writeFileSync(filePath, Buffer.from(parsed.base64, "base64"));
+    } catch (e: any) {
+      return json(res, { error: `Błąd zapisu pliku: ${e.message}` }, 500);
+    }
 
     return json(res, { creativeId, mimeType: parsed.mimeType });
   }
@@ -1047,6 +1052,12 @@ Napisz analizę po polsku. Wyjaśnij przyczyny wyników (np. niska świadomość
   }
 
   res.writeHead(404); res.end();
+  } catch (e: any) {
+    console.error("[server] Unhandled error:", e);
+    if (!res.headersSent) {
+      json(res, { error: `Internal server error: ${e.message}` }, 500);
+    }
+  }
 });
 
 server.listen(PORT, () => {

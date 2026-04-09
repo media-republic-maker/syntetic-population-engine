@@ -294,7 +294,16 @@ export interface StudyFormData {
   filterIncome?: string;
 }
 
+// Fallback MIME detection by extension when file.type is empty
+function guessMimeType(file: File): string {
+  if (file.type) return file.type;
+  const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
+  const map: Record<string, string> = { jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png", gif: "image/gif", webp: "image/webp" };
+  return map[ext] ?? "";
+}
+
 export async function uploadCreative(file: File): Promise<string> {
+  const mimeType = guessMimeType(file);
   const base64 = await new Promise<string>((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => {
@@ -308,7 +317,7 @@ export async function uploadCreative(file: File): Promise<string> {
   const res = await fetch(`${BASE}/api/upload-creative`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ base64, mimeType: file.type, filename: file.name }),
+    body: JSON.stringify({ base64, mimeType, filename: file.name }),
   });
 
   if (!res.ok) {
