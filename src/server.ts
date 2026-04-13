@@ -13,6 +13,8 @@ import { runSpreadSimulation } from "./engine/spread.js";
 import { aggregateResults, type StudyReport } from "./reports/aggregator.js";
 import { generatePDF } from "./reports/pdf.js";
 import type { AdMaterial, Persona, BotResponse } from "./personas/schema.js";
+import { simulationStore } from "./simulation/stateStore.js";
+import type { SimulationConfig, SimulationEventType, Platform } from "./simulation/schema.js";
 
 const PORT = parseInt(process.env.PORT ?? "3000", 10);
 const DATA_DIR = join(process.cwd(), "data");
@@ -1014,6 +1016,168 @@ Napisz analizę po polsku. Wyjaśnij przyczyny wyników (np. niska świadomość
       ...CORS_HEADERS,
     });
     res.end(pdf);
+    return;
+  }
+
+  // ── API: Lista symulacji ──────────────────────────────────────────────────
+  if (url.pathname === "/api/simulations" && req.method === "GET") {
+    json(res, simulationStore.listAll());
+    return;
+  }
+
+  // ── API: Utwórz nową symulację ────────────────────────────────────────────
+  if (url.pathname === "/api/simulation" && req.method === "POST") {
+    try {
+      const body = JSON.parse(await readBody(req));
+
+      // Filtrowanie populacji (targeting z NewStudy)
+      const rawPopulation = getPopulation();
+      const population = filterPopulation(rawPopulation, new URLSearchParams({
+        filterGender:     body.filterGender     ?? "all",
+        filterAgeMin:     String(body.filterAgeMin  ?? "0"),
+        filterAgeMax:     String(body.filterAgeMax  ?? "99"),
+        filterSettlement: body.filterSettlement ?? "all",
+        filterIncome:     body.filterIncome     ?? "all",
+      }));
+
+      // Kreacja graficzna – załaduj z temp jeśli creativeId przekazany
+      const ad: AdMaterial = { ...(body.ad as AdMaterial) };
+      if (body.creativeId) {
+        const creative = loadCreativeAsset(body.creativeId);
+        if (creative) Object.assign(ad, creative);
+      }
+
+      const config: SimulationConfig = {
+        studyName: body.studyName ?? "Symulacja",
+        ad,
+        population,
+        totalRounds: Math.min(Math.max(Number(body.totalRounds ?? 5), 1), 20),
+        platform: (body.platform ?? "facebook") as Platform,
+        activeAgentRatio: Math.min(Math.max(Number(body.activeAgentRatio ?? 0.7), 0.1), 1),
+      };
+
+      const orc = await simulationStore.create(config);
+      const simId = orc.getId();
+
+      // Inicjalizacja (GraphRAG) asynchronicznie
+      orc.initialize().catch((err) => {
+        console.error(`⚠ Symulacja ${simId} init error:`, err.message);
+      });
+
+      json(res, { simulationId: simId });
+    } catch (err: any) {
+      json(res, { error: String(err.message ?? err) }, 400);
+    }
+    return;
+  }
+
+  // ── API: Stan symulacji ───────────────────────────────────────────────────
+  const simStateMatch = url.pathname.match(/^\/api\/simulation\/([^/]+)$/);
+  if (simStateMatch && req.method === "GET") {
+    const orc = simulationStore.get(simStateMatch[1]);
+    if (!orc) { json(res, { error: "Symulacja nie istnieje" }, 404); return; }
+    json(res, orc.getState());
+    return;
+  }
+
+  // ── API: Stream rund (SSE) ────────────────────────────────────────────────
+  const simStreamMatch = url.pathname.match(/^\/api\/simulation\/([^/]+)\/stream$/);
+  if (simStreamMatch && req.method === "GET") {
+    const orc = simulationStore.get(simStreamMatch[1]);
+    if (!orc) { json(res, { error: "Symulacja nie istnieje" }, 404); return; }
+
+    res.writeHead(200, {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      Connection: "keep-alive",
+      ...CORS_HEADERS,
+    });
+
+    const sendEvent = (type: string, data: unknown) => {
+      res.write(`event: ${type}\ndata: ${JSON.stringify(data)}\n\n`);
+    };
+
+    const state = orc.getState();
+    sendEvent("state", state);
+
+    orc.onRoundComplete = (round) => {
+      sendEvent("round", round);
+      simulationStore.persist(orc.getId());
+    };
+
+    // Uruchom symulację jeśli jeszcze nie ruszyła
+    if (state.status === "running" && state.currentRound < state.totalRounds) {
+      orc.runToCompletion((current, total) => {
+        sendEvent("progress", { current, total });
+      }).then(() => {
+        sendEvent("complete", orc.getState());
+        simulationStore.persist(orc.getId());
+        res.end();
+      }).catch((err) => {
+        sendEvent("error", { message: String(err.message ?? err) });
+        res.end();
+      });
+    } else if (state.status === "complete") {
+      sendEvent("complete", state);
+      res.end();
+    } else {
+      // Initializing – czekaj
+      const poll = setInterval(() => {
+        const s = orc.getState();
+        if (s.status === "running" && s.currentRound === 0) {
+          orc.runToCompletion((current, total) => {
+            sendEvent("progress", { current, total });
+          }).then(() => {
+            clearInterval(poll);
+            sendEvent("complete", orc.getState());
+            simulationStore.persist(orc.getId());
+            res.end();
+          }).catch((err) => {
+            clearInterval(poll);
+            sendEvent("error", { message: String(err.message ?? err) });
+            res.end();
+          });
+          clearInterval(poll);
+        } else if (s.status === "error" || s.status === "complete") {
+          clearInterval(poll);
+          sendEvent(s.status === "error" ? "error" : "complete", s);
+          res.end();
+        }
+      }, 500);
+
+      req.on("close", () => clearInterval(poll));
+    }
+    return;
+  }
+
+  // ── API: Wstrzyknij event ─────────────────────────────────────────────────
+  const simInjectMatch = url.pathname.match(/^\/api\/simulation\/([^/]+)\/inject$/);
+  if (simInjectMatch && req.method === "POST") {
+    const orc = simulationStore.get(simInjectMatch[1]);
+    if (!orc) { json(res, { error: "Symulacja nie istnieje" }, 404); return; }
+    const body = JSON.parse(await readBody(req));
+    const event = orc.injectEvent({
+      injectedAt: orc.getState().currentRound + 1,
+      type: (body.type ?? "breaking_news") as SimulationEventType,
+      content: String(body.content ?? ""),
+      affectedPersonaIds: Array.isArray(body.affectedPersonaIds) ? body.affectedPersonaIds : undefined,
+    });
+    json(res, event);
+    return;
+  }
+
+  // ── API: Chat z agentem ───────────────────────────────────────────────────
+  const simChatMatch = url.pathname.match(/^\/api\/simulation\/([^/]+)\/chat$/);
+  if (simChatMatch && req.method === "POST") {
+    const orc = simulationStore.get(simChatMatch[1]);
+    if (!orc) { json(res, { error: "Symulacja nie istnieje" }, 404); return; }
+    try {
+      const body = JSON.parse(await readBody(req));
+      const reply = await orc.chatWithAgent(body.personaId ?? null, String(body.message ?? ""));
+      json(res, { reply });
+    } catch (err: any) {
+      json(res, { error: String(err.message ?? err) }, 500);
+    }
     return;
   }
 

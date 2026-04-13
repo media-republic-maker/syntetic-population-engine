@@ -457,6 +457,140 @@ export async function fetchSummary(result: StudyResult): Promise<string> {
   return data.summary as string;
 }
 
+// ─── Simulation API (v2) ──────────────────────────────────────────────────────
+
+export interface SimulationFormData {
+  studyName: string;
+  headline: string;
+  body: string;
+  cta: string;
+  brand?: string;
+  category?: string;
+  context?: string;
+  creativeId?: string;
+  totalRounds: number;
+  platform: "facebook" | "twitter";
+  activeAgentRatio?: number;
+  // Targeting (z NewStudy)
+  filterGender?: string;
+  filterAgeMin?: string;
+  filterAgeMax?: string;
+  filterSettlement?: string;
+  filterIncome?: string;
+}
+
+export interface SimulationSummary {
+  id: string;
+  studyName: string;
+  status: string;
+  createdAt: string;
+  totalRounds: number;
+  currentRound: number;
+}
+
+export async function listSimulations(): Promise<SimulationSummary[]> {
+  const res = await fetch(`${BASE}/api/simulations`);
+  if (!res.ok) return [];
+  return res.json();
+}
+
+export async function startSimulation(data: SimulationFormData): Promise<string> {
+  const res = await fetch(`${BASE}/api/simulation`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      studyName: data.studyName,
+      totalRounds: data.totalRounds,
+      platform: data.platform,
+      activeAgentRatio: data.activeAgentRatio ?? 0.7,
+      creativeId: data.creativeId,
+      filterGender:     data.filterGender,
+      filterAgeMin:     data.filterAgeMin,
+      filterAgeMax:     data.filterAgeMax,
+      filterSettlement: data.filterSettlement,
+      filterIncome:     data.filterIncome,
+      ad: {
+        headline: data.headline,
+        body: data.body,
+        cta: data.cta,
+        brandName: data.brand || undefined,
+        productCategory: data.category || undefined,
+        context: data.context || undefined,
+      },
+    }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: "Błąd startu symulacji" }));
+    throw new Error(err.error ?? "Błąd startu symulacji");
+  }
+  const { simulationId } = await res.json();
+  return simulationId as string;
+}
+
+export async function getSimulation(id: string): Promise<any> {
+  const res = await fetch(`${BASE}/api/simulation/${id}`);
+  if (!res.ok) throw new Error("Symulacja nie istnieje");
+  return res.json();
+}
+
+export function streamSimulation(
+  id: string,
+  handlers: {
+    onState?: (state: any) => void;
+    onRound?: (round: any) => void;
+    onProgress?: (current: number, total: number) => void;
+    onComplete?: (state: any) => void;
+    onError?: (msg: string) => void;
+  }
+): () => void {
+  const es = new EventSource(`${BASE}/api/simulation/${id}/stream`);
+
+  es.addEventListener("state", (e) => handlers.onState?.(JSON.parse(e.data)));
+  es.addEventListener("round", (e) => handlers.onRound?.(JSON.parse(e.data)));
+  es.addEventListener("progress", (e) => {
+    const { current, total } = JSON.parse(e.data);
+    handlers.onProgress?.(current, total);
+  });
+  es.addEventListener("complete", (e) => {
+    es.close();
+    handlers.onComplete?.(JSON.parse(e.data));
+  });
+  es.addEventListener("error", (e: any) => {
+    es.close();
+    const msg = e.data ? JSON.parse(e.data).message : "Błąd symulacji";
+    handlers.onError?.(msg);
+  });
+
+  return () => es.close();
+}
+
+export async function injectSimulationEvent(
+  id: string,
+  type: string,
+  content: string
+): Promise<void> {
+  await fetch(`${BASE}/api/simulation/${id}/inject`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ type, content }),
+  });
+}
+
+export async function chatWithSimulationAgent(
+  id: string,
+  personaId: string | null,
+  message: string
+): Promise<string> {
+  const res = await fetch(`${BASE}/api/simulation/${id}/chat`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ personaId, message }),
+  });
+  if (!res.ok) throw new Error("Błąd chatu z agentem");
+  const { reply } = await res.json();
+  return reply as string;
+}
+
 // ─── Social Spread ────────────────────────────────────────────────────────────
 
 export async function runSpread(result: StudyResult): Promise<any> {
