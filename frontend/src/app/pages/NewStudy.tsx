@@ -181,11 +181,16 @@ function FormFields({
       </div>
 
       <div className="space-y-2">
-        <Label className="text-white text-sm">Headline</Label>
+        <Label className="text-white text-sm">
+          Headline{' '}
+          {creative?.id && !data.headline && (
+            <span className="text-[#52525b] font-normal text-xs">(opcjonalnie — oceniasz sam KV)</span>
+          )}
+        </Label>
         <Input
           value={data.headline}
           onChange={(e) => setData({ ...data, headline: e.target.value })}
-          placeholder="Wpisz nagłówek kreacji..."
+          placeholder={creative?.id ? 'Opcjonalnie – KV wystarczy do testu...' : 'Wpisz nagłówek kreacji...'}
           className="bg-[#18181b] border-[#27272a] text-white placeholder:text-[#52525b] rounded-lg"
         />
       </div>
@@ -494,7 +499,7 @@ export function NewStudy() {
       <div className="flex justify-end">
         <Button
           onClick={handleRunStudy}
-          disabled={isRunning || (!formData.headline && !creativeA.id) || !formData.brand || anyCreativeUploading}
+          disabled={isRunning || (!formData.headline && !creative.id) || !formData.brand || anyCreativeUploading}
           className="bg-[#6366f1] hover:bg-[#5558e3] text-white px-8 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isRunning ? (
