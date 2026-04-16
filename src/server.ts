@@ -26,7 +26,7 @@ function getPopulation(): Persona[] {
   if (existsSync(POPULATION_PATH)) {
     return JSON.parse(readFileSync(POPULATION_PATH, "utf8")) as Persona[];
   }
-  const size = parseInt(process.env.POPULATION_SIZE ?? "50", 10);
+  const size = parseInt(process.env.POPULATION_SIZE ?? "7000", 10);
   const pop = generatePopulation(size);
   mkdirSync(DATA_DIR, { recursive: true });
   writeFileSync(POPULATION_PATH, JSON.stringify(pop, null, 2), "utf8");
@@ -718,12 +718,12 @@ const server = createServer(async (req: IncomingMessage, res: ServerResponse) =>
     return;
   }
 
-  // ── Stary UI (legacy HTML) – wyłączony, zastąpiony przez React frontend ────
-  // if (url.pathname === "/" && req.method === "GET") {
-  //   res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-  //   res.end(HTML);
-  //   return;
-  // }
+  // Redirect root → /adstest/ so React Router (basename: '/adstest') works
+  if (url.pathname === "/" && !req.url?.startsWith(BASE_PREFIX) && req.method === "GET") {
+    res.writeHead(302, { Location: `${BASE_PREFIX}/` });
+    res.end();
+    return;
+  }
 
   // ── API: Population stats ──────────────────────────────────────────────────
   if (url.pathname === "/api/population" && req.method === "GET") {

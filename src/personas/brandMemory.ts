@@ -5,9 +5,13 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { readFileSync } from "fs";
-import { join } from "path";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
 import type { Persona, BrandMemoryLayer, BrandMemoryEntry } from "./schema.js";
 import { weightedRandom } from "./distributions.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 interface BrandDefinition {
   brandName: string;
@@ -24,7 +28,7 @@ let _brands: BrandDefinition[] | null = null;
 
 function loadBrands(): BrandDefinition[] {
   if (_brands) return _brands;
-  const filePath = join(process.cwd(), "data", "brands", "polish_brands.json");
+  const filePath = join(__dirname, "..", "..", "data", "brands", "polish_brands.json");
   _brands = JSON.parse(readFileSync(filePath, "utf8")) as BrandDefinition[];
   return _brands;
 }

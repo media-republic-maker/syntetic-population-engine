@@ -77,13 +77,36 @@ export function sampleGender(): Gender {
 //   Podstawowe i niższe:   12.8%  (3.87M)  → primary
 // Uwaga: BAEL (aktywni zawodowo) zawyża wykształcenie wyższe do ~42%;
 //   NSP 2021 reprezentuje całą populację dorosłych (lepsze dla symulacji konsumentów)
-export function sampleEducation(): EducationLevel {
-  return weightedRandom<EducationLevel>([
-    ["primary",    13],  // 12.8% – NSP 2021: 3.87M
-    ["vocational", 23],  // 23.2% – NSP 2021: 7.00M
-    ["secondary",  37],  // 37.3% – NSP 2021: 11.27M (średnie + policealne)
-    ["higher",     27],  // 26.7% – NSP 2021: 8.05M (było 42% w BAEL)
-  ]);
+//
+// Structural zero (spec §1.5): kohorta wiekowa warunkuje wykształcenie
+//   18–21: studia w toku lub niezaczęte → "higher" ekstremalnie rzadkie (<3%)
+//   22–28: kohorta kończąca studia → higher rośnie do ~30%
+//   29–45: peak wykształcenia wyższego (efekt kohortowy)
+//   46+:   historycznie niższy odsetek wyższego (starsze roczniki NSP)
+export function sampleEducation(age: number): EducationLevel {
+  // Bazowy rozkład NSP 2021
+  const base: [EducationLevel, number][] = [
+    ["primary",     13],
+    ["vocational",  23],
+    ["secondary",   37],
+    ["higher",      27],
+  ];
+
+  // Korekty kohortowe
+  let higherBoost = 0;
+  if (age <= 21)      higherBoost = -24;  // structural zero: 18-21 → higher ~3%
+  else if (age <= 25) higherBoost = -12;  // studia w toku
+  else if (age <= 35) higherBoost =   4;  // kohorta z boomem edukacyjnym
+  else if (age >= 60) higherBoost =  -8;  // starsze roczniki – mniej wyższego
+  else if (age >= 50) higherBoost =  -4;
+
+  return weightedRandom<EducationLevel>(
+    base.map(([lvl, w]): [EducationLevel, number] => {
+      if (lvl === "higher")    return [lvl, Math.max(1, w + higherBoost)];
+      if (lvl === "secondary" && higherBoost < 0) return [lvl, w - higherBoost * 0.5]; // wyrównanie
+      return [lvl, w];
+    })
+  );
 }
 
 // Zamieszkanie: GUS BDL 2024 – wieś 40.6%, miasto 59.4% (var 60617/60633)
@@ -168,13 +191,15 @@ export function sampleHousehold(age: number, gender: Gender): HouseholdType {
 
 // Dochody: GUS BDL API var 216973 – dochód rozporządzalny per capita 2024: ~3 103 PLN
 // Progi bracketów przeskalowane wg wzrostu dochodów (skrypt: calibrate-from-bdl.ts)
-export function sampleIncomeLevel(education: EducationLevel, settlementType: SettlementType): IncomeLevel {
+// Korekta wiekowa: peak earnings 35–55 wg GUS BAEL (efekt doświadczenia zawodowego),
+//   18–24 często poniżej 2000 (dorywcze/stażowe), 65+ emerytura (niższy dochód rozporządzalny)
+export function sampleIncomeLevel(education: EducationLevel, settlementType: SettlementType, age: number): IncomeLevel {
   // Bazowy rozkład (GUS budżety gosp. domowych 2023)
   const base: [IncomeLevel, number][] = [
     ["below_2000", 12],
-    ["2000_3500", 30],
-    ["3500_5000", 28],
-    ["5000_8000", 20],
+    ["2000_3500",  30],
+    ["3500_5000",  28],
+    ["5000_8000",  20],
     ["above_8000", 10],
   ];
 
@@ -182,10 +207,16 @@ export function sampleIncomeLevel(education: EducationLevel, settlementType: Set
   const eduBoost = { primary: -2, vocational: -1, secondary: 0, higher: 2 }[education];
   // Korekty geograficzne
   const geoBoost = { village: -1, small_city: -1, medium_city: 0, large_city: 1, metropolis: 2 }[settlementType];
+  // Korekty wiekowe: efekt kariery i emerytury
+  const ageBoost =
+    age <= 24 ? -2 :     // wejście na rynek pracy
+    age <= 34 ?  0 :
+    age <= 54 ?  2 :     // peak earnings
+    age <= 64 ?  0 :
+               -1;       // emerytura
 
-  // Przesuń wagi proporcjonalnie
   const adjusted = base.map(([level, w], i): [IncomeLevel, number] => {
-    const shift = (i - 2) * (eduBoost + geoBoost) * 0.5;
+    const shift = (i - 2) * (eduBoost + geoBoost + ageBoost) * 0.5;
     return [level, Math.max(1, w + shift)];
   });
 
@@ -207,7 +238,7 @@ export function sampleOwnsProperty(age: number, incomeLevel: IncomeLevel): boole
 // niezdecydowani 11%, apolityczni 7% (łącznie ~100%)
 // ─────────────────────────────────────────────────────────────────────────────
 
-export function samplePoliticalAffiliation(age: number, settlementType: SettlementType): PoliticalAffiliation {
+export function samplePoliticalAffiliation(age: number, settlementType: SettlementType, education: EducationLevel): PoliticalAffiliation {
   const base: [PoliticalAffiliation, number][] = [
     ["pis",          28],
     ["ko",           27],
@@ -224,26 +255,35 @@ export function samplePoliticalAffiliation(age: number, settlementType: Settleme
     if (party === "pis") {
       if (age > 55) weight += 8;
       if (settlementType === "village") weight += 6;
+      // Wykształcenie: PiS silniejszy wśród primary/vocational (CBOS 2025)
+      if (education === "primary" || education === "vocational") weight += 5;
     }
     // KO: silniejszy w metropoliach i wśród wyborców 30–55
     if (party === "ko") {
       if (settlementType === "metropolis") weight += 8;
       if (settlementType === "large_city") weight += 4;
       if (age >= 30 && age <= 55) weight += 3;
+      // KO silniejsze wśród wyższego wykształcenia (CBOS 2025)
+      if (education === "higher") weight += 7;
+      if (education === "secondary") weight += 2;
     }
     // Konfederacja: silna wśród mężczyzn 18–35
     if (party === "konfederacja") {
       if (age < 35) weight += 6;
       if (age < 28) weight += 4;
+      // Raczej niższe/średnie wykształcenie
+      if (education === "vocational" || education === "secondary") weight += 2;
     }
-    // Lewica: urbańska, młodsi wyborcy
+    // Lewica: urbańska, młodsi wyborcy, wyższe wykształcenie
     if (party === "lewica") {
       if (age < 40) weight += 3;
       if (settlementType === "metropolis" || settlementType === "large_city") weight += 4;
+      if (education === "higher") weight += 5;
     }
-    // TD: wieś i małe miasta (PSL-baza)
+    // TD: wieś i małe miasta (PSL-baza), średnie wykształcenie
     if (party === "td") {
       if (settlementType === "village" || settlementType === "small_city") weight += 4;
+      if (education === "vocational") weight += 2;
     }
     return [party, Math.max(1, weight)];
   });
