@@ -220,3 +220,10 @@ Without `OPENAI_API_KEY` / `GROQ_API_KEY`, all agents fall back to Claude Sonnet
 - **Bass (1969)** — information diffusion model
 - **Espindola et al. (2022)** — VAE/ABM population synthesis specification
 - **Hofstede (2010)** — Individualism/Collectivism index for Poland (IDV = 60)
+
+## Screenshots
+
+<img width="1285" height="641" alt="Image" src="https://github.com/user-attachments/assets/5b20f7f9-3e0a-4c00-a27c-ac0aad1580d9" />
+<img width="1467" height="778" alt="Image" src="https://github.com/user-attachments/assets/1ea137c1-0d77-4b32-bf5c-e4346d9ff917" />
+<img width="1469" height="779" alt="Image" src="https://github.com/user-attachments/assets/70b7c505-adf2-4503-a968-7197072c2ce5" />
+<img width="1469" height="777" alt="Image" src="https://github.com/user-attachments/assets/de47ec0e-c63a-4622-a24b-03ad7e5b156b" />
